@@ -23,9 +23,9 @@ def run_model(train_model = True):
     scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=200)
 
     if train_model:
-        # Train the model for 60 epochs, saving every 5 epochs
-        num_epochs = 5
-        save_interval = 1
+        # Train the model for 50 epochs, saving every 5 epochs
+        num_epochs = 50
+        save_interval = 5
         model, train_losses, train_accuracies, test_losses, test_accuracies = train_epochs(
             model, train_loader, test_loader, criterion, optimizer, device,
             num_epochs, save_interval)
