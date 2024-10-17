@@ -51,7 +51,7 @@ Never commit large data files,trained models, personal API Keys/secrets to GitHu
         |   ├── test_yolo.py
         |   ├── train_yolo.py
         |   ├── validate_yolo.py
-        |── yolov5m.pt
+        |   └── yolov5m.pt
         └── requirements.txt
 ```
 
