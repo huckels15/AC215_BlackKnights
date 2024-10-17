@@ -44,11 +44,11 @@ RUN mkdir -p /mnt/gcs_data && chown app:app /mnt/gcs_data
 
 # Switch to the new user
 #USER app # Keep the user as root since we need for mounting
-WORKDIR /app
+WORKDIR /git_repo/src/data_versioning_resnet
 
 
 # Install python packages
-ADD --chown=app:app Pipfile Pipfile.lock /app/
+ADD --chown=app:app Pipfile Pipfile.lock /git_repo/src/data_versioning_resnet/
 
 RUN pipenv sync
 

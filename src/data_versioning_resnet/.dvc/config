@@ -1,0 +1,4 @@
+[core]
+    remote = resnet_dataset
+['remote "resnet_dataset"']
+    url = gs://cancer-data-bucket/dvc_store

@@ -21,6 +21,7 @@ docker run --rm --name data-version-cli -ti \
 -v "$BASE_DIR":/app \
 -v "$SECRETS_DIR":/secrets \
 -v ~/.gitconfig:/etc/gitconfig \
+-v "$(pwd)/../../":/git_repo \
 -e GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
 -e GCP_PROJECT=$GCP_PROJECT \
 -e GCP_ZONE=$GCP_ZONE \
