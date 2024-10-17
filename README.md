@@ -39,8 +39,8 @@ Never commit large data files,trained models, personal API Keys/secrets to GitHu
     │   ├── docker-shell.sh
     │   ├── models
     │   ├── python_files
-    |       ├── model.py
-    │       └── train_resnet.py
+    |   |   ├── model.py
+    │   |   └── train_resnet.py
     │   └── requirements.txt
     └── yolo
         ├── Dockerfile
@@ -48,9 +48,9 @@ Never commit large data files,trained models, personal API Keys/secrets to GitHu
         ├── docker-shell.sh
         ├── python_files
         │   ├── runs
-        ├── test_yolo.py
-        ├── train_yolo.py
-        ├── validate_yolo.py
+        |   ├── test_yolo.py
+        |   ├── train_yolo.py
+        |   ├── validate_yolo.py
         |── yolov5m.pt
         └── requirements.txt
 ```
