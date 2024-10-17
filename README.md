@@ -8,29 +8,51 @@ Never commit large data files,trained models, personal API Keys/secrets to GitHu
 #### Project Milestone 2 Organization
 
 ```
-├── Readme.md
-├── data # DO NOT UPLOAD DATA TO GITHUB, only .gitkeep to keep the directory or a really small sample
-├── notebooks
-│   └── eda.ipynb
-├── references
-├── reports
-│   └── Statement of Work_Sample.pdf
+.
+├── LICENSE
+├── README.md
 └── src
-    ├── datapipeline
+    ├── art
+    │   ├── Dockerfile
+    │   ├── attacks
+    │   └── docker-shell.sh
+    ├── data_versioning_resnet
     │   ├── Dockerfile
     │   ├── Pipfile
     │   ├── Pipfile.lock
-    │   ├── dataloader.py
+    │   ├── docker-entrypoint.sh
     │   ├── docker-shell.sh
-    │   ├── preprocess_cv.py
-    │   ├── preprocess_rag.py
+    │   ├── resnet_dataset
+    │   └── resnet_dataset.dvc
+    ├── data_versioning_yolo
+    │   ├── Dockerfile
+    │   ├── Pipfile
+    │   ├── Pipfile.lock
+    │   ├── docker-entrypoint.sh
+    │   ├── docker-shell.sh
+    │   ├── yolo_dataset
+    │   └── yolo_dataset.dvc
     ├── docker-compose.yml
-    └── models
+    ├── resnet
+    │   ├── Dockerfile
+    │   ├── data
+    │   ├── docker-shell.sh
+    │   ├── models
+    │   ├── python_files
+    |       ├── model.py
+    │       └── train_resnet.py
+    │   └── requirements.txt
+    └── yolo
         ├── Dockerfile
+        ├── data
         ├── docker-shell.sh
-        ├── infer_model.py
-        ├── model_rag.py
-        └── train_model.py
+        ├── python_files
+        │   ├── runs
+        ├── test_yolo.py
+        ├── train_yolo.py
+        ├── validate_yolo.py
+        |── yolov5m.pt
+        └── requirements.txt
 ```
 
 # AC215 - Milestone2 - Cheesy App
