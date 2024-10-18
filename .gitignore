@@ -36,6 +36,7 @@ models/
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
+secrets/
 
 # Installer logs
 pip-log.txt

@@ -7,12 +7,21 @@ set -e
 export IMAGE_NAME="data-download-resnet"
 export BASE_DIR=$(pwd)
 
-echo "Building image..."
-docker build -t $IMAGE_NAME -f Dockerfile .
+BUILD="False" 
 
-# Run the container
-docker run --rm --name $IMAGE_NAME -ti \
---mount type=bind,source="$BASE_DIR",target=/app \
-# Need to hard code the location of where the secrets folder is
---mount type=bind,source="/home/elijahdabkowski/AY25-1/classes/AC215/project/secrets/",target=/app/secrets \
-$IMAGE_NAME
+if [ "$BUILD" == "True" ]; then 
+    echo "Building image..."
+    docker build -t $IMAGE_NAME -f Dockerfile .
+
+    docker run --rm --name $IMAGE_NAME -ti \
+    --mount type=bind,source="$BASE_DIR",target=/app \
+    --mount type=bind,source="/mnt/c/Users/Jacob/OneDrive - West Point/Irrelevant BS/Desktop/secrets",target=/app/secrets \
+    $IMAGE_NAME
+fi
+
+if [ "$BUILD" != "True" ]; then 
+    docker run --rm --name $IMAGE_NAME -ti \
+    --mount type=bind,source="$BASE_DIR",target=/app \
+    --mount type=bind,source="/mnt/c/Users/Jacob/OneDrive - West Point/Irrelevant BS/Desktop/secrets",target=/app/secrets \
+    $IMAGE_NAME
+fi
