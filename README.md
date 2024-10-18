@@ -1,4 +1,4 @@
-## AC Black Knights Milestone 2
+## Black Knights Milestone 2
 
 
 #### Project Milestone 2 Organization
@@ -74,13 +74,13 @@
 
 # AC215 - Milestone2 - Advesarial Testing of Image Classification Models
 
-**Team Members**
+**Team Members**:
 Jacob Huckelberry, Eli Dabkowsi, Ed Tang
 
-**Group Name**
+**Group Name**:
 Black Knights Group
 
-**Project**
+**Project**:
 In this project, we aim to develop a framework to investigate the effects of adversarial attacks on image classification models. The app will feature two image classification networks trained to make medical diagnoses and recognize street signs--both critical functionalities with large consequences in instances of failure. The user will then be able to use the Adversarial Robustness Toolbox to perform preset attacks against these models to demonstrate their efficacy. Additionally, there will be an option to create mitigations against attacks and evaluate the resulting effects.
 
 ### Milestone2 ###
