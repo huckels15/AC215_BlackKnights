@@ -65,7 +65,7 @@ Never commit large data files,trained models, personal API Keys/secrets to GitHu
         └── requirements.txt
 ```
 
-# AC215 - Milestone2 - Cheesy App
+# AC215 - Milestone2 - Advesarial Testing of Image Classification Models
 
 **Team Members**
 Jacob Huckelberry, Eli Dabkowsi, Ed Tang
