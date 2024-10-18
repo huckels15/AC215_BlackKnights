@@ -7,9 +7,20 @@
 .
 ├── LICENSE
 ├── README.md
+├── deliverables
+│   ├── application_mock_up.pdf
+│   └── running_containers_envs
+│       ├── art_container_env.PNG
+│       ├── data_download_resnet_container_env.PNG
+│       ├── data_download_yolo_container_env.PNG
+│       ├── data_versioning_resnet_container_env.PNG
+│       ├── data_versioning_yolo_container_env.PNG
+│       ├── resnet_container_env.PNG
+│       └── yolo_container_env.PNG
 └── src
     ├── art
     │   ├── Dockerfile
+    |   ├── requirements.txt
     │   ├── attacks
     │   └── docker-shell.sh
     ├── data_download_resnet
