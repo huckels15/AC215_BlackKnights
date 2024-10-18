@@ -142,7 +142,7 @@ The Data Pipeline Containers for both the Resnet and Yolo models are identical:
    Follows standard conventions with modifications made to support model training.
 
 3. **`src/resnet/requirements.txt`**
-   We used the following packages for model training and data preprocessing:
+   We used the following packages for resnet model training and data preprocessing:
    - numpy
    - scipy
    - matplotlib
@@ -160,7 +160,26 @@ The Data Pipeline Containers for both the Resnet and Yolo models are identical:
 4. **`src/resnet/model.py`**
    Defines the resnet model architecture with tensorflow to be called in `train_resnet.py`.
 
-5. Yolo Files: To be Implemented for resnet
+5. **`src/yolo/requirements.txt`**
+   We used the following packages for yolo model training and data preprocessing:
+   - numpy
+   - scipy
+   - matplotlib
+   - scikit-learn
+   - pandas
+   - yolov5
+   - torch 
+   - torchvision 
+   - torchaudio
+   - huggingface_hub==0.24.7
+   - requests
+   - ultralytics
+   - ipython
+
+6. **`/src/yolo/Dockerfile`**
+   Follows standard conventions with modifications made to support model training, being nearly identical to the resnet Dockerfile, adding libgli1 and libglib packages to be installed.
+
+7. Yolo Files: To be Implemented for resnet
    - **`src/yolo/test_yolo.py`** and **`src/yolo/validate_yolo.py`** 
       - Generates **`src/yolo/test_yolo.py`**predictions and tests metrics on validation and test Yolo models.
    - **`src/yolo/train_yolo.py`**
