@@ -1,9 +1,5 @@
-## Milestone 2 Template
+## AC Black Knights Milestone 2
 
-```
-The files are empty placeholders only. You may adjust this template as appropriate for your project.
-Never commit large data files,trained models, personal API Keys/secrets to GitHub
-```
 
 #### Project Milestone 2 Organization
 
@@ -74,8 +70,6 @@ Jacob Huckelberry, Eli Dabkowsi, Ed Tang
 Black Knights Group
 
 **Project**
-In this project, we aim to develop an AI-powered cheese application. The app will feature visual recognition technology to identify various types of cheese and include a chatbot for answering all kinds of cheese-related questions. Users can simply take a photo of the cheese, and the app will identify it, providing detailed information. Additionally, the chatbot will allow users to ask cheese-related questions. It will be powered by a RAG model and fine-tuned models, making it a specialist in cheese expertise.
-
 In this project, we aim to develop a framework to investigate the effects of adversarial attacks on image classification models. The app will feature two image classification networks trained to make medical diagnoses and recognize street signs--both critical functionalities with large consequences in instances of failure. The user will then be able to use the Adversarial Robustness Toolbox to perform preset attacks against these models to demonstrate their efficacy. Additionally, there will be an option to create mitigations against attacks and evaluate the resulting effects.
 
 ### Milestone2 ###
@@ -86,7 +80,7 @@ In this milestone, we have the components for data management, including version
 
 We have gathered two datasets:
 
-The first dataset is from Kaggle (1) and is a dataset of over 50000 images of more than 40 classes of German traffic signs. The task associated with this dataset is classifying the datasets, and the preliminary model that we will finetune is Yolo. Along with the image data, there is also the shape of the sign as well as the color as features, although these may be ignored in the training process for a pure image classification task. 
+The first dataset is from Kaggle (1) and is a dataset of over 500 images of 4 classes of traffic signs. The task associated with this dataset is object recognition, and the preliminary model that we will finetune is Yolo. Along with the image data, there is also bounding box features that are necessary to finetune Yolov5.
 
 The second dataset is from Hugging Face (2), and it is a collection of 10015 images of skin that are associated with seven different diagnoses. There are also metadata including the sex and age of the patient. The classification task is identifying the type of disease given the picture, and a resnet model will be trained on this dataset likely without the features. 
 
@@ -110,12 +104,12 @@ The Data Pipeline Containers for both the Resnet and Yolo models are identical:
 
 
 1. **`src/data_download_resnet/data_download_resnet.py`**
-   This script downloads from the bucket containing the dataset locally.
+   This script downloads from the bucket containing the ResNet dataset locally.
 
 2. **`src/data_download_resnet/Dockerfile`**
    The Dockerfile follows standard convention with modifications to work with Google Cloud Storage, including the necessary packages and credentials.
 
-3. **`src/data_download_resnet/Pipfile`**
+3. **`src/data_download_resnet/requirements.txt`**
    The packages we used include google-cloud-storage for GCS interaction, pandas for data managment, and dvc/dvc-gs for version control.
 
 4. **`src/data_versioning_resnet/Dockerfile`**
@@ -160,9 +154,9 @@ The Data Pipeline Containers for both the Resnet and Yolo models are identical:
 4. **`src/resnet/model.py`**
    Defines the resnet model architecture with tensorflow to be called in `train_resnet.py`.
 
-5. Yolo Files: To be Implemented for resnet
+5. Yolo Files:
    - **`src/yolo/test_yolo.py`** and **`src/yolo/validate_yolo.py`** 
-      - Generates **`src/yolo/test_yolo.py`**predictions and tests metrics on validation and test Yolo models.
+      - Generates predictions and metrics on validation and test sets.
    - **`src/yolo/train_yolo.py`**
       - Loads image files from street sign dataset, splits into training and validation splits, associates images with classification classes and stores data into yaml file.
       - Trains imported Yolo model on data stored in yaml file.
@@ -216,5 +210,5 @@ https://drive.google.com/drive/folders/12xqjhiSnE9g7RWqrwCIj-7xWYUFt366e?usp=dri
 
 ## Sources:
 
-1. https://www.kaggle.com/datasets/meowmeowmeowmeowmeow/gtsrb-german-traffic-sign
+1. https://www.kaggle.com/datasets/valentynsichkar/traffic-signs-dataset-in-yolo-format
 2. https://huggingface.co/datasets/marmal88/skin_cancer 
