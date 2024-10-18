@@ -122,3 +122,9 @@ This folder contains code that is not part of container - for e.g: Application m
 
 ----
 You may adjust this template as appropriate for your project.
+
+## Model Weights Link
+
+You can find the weights we use for our ResNet and Yolo models here:
+
+https://drive.google.com/drive/folders/12xqjhiSnE9g7RWqrwCIj-7xWYUFt366e?usp=drive_link
