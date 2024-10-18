@@ -1,24 +1,17 @@
-# Use the official Python image from the Docker Hub
+# Use the official Python image
 FROM python:3.9-slim
 
-# Set the working directory in the container
+# Set the working directory to /app
 WORKDIR /app
 
-# Copy the requirements.txt file into the container
+# Copy and Run the requirements.txt 
 COPY requirements.txt .
-
-# Install the required Python packages
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the current directory (which contains the Python script) into the container
+# Copy all contents into /app
 COPY . .
 
-# Ensure the service account key file is available
-# You can bind-mount it from the host machine at runtime for security purposes
-
-# Set environment variable for the GCP service account JSON key file path
-# (You will bind-mount the key from your host machine to this path at runtime)
+# Set the credentials which were specified within the shell
 ENV GOOGLE_APPLICATION_CREDENTIALS="/app/secrets.json"
 
-# Run the Python script
 CMD ["/bin/bash"]
