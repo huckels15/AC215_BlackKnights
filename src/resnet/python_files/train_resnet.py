@@ -69,7 +69,5 @@ if __name__ == "__main__":
         optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     
     history = resnet.fit(train_gen, epochs=100, validation_data=val_gen)
-    test_loss, test_accuracy = resnet.evaluate(test_gen)
-    print(f"The test accuracy is {test_accuracy}.")
     model_name = f"trainedResnet_{year}{month:02d}{day:02d}_{hour:02d}{minute:02d}.h5"
     resnet.save("../models/" + model_name)
