@@ -16,6 +16,16 @@ Never commit large data files,trained models, personal API Keys/secrets to GitHu
     │   ├── Dockerfile
     │   ├── attacks
     │   └── docker-shell.sh
+    ├── data_download_resnet
+    │   ├── Dockerfile
+    │   ├── data_download_resnet.py
+    │   ├── docker-shell.sh
+    │   └── requirements.txt
+    ├── data_download_yolo
+    │   ├── Dockerfile
+    │   ├── data_download_yolo.py
+    │   ├── docker-shell.sh
+    │   └── requirements.txt
     ├── data_versioning_resnet
     │   ├── Dockerfile
     │   ├── Pipfile
