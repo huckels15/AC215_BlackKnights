@@ -1,0 +1,4 @@
+[core]
+    remote = yolo_dataset
+['remote "yolo_dataset"']
+    url = gs://traffic-sign-dataset/dvc_store
