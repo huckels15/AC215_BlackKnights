@@ -1,7 +1,7 @@
-export IMAGE_NAME=resnet-training-cli
+export IMAGE_NAME=yolo-training-cli
 export BASE_DIR=$(pwd)
 export SECRETS_DIR=$(pwd)/../../../secrets/
-export GCS_BUCKET_URI="gs://resnet-trainer"
+export GCS_BUCKET_URI="gs://yolo-trainer"
 export GCP_PROJECT="secret-cipher-399620"
 
 
