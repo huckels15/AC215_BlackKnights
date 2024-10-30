@@ -4,19 +4,19 @@
 
 export UUID=$(openssl rand -hex 6)
 export DISPLAY_NAME="resnet_training_job_$UUID"
-export MACHINE_TYPE="n1-standard-4"
+export MACHINE_TYPE="n1-standard-8"
 export REPLICA_COUNT=1
 export EXECUTOR_IMAGE_URI="us-docker.pkg.dev/vertex-ai/training/tf-gpu.2-14.py310:latest"
 export PYTHON_PACKAGE_URI=$GCS_BUCKET_URI/resnet-trainer.tar.gz
-export PYTHON_MODULE="train_resnet.py"
+export PYTHON_MODULE="resnet-trainer.train_resnet"
 export ACCELERATOR_TYPE="NVIDIA_TESLA_T4"
 export ACCELERATOR_COUNT=1
-export GCP_REGION="us-east1" # Adjust region based on you approved quotas for GPUs
+export GCP_REGION="us-central1" # Adjust region based on you approved quotas for GPUs
 
 # Change the number of epochs
 #export CMDARGS="--model_name=mobilenetv2,--epochs=2,--batch_size=32,--wandb_key=$WANDB_KEY"
 #export CMDARGS="--model_name=mobilenetv2,--train_base,--epochs=2,--batch_size=32,--wandb_key=$WANDB_KEY"
-export CMDARGS="--model_name=resnet101,--train_base,--epochs=2,--batch_size=32,--wandb_key=$WANDB_KEY"
+export CMDARGS="--wandb_key=$WANDB_KEY"
 
 # Run training with GPU
 gcloud ai custom-jobs create \

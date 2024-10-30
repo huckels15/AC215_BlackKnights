@@ -30,7 +30,7 @@ def download_directory_from_gcs(bucket_name, source_directory, destination_direc
 if __name__ == '__main__':
     bucket_name = 'cancer-data-bucket' 
     source_directory = 'dvc_store/csvs/' 
-    destination_directory = './data/' 
+    destination_directory = './resnet_data/' 
     download_directory_from_gcs(bucket_name, source_directory, destination_directory)
 
 
