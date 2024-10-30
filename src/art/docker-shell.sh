@@ -13,12 +13,12 @@ if [ "$BUILD" == "True" ]; then
 
     # Run the container
     docker run --gpus=all --rm --name $IMAGE_NAME -ti \
-    --mount type=bind,source="$BASE_DIR",target=/app $IMAGE_NAME
+    --mount type=bind,source="$BASE_DIR",target=/project $IMAGE_NAME
 fi
 
 if [ "$BUILD" != "True" ]; then 
     echo "Using prebuilt image..."
     # Run the container
     docker run --gpus=all --rm --name $IMAGE_NAME -ti \
-    --mount type=bind,source="$BASE_DIR",target=/app $IMAGE_NAME
+    --mount type=bind,source="$BASE_DIR",target=/project $IMAGE_NAME
 fi
