@@ -105,9 +105,10 @@ def pipeline():
                 location=GCP_REGION,
                 staging_bucket=GCS_PACKAGE_URI,
                 bucket_name=GCS_BUCKET_NAME,
-                epochs=15,
+                epochs=1,
                 batch_size=16,
-                model_name="mobilenetv2",
+                model_name="resnet",
+                wandb_key=WANDB_KEY,
             )
             .set_display_name("Model Training")
         )

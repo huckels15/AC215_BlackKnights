@@ -173,19 +173,22 @@ root:
                 constant: resnet-models-ac215
             epochs:
               runtimeValue:
-                constant: 15.0
+                constant: 1.0
             location:
               runtimeValue:
                 constant: us-east1
             model_name:
               runtimeValue:
-                constant: mobilenetv2
+                constant: resnet
             project:
               runtimeValue:
                 constant: secret-cipher-399620
             staging_bucket:
               runtimeValue:
                 constant: gs://resnet-trainer
+            wandb_key:
+              runtimeValue:
+                constant: 9981fa18ce8a6989ff4b8a46c6ef129f77cee3be
         taskInfo:
           name: Model Training
 schemaVersion: 2.1.0
