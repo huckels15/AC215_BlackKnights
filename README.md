@@ -1,7 +1,7 @@
-## Black Knights Milestone 2
+## Black Knights Milestone 3
 
 
-#### Project Milestone 2 Organization
+#### Project Milestone 3 Organization
 
 ```
 .
@@ -9,6 +9,8 @@
 ├── README.md
 ├── deliverables
 │   ├── application_mock_up.pdf
+│   ├── presentation
+│   │   └── Milestone 3 Presentation.pptx
 │   └── running_containers_envs
 │       ├── art_container_env.PNG
 │       ├── data_download_resnet_container_env.PNG
@@ -20,19 +22,23 @@
 └── src
     ├── art
     │   ├── Dockerfile
-    |   ├── requirements.txt
     │   ├── attacks
-    │   └── docker-shell.sh
+    │   ├── data
+    │   ├── docker-shell.sh
+    │   ├── models
+    │   └── requirements.txt
     ├── data_download_resnet
     │   ├── Dockerfile
     │   ├── data_download_resnet.py
     │   ├── docker-shell.sh
-    │   └── requirements.txt
+    │   ├── requirements.txt
+    │   └── secrets
     ├── data_download_yolo
     │   ├── Dockerfile
     │   ├── data_download_yolo.py
     │   ├── docker-shell.sh
-    │   └── requirements.txt
+    │   ├── requirements.txt
+    │   └── secrets
     ├── data_versioning_resnet
     │   ├── Dockerfile
     │   ├── Pipfile
@@ -56,23 +62,49 @@
     │   ├── docker-shell.sh
     │   ├── models
     │   ├── python_files
-    |   |   ├── model.py
-    │   |   └── train_resnet.py
     │   └── requirements.txt
-    └── yolo
+    ├── resnet_cloud
+    │   ├── Dockerfile
+    │   ├── Pipfile
+    │   ├── cli.py
+    │   ├── cli.sh
+    │   ├── docker-entrypoint.sh
+    │   ├── docker-shell.sh
+    │   ├── package
+    │   ├── package-resnet.sh
+    │   ├── python_files.tar.gz
+    │   └── requirements.txt
+    ├── workflow
+    │   ├── Dockerfile
+    │   ├── Pipfile
+    │   ├── Pipfile.lock
+    │   ├── cli.py
+    │   ├── docker-entrypoint.sh
+    │   ├── docker-shell.sh
+    │   ├── model.py
+    │   ├── model_deploy.yaml
+    │   ├── model_training.yaml
+    │   └── pipeline.yaml
+    ├── yolo
+    │   ├── Dockerfile
+    │   ├── data
+    │   ├── docker-shell.sh
+    │   ├── python_files
+    │   └── requirements.txt
+    └── yolo_cloud
         ├── Dockerfile
-        ├── data
+        ├── Pipfile
+        ├── cli.py
+        ├── cli.sh
+        ├── docker-entrypoint.sh
         ├── docker-shell.sh
-        ├── python_files
-        │   ├── runs
-        |   ├── test_yolo.py
-        |   ├── train_yolo.py
-        |   ├── validate_yolo.py
-        |   └── yolov5m.pt
+        ├── package
+        ├── package-yolo.sh
+        ├── python_files.tar.gz
         └── requirements.txt
 ```
 
-# AC215 - Milestone2 - Advesarial Testing of Image Classification Models
+# AC215 - Milestone3 - Advesarial Testing of Image Classification Models
 
 **Team Members**:
 Jacob Huckelberry, Eli Dabkowsi, Ed Tang
@@ -83,9 +115,9 @@ Black Knights Group
 **Project**:
 In this project, we aim to develop a framework to investigate the effects of adversarial attacks on image classification models. The app will feature two image classification networks trained to make medical diagnoses and recognize street signs--both critical functionalities with large consequences in instances of failure. The user will then be able to use the Adversarial Robustness Toolbox to perform preset attacks against these models to demonstrate their efficacy. Additionally, there will be an option to create mitigations against attacks and evaluate the resulting effects.
 
-### Milestone2 ###
+### Milestone3 ###
 
-In this milestone, we have the components for data management, including versioning, as well as the image classification models and the adversarial robustness toolbox. 
+In this milestone, we have the created a pipeline for model training in Vertex AI and have implemented initial attacks on ResNet. 
 
 **Data**
 
@@ -191,6 +223,10 @@ The Data Pipeline Containers for both the Resnet and Yolo models are identical:
       - Loads image files from street sign dataset, splits into training and validation splits, associates images with classification classes and stores data into yaml file.
       - Trains imported Yolo model on data stored in yaml file.
 
+8. In **`/src/resnet_cloud`** and **`/src/yolo_cloud`** we have moved our model training for these models to the cloud using Vertex AI
+
+9. In **`/src/workflow`** we have implemented an initial train and deploy pipeline for ResNet.
+
 ## Data Versioning Strategy:
 
 ### Explanation for Choice:
@@ -228,7 +264,7 @@ Containers are run universally with `docker-shell.sh` scripts. Docker compose co
 ## Notebooks/Reports
 
 **`deliverables/`**
-   Contains screenshots for running containers and application mockup.
+   Contains screenshots for running containers, application mockup, and milestone 3 presentation.
 
 
 ## Model Weights Link
