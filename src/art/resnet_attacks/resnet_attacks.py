@@ -9,13 +9,9 @@ from tensorflow.keras.optimizers import Adam
 import numpy as np
 import matplotlib.pyplot as plt
 import argparse
-import json
-
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Suppress TensorFlow logs (0 = all, 3 = none)
 
 def load_data():
-    data = pd.read_csv("data/dvc_store_csvs_hmnist_28_28_RGB.csv")
+    data = pd.read_csv("../data/dvc_store_csvs_hmnist_28_28_RGB.csv")
     y = data['label']
     X = data.drop(columns= ['label'])
 
@@ -40,7 +36,6 @@ def load_data():
 
 
 def plot_samples(num_samples, x_test, x_test_adv, y_test, predictions_adv):
-
     class_map = {
         0: 'Melanocytic nevi',
         1: 'Melanoma',
@@ -67,14 +62,31 @@ def plot_samples(num_samples, x_test, x_test_adv, y_test, predictions_adv):
         
         fig.suptitle(f"Example {i + 1}", fontsize=14, fontweight="bold")
         plt.savefig(f"figures/example_{i+1}_original_vs_adversarial.png")
-        path = "figures/example_1_original_vs_adversarial.png"
-        return path
+        plt.show()
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--eps", type=str, default=0.01, help="")
+parser.add_argument(
+    "--fgsm", 
+    action="store_true", 
+    help="Run FGSM attack"
+)
+parser.add_argument(
+    "--pgd", 
+    action="store_true", 
+    help="Run PGD attack"
+)
+parser.add_argument(
+    "--deepfool", 
+    action="store_true", 
+    help="Run DeepFool attack"
+)
+parser.add_argument(
+    "--square", 
+    action="store_true", 
+    help="Run Square attack"
+)
 
 args = parser.parse_args()
-run_args = vars(args)
 
 train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
     rotation_range=15,
@@ -88,7 +100,7 @@ test_datagen = tf.keras.preprocessing.image.ImageDataGenerator()
 _, _, test_gen = load_data()
 custom_objects = {"Adam": Adam}
 
-model = tf.keras.models.load_model("models/trainedResnet_20241016_2143.h5", custom_objects=custom_objects, compile=False)
+model = tf.keras.models.load_model("../models/trainedResnet_20241016_2143.h5", custom_objects=custom_objects, compile=False)
 model.compile(optimizer=Adam(), loss='categorical_crossentropy', metrics=['accuracy'])
 
 min_pixel_value, max_pixel_value = 0.0, 255.0
@@ -97,22 +109,25 @@ classifier = KerasClassifier(model=model, clip_values=(min_pixel_value, max_pixe
 x_test, y_test = next(test_gen) 
 predictions = classifier.predict(x_test)
 accuracy = np.sum(np.argmax(predictions, axis=1) == np.argmax(y_test, axis=1)) / len(y_test)
-#print("Accuracy on benign test examples: {:.2f}%".format(accuracy * 100))
+print("Accuracy on benign test examples: {:.2f}%".format(accuracy * 100))
 
-attack = FastGradientMethod(estimator=classifier, eps=float(run_args['eps']))
+if args.fgsm:
+    print("Running FGSM attack...")
+    attack = FastGradientMethod(estimator=classifier, eps=0.2)
+elif args.pgd:
+    print("Running PGD attack...")
+    attack = PGD(estimator=classifier, eps=0.2, eps_step=0.01, max_iter=40)
+elif args.deepfool:
+    print("Running DeepFool attack...")
+    attack = DeepFool(classifier=classifier, max_iter=50)
+elif args.square:
+    print("Running Square attack...")
+    attack = Square(estimator=classifier, eps=0.2, max_iter=100)
 
 x_test_adv = attack.generate(x=x_test)
 
 predictions_adv = classifier.predict(x_test_adv)
 accuracy_adv = np.sum(np.argmax(predictions_adv, axis=1) == np.argmax(y_test, axis=1)) / len(y_test)
-#print("Accuracy on adversarial test examples: {:.2f}%".format(accuracy_adv * 100))
+print("Accuracy on adversarial test examples: {:.2f}%".format(accuracy_adv * 100))
 
-path = plot_samples(1, x_test, x_test_adv, y_test, predictions_adv)
-
-results = {
-    "reg_acc": (accuracy) * 100,
-    "adv_acc": (accuracy_adv) * 100,
-    "figure": path
-}
-
-print(json.dumps(results))
+plot_samples(1, x_test, x_test_adv, y_test, predictions_adv)

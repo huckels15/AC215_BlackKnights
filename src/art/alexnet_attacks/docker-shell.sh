@@ -4,7 +4,7 @@ set -e
 
 BUILD="True" 
 
-export IMAGE_NAME="resnet_fgsm"
+export IMAGE_NAME="alexnet_attacks"
 export BASE_DIR=$(pwd)
 
 if [ "$BUILD" == "True" ]; then 
