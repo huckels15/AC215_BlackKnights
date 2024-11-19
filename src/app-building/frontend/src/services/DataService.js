@@ -61,6 +61,52 @@ const DataService = {
 
         return Promise.resolve({ data: mockResults });
     },
+    Playground: async function (formData) {
+        // Simulate API delay
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        // Mock response data
+        const mockResults = {
+            success: true,
+            model: "MockNet v1.0",
+            timestamp: new Date().toISOString(),
+            results: [
+                {
+                    class_index: 1,
+                    class_name: "Golden Retriever",
+                    probability: 0.92
+                },
+                {
+                    class_index: 2,
+                    class_name: "Labrador",
+                    probability: 0.85
+                },
+                {
+                    class_index: 3,
+                    class_name: "German Shepherd",
+                    probability: 0.67
+                },
+                {
+                    class_index: 4,
+                    class_name: "Beagle",
+                    probability: 0.45
+                },
+                {
+                    class_index: 5,
+                    class_name: "Poodle",
+                    probability: 0.23
+                }
+            ],
+            processing_time: "0.845 seconds",
+        };
+
+        // Randomly fail sometimes to test error handling (10% chance)
+        if (Math.random() < 0.1) {
+            throw new Error('Mock classification failed');
+        }
+
+        return Promise.resolve({ data: mockResults });
+    },
     Audio2Text: async function (formData) {
         // Simulate API delay
         await new Promise(resolve => setTimeout(resolve, 2000));

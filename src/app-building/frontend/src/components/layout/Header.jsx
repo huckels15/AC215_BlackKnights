@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Podcasts, Email, SmartToy, Menu, Close } from '@mui/icons-material';
+import { Home, Podcasts, Email, SmartToy, Menu, Close, GitHub, People, BugReport, DirectionsRun, RunCircle} from '@mui/icons-material';
 import InsertChartIcon from '@mui/icons-material/InsertChart';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import AppsIcon from '@mui/icons-material/Apps';
@@ -15,10 +15,14 @@ export default function Header() {
 
     const navItems = [
         { name: 'Home', path: '/', icon: <Home sx={{ fontSize: 20 }} /> },
-        { name: 'Todo', path: '/todo', icon: <ListAltIcon fontSize="small" /> },
-        { name: 'Plots', path: '/plots', icon: <InsertChartIcon fontSize="small" /> },
-        { name: 'Grids', path: '/styletransfer', icon: <AppsIcon fontSize="small" /> },
-        { name: 'AI Assistant', path: '/chat', icon: <SmartToy fontSize="small" /> }
+        //{ name: 'Todo', path: '/todo', icon: <ListAltIcon fontSize="small" /> },
+        //{ name: 'Plots', path: '/plots', icon: <InsertChartIcon fontSize="small" /> },
+        //{ name: 'Grids', path: '/styletransfer', icon: <AppsIcon fontSize="small" /> },
+        //{ name: 'AI Assistant', path: '/chat', icon: <SmartToy fontSize="small" /> },
+        { name: 'GitHub', path: '/github', icon: <GitHub fontSize="small" /> },
+        { name: 'Team Members', path: '/members', icon: <People fontSize="small" /> },
+        { name: 'Attacks', path: '/attacks', icon: <BugReport fontSize="small" /> },
+        { name: 'Playground', path: '/playground', icon: <DirectionsRun fontSize="small" /> }
     ];
 
     // UI View
@@ -29,7 +33,7 @@ export default function Header() {
                     <div className="header-content">
                         <Link href="/" className="header-logo">
                             <span className="text-2xl">✨</span>
-                            <h1 className="text-xl font-bold font-montserrat">My Awesome App</h1>
+                            <h1 className="text-xl font-bold font-montserrat">Adversarial Playground</h1>
                         </Link>
 
                         <nav className="nav-desktop">

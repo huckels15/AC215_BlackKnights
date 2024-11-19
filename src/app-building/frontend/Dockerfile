@@ -30,8 +30,12 @@ COPY --from=build /app/.env ./.env
 # Install only production dependencies
 RUN npm ci --only=production
 
+# Set environment variables
+ENV NODE_ENV=production
+ENV PORT=8080 
+
 # Expose the listening port
-EXPOSE 3000
+EXPOSE 8080
 
 # Run the Next.js app
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]

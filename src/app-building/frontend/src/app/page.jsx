@@ -9,10 +9,10 @@ export default function Home() {
             <section className="hero-section">
                 <div className="hero-content">
                     <h1 className="hero-title">
-                        Welcome to My Awesome App Eli
+                        Get Ready to Play on the Adversarial Playground
                     </h1>
                     <p className="hero-description">
-                        Discover amazing content, engage with our community, and stay updated with the latest podcasts and newsletters.
+                        Explore what happens when adversarial attacks are deployed against image classification networks and how they can be defended against!
                     </p>
                     <div className="flex flex-wrap justify-center gap-4">
                         <button className="button-primary">Get Started</button>
@@ -24,32 +24,43 @@ export default function Home() {
             {/* Content Section */}
             <section className="content-section">
                 <div className="content-grid">
-                    <Link href="/image" className="block">
+
+                    <Link href="/playground" className="block">
                         <div className="feature-card">
-                            <h3 className="feature-card-title">Image Classification</h3>
+                            <h3 className="feature-card-title">Adversarial Playground</h3>
                             <p className="feature-card-description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                Play around on our playground to see the effect of adversarial attacks on image classification models!
                             </p>
                         </div>
                     </Link>
 
-                    <Link href="/audio" className="block">
+                    <Link href="/github" className="block">
                         <div className="feature-card">
-                            <h3 className="feature-card-title">Audio 2 Text</h3>
+                            <h3 className="feature-card-title">GitHub Page</h3>
                             <p className="feature-card-description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                Visit our GitHub Page!
                             </p>
                         </div>
                     </Link>
 
-                    <Link href="/text" className="block">
+                    <Link href="/members" className="block">
                         <div className="feature-card">
-                            <h3 className="feature-card-title">Text 2 Audio</h3>
+                            <h3 className="feature-card-title">Team Members</h3>
                             <p className="feature-card-description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                Want to know more about the developers of Adversarial Playground? Click below!
                             </p>
                         </div>
                     </Link>
+
+                    <Link href="/attacks" className="block">
+                        <div className="feature-card">
+                            <h3 className="feature-card-title">Attacks</h3>
+                            <p className="feature-card-description">
+                                Want to learn more about the attacks implemented? Click below!
+                            </p>
+                        </div>
+                    </Link>
+
                 </div>
             </section>
         </div>
