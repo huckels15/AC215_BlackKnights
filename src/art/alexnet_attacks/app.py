@@ -1,25 +1,57 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import subprocess
 import os
 import json
+from typing import Optional
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"], 
+)
 
 class AttackRequest(BaseModel):
     model: str
     attack: str
-    epsilon: float
+    epsilon: Optional[float] = None
+    eps_step: Optional[float] = None
+    max_iter: Optional[int] = None
 
-@app.post("/resnet-attack/")
+
+@app.post("/alexnet-attack/")
 def run_attack(request: AttackRequest):
-    script_name = f"{request.model}_{request.attack}.py"
+    script_name = f"{request.model}_attacks.py"
     epsilon = request.epsilon
 
     if not os.path.exists(script_name):
         raise HTTPException(status_code=404, detail="Model script not found")
+    
+    command = ["python3", script_name]
 
-    command = ["python3", script_name, "--eps", str(epsilon)]
+    if request.attack == "fgsm":
+        command.append("--fgsm")
+    elif request.attack == "pgd":
+        command.append("--pgd")
+    elif request.attack == "deepfool":
+        command.append("--deepfool")
+    elif request.attack == "square":
+        command.append("--square")
+    else:
+        raise HTTPException(status_code=400, detail="Invalid attack type")
+
+    if request.epsilon is not None:
+        command.extend(["--eps", str(request.epsilon)])
+    if request.eps_step is not None:
+        command.extend(["--eps_step", str(request.eps_step)])
+    if request.max_iter is not None:
+        command.extend(["--max_iter", str(request.max_iter)])
+
     try:
         result = subprocess.run(command, capture_output=True, text=True, check=True)
         output = result.stdout

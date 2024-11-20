@@ -2,9 +2,9 @@
 
 set -e
 
-BUILD="True" 
+BUILD="False" 
 
-export IMAGE_NAME="alexnet_attacks"
+export IMAGE_NAME="resnet_attacks"
 export BASE_DIR=$(pwd)
 
 if [ "$BUILD" == "True" ]; then 
