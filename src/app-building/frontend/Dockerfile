@@ -13,7 +13,7 @@ COPY . .
 # Build the Next.js app
 # Copy env file for build time
 COPY .env.production .env
-RUN npm run build
+RUN npm run build && ls -al .next
 
 # Production stage
 FROM node:18-alpine AS production
@@ -30,12 +30,8 @@ COPY --from=build /app/.env ./.env
 # Install only production dependencies
 RUN npm ci --only=production
 
-# Set environment variables
-ENV NODE_ENV=production
-ENV PORT=8080 
-
 # Expose the listening port
-EXPOSE 8080
+EXPOSE 3000
 
 # Run the Next.js app
-CMD ["npm", "run", "start"]
+CMD ["npm", "start"]

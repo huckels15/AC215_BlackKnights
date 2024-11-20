@@ -1,5 +1,5 @@
-export const getMockResponse = async (model, attack) => {
-  const url = "http://34.145.144.99:8000/resnet-attack/";
+export const getFGSMRes = async (model, attack) => {
+  const url = "http://34.57.140.84:8000/resnet-attack/";
   const payload = {
     model: model,
     attack: attack,

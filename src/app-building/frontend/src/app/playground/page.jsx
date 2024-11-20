@@ -1,7 +1,14 @@
 'use client'
 
 import { useState } from 'react';
-import { getMockResponse } from '@/components/playground/Playground';
+import { getFGSMRes } from '@/components/playground/FGSMRes';
+import { getPGDRes } from '@/components/playground/PGDRes';
+import { getDEEPFOOLRes } from '@/components/playground/DEEPFOOLRes';
+import { getSQUARERes } from '@/components/playground/SQUARERes';
+import { getFGSMAlex } from '@/components/playground/FGSMAlex';
+import { getPGDAlex } from '@/components/playground/PGDAlex';
+import { getDEEPFOOLAlex } from '@/components/playground/DEEPFOOLAlex';
+import { getSQUAREAlex } from '@/components/playground/SQUAREAlex';
 
 export default function PlaygroundPage() {
     const [selectedModel, setSelectedModel] = useState('');
@@ -19,14 +26,90 @@ export default function PlaygroundPage() {
 
     const handleRun = async () => {
         if (selectedModel && selectedAttack) {
-            setLoading(true); // Show loading spinner
-            try {
-                const response = await getMockResponse(selectedModel, selectedAttack);
-                setOutput(JSON.stringify(response, null, 2)); // Display JSON response
-            } catch (error) {
-                setOutput("Failed to fetch response.");
-            } finally {
-                setLoading(false); // Stop loading spinner
+            if (selectedModel === "resnet" && selectedAttack === "fgsm") {
+                setLoading(true);
+                try {
+                    const response = await getFGSMRes(selectedModel, selectedAttack);
+                    setOutput(JSON.stringify(response, null, 2));
+                } catch (error) {
+                    setOutput("Failed to fetch response.");
+                } finally {
+                    setLoading(false);
+                }
+            } else if (selectedModel === "resnet" && selectedAttack === "pgd") {
+                setLoading(true);
+                try {
+                    const response = await getPGDRes(selectedModel, selectedAttack);
+                    setOutput(JSON.stringify(response, null, 2));
+                } catch (error) {
+                    console.error('Error:', error)
+                    setOutput("Failed to fetch response for alternative processing.");
+                } finally {
+                    setLoading(false);
+                }
+            } else if (selectedModel === "resnet" && selectedAttack === "deepfool") {
+                setLoading(true);
+                try {
+                    const response = await getDEEPFOOLRes(selectedModel, selectedAttack);
+                    setOutput(JSON.stringify(response, null, 2));
+                } catch (error) {
+                    setOutput("Failed to fetch response for alternative processing.");
+                } finally {
+                    setLoading(false);
+                }
+            } else if (selectedModel === "resnet" && selectedAttack === "square") {
+                setLoading(true);
+                try {
+                    const response = await getSQUARERes(selectedModel, selectedAttack);
+                    setOutput(JSON.stringify(response, null, 2));
+                } catch (error) {
+                    setOutput("Failed to fetch response for alternative processing.");
+                } finally {
+                    setLoading(false);
+                }
+            } else if (selectedModel === "alexnet" && selectedAttack === "fgsm") {
+                setLoading(true);
+                try {
+                    const response = await getFGSMAlex(selectedModel, selectedAttack);
+                    setOutput(JSON.stringify(response, null, 2));
+                } catch (error) {
+                    setOutput("Failed to fetch response.");
+                } finally {
+                    setLoading(false);
+                }
+            } else if (selectedModel === "alexnet" && selectedAttack === "pgd") {
+                setLoading(true);
+                try {
+                    const response = await getPGDAlex(selectedModel, selectedAttack);
+                    setOutput(JSON.stringify(response, null, 2));
+                } catch (error) {
+                    console.error('Error:', error)
+                    setOutput("Failed to fetch response for alternative processing.");
+                } finally {
+                    setLoading(false);
+                }
+            } else if (selectedModel === "alexnet" && selectedAttack === "deepfool") {
+                setLoading(true);
+                try {
+                    const response = await getDEEPFOOLAlex(selectedModel, selectedAttack);
+                    setOutput(JSON.stringify(response, null, 2));
+                } catch (error) {
+                    setOutput("Failed to fetch response for alternative processing.");
+                } finally {
+                    setLoading(false);
+                }
+            } else if (selectedModel === "alexnet" && selectedAttack === "square") {
+                setLoading(true);
+                try {
+                    const response = await getSQUAREAlex(selectedModel, selectedAttack);
+                    setOutput(JSON.stringify(response, null, 2));
+                } catch (error) {
+                    setOutput("Failed to fetch response for alternative processing.");
+                } finally {
+                    setLoading(false);
+                }
+            } else {
+                setOutput("Selected model or attack does not match any valid combinations.");
             }
         } else {
             setOutput("Please select both a model and an attack.");
@@ -55,7 +138,7 @@ export default function PlaygroundPage() {
                                         Choose a Model
                                     </option>
                                     <option value="resnet">ResNet</option>
-                                    <option value="yolo">Yolo</option>
+                                    <option value="alexnet">AlexNet</option>
                                 </select>
                             </div>
                         </div>
@@ -76,8 +159,8 @@ export default function PlaygroundPage() {
                                     </option>
                                     <option value="fgsm">Fast Gradient Sign Method</option>
                                     <option value="pgd">Projected Gradient Descent</option>
-                                    <option value="df">DeepFool</option>
-                                    <option value="sa">Square Attack</option>
+                                    <option value="deepfool">DeepFool</option>
+                                    <option value="square">Square Attack</option>
                                 </select>
                             </div>
                         </div>
