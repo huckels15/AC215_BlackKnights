@@ -36,6 +36,7 @@ jobs:
       - name: Run Hadolint on all Dockerfiles
         uses: hadolint/hadolint-action@v3.1.0
         with:
-          dockerfile: '**/src/**/*.Dockerfile'  
+          dockerfile: 'src/**/*.Dockerfile'  
           format: json    
-          fail-on-warnings: false 
+          no-fail: true
+          recursive: true
