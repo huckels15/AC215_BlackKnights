@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import subprocess
 import os
@@ -10,10 +11,10 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], 
+    allow_origins=["*"],  # Replace "*" with specific origins for better security in production
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"], 
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
 )
 
 class AttackRequest(BaseModel):
@@ -24,7 +25,7 @@ class AttackRequest(BaseModel):
     max_iter: Optional[int] = None
 
 
-@app.post("/alexnet-attack/")
+@app.post("/resnet-attack/")
 def run_attack(request: AttackRequest):
     script_name = f"{request.model}_attacks.py"
     epsilon = request.epsilon
@@ -65,3 +66,10 @@ def run_attack(request: AttackRequest):
         raise HTTPException(status_code=500, detail="Failed to decode script output")
 
     return results
+
+@app.get("/get-file/")
+def get_file(file_path: str):
+    if not os.path.exists(file_path):
+        raise HTTPException(status_code=404, detail="File not found")
+
+    return FileResponse(path=file_path, filename=os.path.basename(file_path))
