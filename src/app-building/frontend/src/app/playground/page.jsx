@@ -9,12 +9,13 @@ import { getFGSMAlex } from '@/components/playground/FGSMAlex';
 import { getPGDAlex } from '@/components/playground/PGDAlex';
 import { getDEEPFOOLAlex } from '@/components/playground/DEEPFOOLAlex';
 import { getSQUAREAlex } from '@/components/playground/SQUAREAlex';
+import { getPRAC } from '@/components/playground/prac';
 
 export default function PlaygroundPage() {
     const [selectedModel, setSelectedModel] = useState('');
     const [selectedAttack, setSelectedAttack] = useState('');
-    const [output, setOutput] = useState(''); // To display the API response
-    const [loading, setLoading] = useState(false); // To show loading state
+    const [output, setOutput] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleModelChange = (event) => {
         setSelectedModel(event.target.value);
@@ -30,7 +31,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getFGSMRes(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     setOutput("Failed to fetch response.");
                 } finally {
@@ -40,7 +41,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getPGDRes(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     console.error('Error:', error)
                     setOutput("Failed to fetch response for alternative processing.");
@@ -51,7 +52,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getDEEPFOOLRes(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     setOutput("Failed to fetch response for alternative processing.");
                 } finally {
@@ -61,7 +62,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getSQUARERes(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     setOutput("Failed to fetch response for alternative processing.");
                 } finally {
@@ -71,7 +72,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getFGSMAlex(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     setOutput("Failed to fetch response.");
                 } finally {
@@ -81,7 +82,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getPGDAlex(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     console.error('Error:', error)
                     setOutput("Failed to fetch response for alternative processing.");
@@ -92,7 +93,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getDEEPFOOLAlex(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     setOutput("Failed to fetch response for alternative processing.");
                 } finally {
@@ -102,7 +103,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getSQUAREAlex(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     setOutput("Failed to fetch response for alternative processing.");
                 } finally {
@@ -182,10 +183,17 @@ export default function PlaygroundPage() {
                             <div className="mt-4">
                                 {loading ? (
                                     <p className="text-gray-600">Loading...</p>
+                                ) : output.reg_acc && output.adv_acc ? (
+                                    <div className="bg-gray-100 p-4 rounded-lg shadow-inner text-left">
+                                        <p className="text-gray-700">
+                                            <span className="font-bold">Accuracy Before Attack:</span> {output.reg_acc}
+                                        </p>
+                                        <p className="text-gray-700">
+                                            <span className="font-bold">Accuracy After Attack:</span> {output.adv_acc}
+                                        </p>
+                                    </div>
                                 ) : (
-                                    <pre className="text-gray-600 text-left bg-gray-100 p-4 rounded-lg shadow-inner overflow-x-auto">
-                                        {output}
-                                    </pre>
+                                    <p className="text-red-600">{output}</p>
                                 )}
                             </div>
                         </div>

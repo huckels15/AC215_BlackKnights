@@ -15,10 +15,6 @@ export default function Header() {
 
     const navItems = [
         { name: 'Home', path: '/', icon: <Home sx={{ fontSize: 20 }} /> },
-        //{ name: 'Todo', path: '/todo', icon: <ListAltIcon fontSize="small" /> },
-        //{ name: 'Plots', path: '/plots', icon: <InsertChartIcon fontSize="small" /> },
-        //{ name: 'Grids', path: '/styletransfer', icon: <AppsIcon fontSize="small" /> },
-        //{ name: 'AI Assistant', path: '/chat', icon: <SmartToy fontSize="small" /> },
         { name: 'GitHub', path: '/github', icon: <GitHub fontSize="small" /> },
         { name: 'Team Members', path: '/members', icon: <People fontSize="small" /> },
         { name: 'Attacks', path: '/attacks', icon: <BugReport fontSize="small" /> },
@@ -32,7 +28,13 @@ export default function Header() {
                 <div className="header-container">
                     <div className="header-content">
                         <Link href="/" className="header-logo">
-                            <span className="text-2xl">✨</span>
+                            <span className="text-2xl">
+                                <img
+                                    src="/assets/advplayground.png"
+                                    alt="Playground"
+                                    className="w-12 h-12 mx-auto rounded-full shadow-sm"
+                                />
+                            </span>
                             <h1 className="text-xl font-bold font-montserrat">Adversarial Playground</h1>
                         </Link>
 
