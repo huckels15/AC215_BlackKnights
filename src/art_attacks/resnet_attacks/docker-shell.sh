@@ -2,7 +2,7 @@
 
 set -e
 
-BUILD="True" 
+BUILD="False" 
 
 export IMAGE_NAME="resnet_attacks_dh"
 export BASE_DIR=$(pwd)

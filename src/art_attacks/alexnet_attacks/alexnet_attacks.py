@@ -22,6 +22,9 @@ NUM_CLASSES = 43
 
 
 def generator(dataset_path, batch_size):
+    '''
+    Generator to be space efficient when loading data for attacks.
+    '''
     data = []
     for class_id in range(NUM_CLASSES):
         class_path = os.path.join(dataset_path, str(class_id))
@@ -47,6 +50,9 @@ def generator(dataset_path, batch_size):
 
 
 def plot_samples(num_samples, x_test, x_test_adv, y_test, predictions_adv):
+    '''
+    Function to plot a sample before and after adversarial perturbations.
+    '''
     class_map = {
         0: 'Speed limit (20km/h)',
         1: 'Speed limit (30km/h)',
@@ -92,7 +98,7 @@ def plot_samples(num_samples, x_test, x_test_adv, y_test, predictions_adv):
         41: 'End of no passing',
         42: 'End of no passing by vehicles over 3.5 metric tons'
     }
-    os.makedirs("figures", exist_ok=True)  # Ensure the directory exists
+    os.makedirs("figures", exist_ok=True)
 
     for i in range(num_samples):
         true_label = class_map[np.argmax(y_test[i])] 
@@ -115,6 +121,10 @@ def plot_samples(num_samples, x_test, x_test_adv, y_test, predictions_adv):
     return path
     
 def parse_args():
+    '''
+    Function to parse command line arguments to choose attack and parameters
+    for the attack.
+    '''
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--fgsm", 
@@ -161,6 +171,9 @@ def parse_args():
     return args, run_args
 
 def run(args, run_args):
+    '''
+    Function to run adversarial examaple attacks on alexnet model.
+    '''
     train_path = "data/Train"
 
     batch_size = 64

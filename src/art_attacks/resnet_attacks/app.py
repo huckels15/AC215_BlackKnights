@@ -11,10 +11,10 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Replace "*" with specific origins for better security in production
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Allow all HTTP methods
-    allow_headers=["*"],  # Allow all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 class AttackRequest(BaseModel):
@@ -27,6 +27,10 @@ class AttackRequest(BaseModel):
 
 @app.post("/resnet-attack/")
 def run_attack(request: AttackRequest):
+    '''
+    Function to serve requested attack to front end. Runs attack script
+    by translating drop down menu selections to command line arguments.
+    '''
     script_name = f"{request.model}_attacks.py"
     epsilon = request.epsilon
 
@@ -60,7 +64,6 @@ def run_attack(request: AttackRequest):
         raise HTTPException(status_code=500, detail=f"Error running script: {e.stderr}")
 
     try:
-        # Parse the JSON output from the script
         results = json.loads(output)
     except json.JSONDecodeError:
         raise HTTPException(status_code=500, detail="Failed to decode script output")
@@ -69,6 +72,9 @@ def run_attack(request: AttackRequest):
 
 @app.get("/get-file/")
 def get_file(file_path: str):
+    """
+    Function to serve image of sample before and after adversarial perturbation.
+    """
     if not os.path.exists(file_path):
         raise HTTPException(status_code=404, detail="File not found")
 

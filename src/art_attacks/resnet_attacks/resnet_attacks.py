@@ -15,7 +15,9 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 def load_data():
-
+    '''
+    Function to load the data to test Resnet and generate adversarial examples.
+    '''
     train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
         rotation_range=15,
         width_shift_range=0.1,
@@ -51,6 +53,9 @@ def load_data():
 
 
 def plot_samples(num_samples, x_test, x_test_adv, y_test, predictions_adv):
+    '''
+    Function to plot a sample before and after adversarial perturbations.
+    '''
     class_map = {
         0: 'Melanocytic nevi',
         1: 'Melanoma',
@@ -81,6 +86,10 @@ def plot_samples(num_samples, x_test, x_test_adv, y_test, predictions_adv):
         return path
 
 def parse_args():
+    '''
+    Function to parse command line arguments to choose attack and parameters
+    for the attack.
+    '''
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--fgsm", 
@@ -127,6 +136,9 @@ def parse_args():
     return args, run_args
 
 def run(args, run_args):
+    '''
+    Function to run adversarial examaple attacks on resnet model.
+    '''
     _, _, test_gen = load_data()
     custom_objects = {"Adam": Adam}
 
