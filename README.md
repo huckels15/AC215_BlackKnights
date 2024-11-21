@@ -198,6 +198,8 @@ Currently the tests are automatically run on pushes to development branches thro
 
 - pytest
 - pytest-cov
+- Hadolint
+- Flint8
 - Github actions
 
 ### Manual Test Usage:
