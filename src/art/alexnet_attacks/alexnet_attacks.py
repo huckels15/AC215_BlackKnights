@@ -114,84 +114,90 @@ def plot_samples(num_samples, x_test, x_test_adv, y_test, predictions_adv):
     path = "figures/example_1_original_vs_adversarial.png"
     return path
     
-parser = argparse.ArgumentParser()
-parser.add_argument(
-    "--fgsm", 
-    action="store_true", 
-    help="Run FGSM attack"
-)
-parser.add_argument(
-    "--pgd", 
-    action="store_true", 
-    help="Run PGD attack"
-)
-parser.add_argument(
-    "--deepfool", 
-    action="store_true", 
-    help="Run DeepFool attack"
-)
-parser.add_argument(
-    "--square", 
-    action="store_true", 
-    help="Run Square attack"
-)
-parser.add_argument(
-    "--eps", 
-    type=str,
-    default="0.2", 
-    help="Run Square attack"
-)
-parser.add_argument(
-    "--eps_step", 
-    type=str,
-    default="0.01", 
-    help="Run Square attack"
-)
-parser.add_argument(
-    "--max_iter", 
-    type=str,
-    default="50", 
-    help="Run Square attack"
-)
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--fgsm", 
+        action="store_true", 
+        help="Run FGSM attack"
+    )
+    parser.add_argument(
+        "--pgd", 
+        action="store_true", 
+        help="Run PGD attack"
+    )
+    parser.add_argument(
+        "--deepfool", 
+        action="store_true", 
+        help="Run DeepFool attack"
+    )
+    parser.add_argument(
+        "--square", 
+        action="store_true", 
+        help="Run Square attack"
+    )
+    parser.add_argument(
+        "--eps", 
+        type=str,
+        default="0.2", 
+        help="Run Square attack"
+    )
+    parser.add_argument(
+        "--eps_step", 
+        type=str,
+        default="0.01", 
+        help="Run Square attack"
+    )
+    parser.add_argument(
+        "--max_iter", 
+        type=str,
+        default="50", 
+        help="Run Square attack"
+    )
 
-args = parser.parse_args()
-run_args = vars(args)
+    args = parser.parse_args()
+    run_args = vars(args)
 
-train_path = "data/Train"
+    return args, run_args
 
-batch_size = 64
-train_generator = generator(train_path, batch_size)
+def run(args, run_args):
+    train_path = "data/Train"
 
-custom_objects = {"Adam": Adam}
-model = tf.keras.models.load_model("models/trainedAlexNet_20241118_1535.h5", custom_objects=custom_objects, compile=False)
-model.compile(optimizer=Adam(), loss='categorical_crossentropy', metrics=['accuracy'])
+    batch_size = 64
+    train_generator = generator(train_path, batch_size)
 
-min_pixel_value, max_pixel_value = 0.0, 1.0
-classifier = KerasClassifier(model=model, clip_values=(min_pixel_value, max_pixel_value), use_logits=False)
+    custom_objects = {"Adam": Adam}
+    model = tf.keras.models.load_model("models/trainedAlexNet_20241118_1535.h5", custom_objects=custom_objects, compile=False)
+    model.compile(optimizer=Adam(), loss='categorical_crossentropy', metrics=['accuracy'])
 
-x_test, y_test = next(train_generator)
-predictions = classifier.predict(x_test)
-accuracy = np.sum(np.argmax(predictions, axis=1) == np.argmax(y_test, axis=1)) / len(y_test)
+    min_pixel_value, max_pixel_value = 0.0, 1.0
+    classifier = KerasClassifier(model=model, clip_values=(min_pixel_value, max_pixel_value), use_logits=False)
 
-if args.fgsm:
-    attack = FastGradientMethod(estimator=classifier, eps=float(run_args['eps']))
-elif args.pgd:
-    attack = PGD(estimator=classifier, eps=float(run_args['eps']), eps_step=float(run_args['eps_step']), max_iter=int(run_args['max_iter']), verbose=False)
-elif args.deepfool:
-    attack = DeepFool(classifier=classifier, max_iter=int(run_args['max_iter']), verbose=False)
-elif args.square:
-    attack = Square(estimator=classifier, eps=float(run_args['eps']), max_iter=int(run_args['max_iter']), verbose=False)
+    x_test, y_test = next(train_generator)
+    predictions = classifier.predict(x_test)
+    accuracy = np.sum(np.argmax(predictions, axis=1) == np.argmax(y_test, axis=1)) / len(y_test)
 
-x_test_adv = attack.generate(x=x_test)
-predictions_adv = classifier.predict(x_test_adv)
-accuracy_adv = np.sum(np.argmax(predictions_adv, axis=1) == np.argmax(y_test, axis=1)) / len(y_test)
+    if args.fgsm:
+        attack = FastGradientMethod(estimator=classifier, eps=float(run_args['eps']))
+    elif args.pgd:
+        attack = PGD(estimator=classifier, eps=float(run_args['eps']), eps_step=float(run_args['eps_step']), max_iter=int(run_args['max_iter']), verbose=False)
+    elif args.deepfool:
+        attack = DeepFool(classifier=classifier, max_iter=int(run_args['max_iter']), verbose=False)
+    elif args.square:
+        attack = Square(estimator=classifier, eps=float(run_args['eps']), max_iter=int(run_args['max_iter']), verbose=False)
 
-path = plot_samples(1, x_test, x_test_adv, y_test, predictions_adv)
+    x_test_adv = attack.generate(x=x_test)
+    predictions_adv = classifier.predict(x_test_adv)
+    accuracy_adv = np.sum(np.argmax(predictions_adv, axis=1) == np.argmax(y_test, axis=1)) / len(y_test)
 
-results = {
-    "reg_acc": (accuracy) * 100,
-    "adv_acc": (accuracy_adv) * 100,
-    "path": path
-}
+    path = plot_samples(1, x_test, x_test_adv, y_test, predictions_adv)
 
-print(json.dumps(results))
+    results = {
+        "reg_acc": (accuracy) * 100,
+        "adv_acc": (accuracy_adv) * 100,
+        "path": path
+    }
+
+    print(json.dumps(results))
+
+    return results
