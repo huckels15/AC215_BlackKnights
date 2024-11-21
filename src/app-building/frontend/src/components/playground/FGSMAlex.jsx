@@ -1,9 +1,9 @@
 export const getFGSMAlex = async (model, attack) => {
-    const url = "http://34.138.103.196:8000/alexnet-attack/";
+    const url = "http://34.138.29.34:8000/alexnet-attack/";
     const payload = {
       model: model,
       attack: attack,
-      epsilon: 0.2, // Default epsilon value, you can modify as needed
+      epsilon: 0.2,
     };
   
     try {

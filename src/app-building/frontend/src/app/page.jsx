@@ -11,13 +11,14 @@ export default function Home() {
                     <h1 className="hero-title">
                         Get Ready to Play on the Adversarial Playground
                     </h1>
+                    <img
+                        src="/assets/advplayground.png"
+                        alt="Playground"
+                        className="w-48 h-48 mx-auto rounded-full"
+                    />
                     <p className="hero-description">
                         Explore what happens when adversarial attacks are deployed against image classification networks and how they can be defended against!
                     </p>
-                    <div className="flex flex-wrap justify-center gap-4">
-                        <button className="button-primary">Get Started</button>
-                        <button className="button-secondary">Learn More</button>
-                    </div>
                 </div>
             </section>
 
@@ -45,7 +46,7 @@ export default function Home() {
 
                     <Link href="/members" className="block">
                         <div className="feature-card">
-                            <h3 className="feature-card-title">Team Members</h3>
+                            <h3 className="feature-card-title">Black Knights Members</h3>
                             <p className="feature-card-description">
                                 Want to know more about the developers of Adversarial Playground? Click below!
                             </p>

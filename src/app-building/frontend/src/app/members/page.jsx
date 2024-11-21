@@ -4,22 +4,23 @@ export default function MembersPage() {
     return (
         <div className="min-h-screen pt-20 pb-12 px-4">
             <div className="container mx-auto max-w-6xl">
-                {/* Header */}
-                <div className="mb-8">
-                    <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 font-montserrat">
-                        Team Members
-                    </h1>
-                    <p className="text-gray-600 mt-2">
-                        Learn more about the creators of Adversarial Playground!
-                    </p>
+                {/* Header Spot */}
+                <div className="flex justify-center">
+                    <div className="mb-8">
+                        <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 font-montserrat">
+                            Black Knights Members
+                        </h1>
+                        <p className="text-gray-600 mt-2">
+                            Learn more about the creators of Adversarial Playground!
+                        </p>
+                    </div>
                 </div>
-
-                {/* Team Members Section */}
+                {/* Jacob, Eli, Ed */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {/* Member 1 */}
+                    {/* Jacob */}
                     <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-md text-center">
                         <img
-                            src="/crest.png" // Replace with the actual image path
+                            src="/assets/jacob.jpg"
                             alt="Jacob Huckelberry"
                             className="w-24 h-24 mx-auto rounded-full shadow-lg"
                         />
@@ -28,22 +29,22 @@ export default function MembersPage() {
                         <p className="text-gray-500 mt-2">Description about Jacob.</p>
                     </div>
 
-                    {/* Member 2 */}
+                    {/* Eli */}
                     <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-md text-center">
                         <img
-                            src="crest.png" // Replace with the actual image path
+                            src="/assets/eli.jpg"
                             alt="Elijah Dabkowski"
                             className="w-24 h-24 mx-auto rounded-full shadow-lg"
                         />
                         <h2 className="text-xl font-bold text-purple-600 mt-4">Elijah Dabkowski</h2>
                         <p className="text-gray-600 mt-2">Role: Developer</p>
-                        <p className="text-gray-500 mt-2">Description about Elijah.</p>
+                        <p className="text-gray-500 mt-2">Just a really chill guy</p>
                     </div>
 
-                    {/* Member 3 */}
+                    {/* Ed */}
                     <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-md text-center">
                         <img
-                            src="crest.png" // Replace with the actual image path
+                            src="/assets/ed.jpeg"
                             alt="Ed Tang"
                             className="w-24 h-24 mx-auto rounded-full shadow-lg"
                         />

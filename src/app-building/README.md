@@ -1,62 +1,108 @@
-# ⚡ App Building Crash Course
+# Adversarial Playground App - Black Knights
+<img src="images/black_knight_2.png"  width="300"> <img src="images/advplayground.png"  width="320">
 
-In this tutorial we will go over a react app template and learn:
-* How to structure a React App
-* What are pages and components
-* Review various components like:
-    * Audio input
-    * Audio output
-    * Image input
-    * Plots and graphs
-    * Chat UI
+
+In this README we will review how to interact with the frontend through the VM IP and the overall code structure that builds the frontend of the Adversarial Playground App
 
 ## Prerequisites
+* Be able to access the internet through a browser
 * Have Docker installed
-* Have VSCode or an IDE of choice
+* Have some form of IDE 
 
-### Clone the github repository
-- Clone or download from [app-building-crashcourse](https://github.com/dlops-io/app-building-crashcourse)
+## Interacting w/ the Adversarial Playground App (Setup Instructions)
+* If you would like to run our solution:
+    * Navigate to http://34.41.1.111:3000
+    * Play around on our virtual playground app!
+* If you would like to create your own app or modify our functionality:
+    * Begin by cloning this repository
+    * Navigate your way through the files until you reach app-building/frontend
+    * Modify  docker-shell.sh to contain whatever image name you want along with ensuring that the Dockerfile.dev file is the docker file being built.
+    * Run ```sh docker-shell.sh``` to build and enter into the container
+    * Run ```npm install```
+    * Run ```npm run dev``` on your own machine and navigate your way to http://localhost:3000 to see the webpage.
+    * You can now make changes and edit our implementation if you so wish.
+    * Run the following commands in order to update your package.json file while the container is still active
+        * npm install
+        * npm run build
+        * npm ci
+    * Exit the container and adjust the docker-shell.sh script to contain a new image name while changing Dockerfile.dev to Dockerfile
+    * Running this should automatically boot up the frontend of the app, allowing you type http://localhost:3000 into your browser to view the frontend.
+    * If you would like, you can proceed with pushing this image to dockerhub and then creating a VM instance on GCP to pull the image and run the frontend on a virtual machine.
 
-### Go into the frontend folder 
-- Open a terminal and go to the location where `app-building-crashcourse/frontend`
+## Usage Guidelines
+After finding your way to http://34.41.1.111:3000, you will find yourself on the apps landing page.
 
-### Build & Run Container
-- Run `sh docker-shell.sh`
+<img src="images/playground-01.png"  width="700">
 
-### Install Required packages
-- If this is your first time running the react container run `npm install`
+You can use either the four header links at the top of the landing page or the four tabs at the bottom of the landing page to access other sections within our app. To start off, try navigating to our Github tab, you will be taken to a page which enables the interactor to navigate to our github repository.
 
-### Start Web Server
-- Run `npm run dev` from the docker shell
-- Go to `http://localhost:3000`
+<img src="images/playground-03.png"  width="700">
 
-If you can see the web page at `http://localhost:3000`, you have your environment setup and ready to follow along for this tutorial.
+Navigating to the Team Members tab, you will be able to learn more about the background and future of each of the three members of the Black Knighs.
 
-## Code Organization
+<img src="images/playground-02.png"  width="700">
 
-### React App Structure
-In a React app we want to break things up in an app into components to make the development and maintenance fo the app easier
-<img src="images/react-01.png"  width="700">
+If you are unfamiliar with the world of adversarial attacks, check out the Attacks tab to learn about the four attacks implemented with helpful links to provide more information on how these attacks work.
 
-Common components like header, footer, navigation bars are only built once. The core page component in a page is swapped out different app views
-<img src="images/react-02.png"  width="700">
+<img src="images/playground-04.png"  width="700">
 
-### Code Structure
-The general organization of a react app is as follows.
-<img src="images/react-03.0.png"  width="700">
+Finally, play around on our adversarial playground where you will be able to select both a model and type of attack you would like to use in order to see what the test accuracy of the selected model would be both before and after an attack has taken place.
 
-<img src="images/react-03.1.png"  width="700">
+<img src="images/playground-06.png"  width="700">
 
-<img src="images/react-03.png"  width="700">
+## Application Components 
 
-## References: Getting Started
-* Intro to HTML: https://www.w3schools.com/html/html_intro.asp
-* Intro to Javascript: https://www.w3schools.com/js/js_intro.asp
-* Intro to React: https://medium.com/javascript-scene/the-missing-introduction-to-react-62837cb2fd76
-* Getting started with React: https://reactjs.org/docs/getting-started.html
-* Getting started with Next: https://nextjs.org/docs/app/getting-started
-* CSS: Tailwind for React: https://tailwindui.com/documentation#react-creating-components 
+### General Code Tree (app-building directory)
+```
+.
+├── README.md
+├── frontend
+│   ├── Dockerfile
+│   ├── Dockerfile.dev
+│   ├── docker-shell.sh
+│   ├── jsconfig.json
+│   ├── next.config.js
+│   ├── node_modules
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── public
+│   │   └── assets
+│   ├── src
+│   │   ├── app
+│   │   ├── components
+│   │   ├── public
+│   │   └── services
+│   └── tailwind.config.js
+└── images
+    └── black_knight_2.png
+```
 
+### General Code Overview
+* Within the main app-building directory is the README.md file, an images directory, and a frontend directory. The images directory contains the images that are shown within the README.md file while the frontend directory contains the code that is utilized to build the react app. Within frontend directory lies the node_modules directory containing the installed packages, the src directory containing the react source code, and a multitude of other files which handle app operations. Additionally, the public directory within the frontend directory contains the static images that are used within the app.
 
+### React Source Code Tree (app-building/frontend/src directory)
 
+```
+.
+├── app
+│   ├── attacks
+│   ├── github
+│   ├── globals.css
+│   ├── globals.neon.nights.css
+│   ├── layout.jsx
+│   ├── members
+│   ├── not-found.jsx
+│   ├── page.jsx
+│   └── playground
+├── components
+│   ├── layout
+│   └── playground
+└── services
+    ├── Common.js
+    ├── DataService.js
+    └── SampleData.js
+```
 
+### React Source Code Overview
+* Within the React source code directory lies two other directories, including /app and /components. The /app folder contains the react pages while the /components folder holders the react components. The react pages directory contains the home page file (page.jsx) along with the specific page directories and subsequent page files such as /playground/page.jsx which are used to build what the user sees and interacts with on the frontend of our app. The react components directory contains the layout directory which is used to create the header and footer that is populated on every page of our app along with the playground directory which contains four seperate files, all of which interact with the backend to send a request and recieve a response for a models performance before and after an adversarial attack takes place. The page.jsx files within the /app folder then collect the specific response from these component files to populate the frontend with the output from our models running on the backend. 

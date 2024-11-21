@@ -1,9 +1,9 @@
 export const getDEEPFOOLAlex = async (model, attack) => {
-    const url = "http://34.138.103.196:8000/alexnet-attack/";
+    const url = "http://34.138.29.34:8000/alexnet-attack/";
     const payload = {
       model: model,
       attack: attack,
-      max_iter: 10, // Default iteration value, you can modify as needed
+      max_iter: 10,
     };
   
     try {

@@ -13,8 +13,8 @@ import { getSQUAREAlex } from '@/components/playground/SQUAREAlex';
 export default function PlaygroundPage() {
     const [selectedModel, setSelectedModel] = useState('');
     const [selectedAttack, setSelectedAttack] = useState('');
-    const [output, setOutput] = useState(''); // To display the API response
-    const [loading, setLoading] = useState(false); // To show loading state
+    const [output, setOutput] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const handleModelChange = (event) => {
         setSelectedModel(event.target.value);
@@ -30,7 +30,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getFGSMRes(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     setOutput("Failed to fetch response.");
                 } finally {
@@ -40,7 +40,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getPGDRes(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     console.error('Error:', error)
                     setOutput("Failed to fetch response for alternative processing.");
@@ -51,7 +51,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getDEEPFOOLRes(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     setOutput("Failed to fetch response for alternative processing.");
                 } finally {
@@ -61,7 +61,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getSQUARERes(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     setOutput("Failed to fetch response for alternative processing.");
                 } finally {
@@ -71,7 +71,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getFGSMAlex(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     setOutput("Failed to fetch response.");
                 } finally {
@@ -81,7 +81,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getPGDAlex(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     console.error('Error:', error)
                     setOutput("Failed to fetch response for alternative processing.");
@@ -92,7 +92,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getDEEPFOOLAlex(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     setOutput("Failed to fetch response for alternative processing.");
                 } finally {
@@ -102,7 +102,7 @@ export default function PlaygroundPage() {
                 setLoading(true);
                 try {
                     const response = await getSQUAREAlex(selectedModel, selectedAttack);
-                    setOutput(JSON.stringify(response, null, 2));
+                    setOutput(response);
                 } catch (error) {
                     setOutput("Failed to fetch response for alternative processing.");
                 } finally {
@@ -119,11 +119,10 @@ export default function PlaygroundPage() {
     return (
         <div className="min-h-screen pt-20 pb-12 px-4">
             <div className="container mx-auto max-w-6xl">
-                {/* Two Column Layout */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* Left Column: Selections */}
+                    {/* User Selection */}
                     <div>
-                        {/* Model Selection */}
+                        {/* Select Model */}
                         <div className="mb-8">
                             <h1 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 font-montserrat">
                                 Select a Model
@@ -143,7 +142,7 @@ export default function PlaygroundPage() {
                             </div>
                         </div>
 
-                        {/* Attack Selection */}
+                        {/* Select Attack */}
                         <div className="mb-8">
                             <h1 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 font-montserrat">
                                 Select an Attack
@@ -166,9 +165,9 @@ export default function PlaygroundPage() {
                         </div>
                     </div>
 
-                    {/* Right Column: Run Button and Output */}
+                    {/* Display Backend Output */}
                     <div className="flex flex-col items-center justify-center">
-                        {/* Run Button */}
+                        {/* Instance to handle backend output */}
                         <button
                             onClick={handleRun}
                             className="mb-8 px-6 py-2 bg-green-600 text-white font-bold rounded-lg shadow-lg hover:bg-green-700 transition-colors"
@@ -176,16 +175,23 @@ export default function PlaygroundPage() {
                             Let's Play!
                         </button>
 
-                        {/* Output Section */}
+                        {/* Load Output */}
                         <div className="text-center">
                             <h2 className="text-xl font-bold text-gray-700">Output</h2>
                             <div className="mt-4">
                                 {loading ? (
                                     <p className="text-gray-600">Loading...</p>
+                                ) : output.reg_acc && output.adv_acc ? (
+                                    <div className="bg-gray-100 p-4 rounded-lg shadow-inner text-left">
+                                        <p className="text-gray-700">
+                                            <span className="font-bold">Accuracy Before Attack:</span> {output.reg_acc}
+                                        </p>
+                                        <p className="text-gray-700">
+                                            <span className="font-bold">Accuracy After Attack:</span> {output.adv_acc}
+                                        </p>
+                                    </div>
                                 ) : (
-                                    <pre className="text-gray-600 text-left bg-gray-100 p-4 rounded-lg shadow-inner overflow-x-auto">
-                                        {output}
-                                    </pre>
+                                    <p className="text-red-600">{output}</p>
                                 )}
                             </div>
                         </div>
