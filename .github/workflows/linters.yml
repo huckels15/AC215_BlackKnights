@@ -35,5 +35,6 @@ jobs:
       # Run Hadolint on src directory
       - name: Run Hadolint
         run: |
-          curl -s https://packagecloud.io/install/repositories/hadolint/hadolint/script.deb.sh | bash
-          apt install hadolint
+          curl -sSL https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64 -o /usr/local/bin/hadolint
+          chmod +x /usr/local/bin/hadolint
+          hadolint $(find src -type f -name "Dockerfile" | xargs)
