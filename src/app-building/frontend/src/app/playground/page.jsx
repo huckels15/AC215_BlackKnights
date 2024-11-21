@@ -9,7 +9,6 @@ import { getFGSMAlex } from '@/components/playground/FGSMAlex';
 import { getPGDAlex } from '@/components/playground/PGDAlex';
 import { getDEEPFOOLAlex } from '@/components/playground/DEEPFOOLAlex';
 import { getSQUAREAlex } from '@/components/playground/SQUAREAlex';
-import { getPRAC } from '@/components/playground/prac';
 
 export default function PlaygroundPage() {
     const [selectedModel, setSelectedModel] = useState('');
@@ -120,11 +119,10 @@ export default function PlaygroundPage() {
     return (
         <div className="min-h-screen pt-20 pb-12 px-4">
             <div className="container mx-auto max-w-6xl">
-                {/* Two Column Layout */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* Left Column: Selections */}
+                    {/* User Selection */}
                     <div>
-                        {/* Model Selection */}
+                        {/* Select Model */}
                         <div className="mb-8">
                             <h1 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 font-montserrat">
                                 Select a Model
@@ -144,7 +142,7 @@ export default function PlaygroundPage() {
                             </div>
                         </div>
 
-                        {/* Attack Selection */}
+                        {/* Select Attack */}
                         <div className="mb-8">
                             <h1 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 font-montserrat">
                                 Select an Attack
@@ -167,9 +165,9 @@ export default function PlaygroundPage() {
                         </div>
                     </div>
 
-                    {/* Right Column: Run Button and Output */}
+                    {/* Display Backend Output */}
                     <div className="flex flex-col items-center justify-center">
-                        {/* Run Button */}
+                        {/* Instance to handle backend output */}
                         <button
                             onClick={handleRun}
                             className="mb-8 px-6 py-2 bg-green-600 text-white font-bold rounded-lg shadow-lg hover:bg-green-700 transition-colors"
@@ -177,7 +175,7 @@ export default function PlaygroundPage() {
                             Let's Play!
                         </button>
 
-                        {/* Output Section */}
+                        {/* Load Output */}
                         <div className="text-center">
                             <h2 className="text-xl font-bold text-gray-700">Output</h2>
                             <div className="mt-4">

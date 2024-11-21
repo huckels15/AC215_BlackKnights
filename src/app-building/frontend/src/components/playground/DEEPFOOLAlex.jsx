@@ -3,7 +3,7 @@ export const getDEEPFOOLAlex = async (model, attack) => {
     const payload = {
       model: model,
       attack: attack,
-      max_iter: 10, // Default iteration value, you can modify as needed
+      max_iter: 10,
     };
   
     try {

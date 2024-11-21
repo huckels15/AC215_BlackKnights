@@ -2,7 +2,7 @@
 
 set -e
 
-export IMAGE_NAME="app-full"
+export IMAGE_NAME="app-dev-running"
 
 # Build the image based on the Dockerfile
 docker build -t $IMAGE_NAME -f Dockerfile .

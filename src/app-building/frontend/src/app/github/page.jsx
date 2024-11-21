@@ -4,7 +4,7 @@ export default function GitHubPage() {
     return (
         <div className="min-h-screen pt-20 pb-12 px-4">
             <div className="container mx-auto max-w-6xl">
-                {/* Header */}
+                {/* Header Spot */}
                 <div className="mb-8">
                     <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 font-montserrat">
                         GitHub Page
@@ -14,7 +14,7 @@ export default function GitHubPage() {
                     </p>
                 </div>
 
-                {/* Button */}
+                {/* Button to Github Page */}
                 <div>
                     <a 
                         href="https://github.com/huckels15/AC215_BlackKnights/tree/app_dev"

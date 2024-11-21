@@ -46,7 +46,7 @@ export default function Home() {
 
                     <Link href="/members" className="block">
                         <div className="feature-card">
-                            <h3 className="feature-card-title">Team Members</h3>
+                            <h3 className="feature-card-title">Black Knights Members</h3>
                             <p className="feature-card-description">
                                 Want to know more about the developers of Adversarial Playground? Click below!
                             </p>

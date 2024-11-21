@@ -3,9 +3,9 @@ export const getPGDAlex = async (model, attack) => {
     const payload = {
       model: model,
       attack: attack,
-      epsilon: 0.2, // Default epsilon value, you can modify as needed
-      eps_step: 0.01, // Default step value, you can modify as needed
-      max_iter: 10, // Default iteration value, you can modify as needed
+      epsilon: 0.2,
+      eps_step: 0.01,
+      max_iter: 10,
     };
   
     try {

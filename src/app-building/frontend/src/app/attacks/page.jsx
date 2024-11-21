@@ -4,16 +4,16 @@ export default function AttacksPage() {
     return (
         <div className="min-h-screen pt-20 pb-12 px-4">
             <div className="container mx-auto max-w-6xl">
-                {/* Header */}
+                {/* Header Spot */}
                 <div className="mb-8">
                     <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 font-montserrat">
                         Types of Adversarial Attacks
                     </h1>
                 </div>
 
-                {/* Attack Section */}
+                {/* Types of Attacks */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    {/* Attack 1 */}
+                    {/* FGSM */}
                     <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-md text-center">
                         <h2 className="text-xl font-bold text-purple-600 mt-4">Fast Gradient Sign Method</h2>
                         <p className="text-gray-600 mt-2">
@@ -27,7 +27,7 @@ export default function AttacksPage() {
                             </p>
                     </div>
 
-                    {/* Attack 2 */}
+                    {/* PGD */}
                     <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-md text-center">
                         <h2 className="text-xl font-bold text-purple-600 mt-4">Projected Gradient Descent</h2>
                         <p className="text-gray-600 mt-2">
@@ -39,7 +39,7 @@ export default function AttacksPage() {
                         </p>
                     </div>
 
-                    {/* Attack 3 */}
+                    {/* DeepFool */}
                     <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-md text-center">
                         <h2 className="text-xl font-bold text-purple-600 mt-4">DeepFool</h2>
                         <p className="text-gray-600 mt-2">
@@ -51,7 +51,7 @@ export default function AttacksPage() {
                         </p>
                     </div>
 
-                    {/* Attack 4 */}
+                    {/* Square */}
                     <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-md text-center">
                         <h2 className="text-xl font-bold text-purple-600 mt-4">Square Attack</h2>
                         <p className="text-gray-600 mt-2">

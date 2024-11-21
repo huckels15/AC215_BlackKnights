@@ -3,10 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Podcasts, Email, SmartToy, Menu, Close, GitHub, People, BugReport, DirectionsRun, RunCircle} from '@mui/icons-material';
-import InsertChartIcon from '@mui/icons-material/InsertChart';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import AppsIcon from '@mui/icons-material/Apps';
+import { Home, Menu, Close, GitHub, People, BugReport, DirectionsRun} from '@mui/icons-material';
 
 export default function Header() {
     // Component States

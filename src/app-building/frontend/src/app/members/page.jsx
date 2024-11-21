@@ -4,7 +4,7 @@ export default function MembersPage() {
     return (
         <div className="min-h-screen pt-20 pb-12 px-4">
             <div className="container mx-auto max-w-6xl">
-                {/* Header */}
+                {/* Header Spot */}
                 <div className="flex justify-center">
                     <div className="mb-8">
                         <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 font-montserrat">
@@ -15,9 +15,9 @@ export default function MembersPage() {
                         </p>
                     </div>
                 </div>
-                {/* Team Members Section */}
+                {/* Jacob, Eli, Ed */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {/* Member 1 */}
+                    {/* Jacob */}
                     <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-md text-center">
                         <img
                             src="/assets/jacob.jpg"
@@ -29,7 +29,7 @@ export default function MembersPage() {
                         <p className="text-gray-500 mt-2">Description about Jacob.</p>
                     </div>
 
-                    {/* Member 2 */}
+                    {/* Eli */}
                     <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-md text-center">
                         <img
                             src="/assets/eli.jpg"
@@ -41,10 +41,10 @@ export default function MembersPage() {
                         <p className="text-gray-500 mt-2">Just a really chill guy</p>
                     </div>
 
-                    {/* Member 3 */}
+                    {/* Ed */}
                     <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-md text-center">
                         <img
-                            src="/assets/logo.png"
+                            src="/assets/ed.jpeg"
                             alt="Ed Tang"
                             className="w-24 h-24 mx-auto rounded-full shadow-lg"
                         />

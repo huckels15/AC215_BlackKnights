@@ -3,7 +3,7 @@ export const getFGSMRes = async (model, attack) => {
   const payload = {
     model: model,
     attack: attack,
-    epsilon: 0.2, // Default epsilon value, you can modify as needed
+    epsilon: 0.2,
   };
 
   try {
