@@ -4,7 +4,7 @@ set -e
 
 BUILD="True" 
 
-export IMAGE_NAME="alexnet_attacks_dh"
+export IMAGE_NAME="alexnet_attacks_dh_test"
 export BASE_DIR=$(pwd)
 export GCS_BUCKET_NAME="traffic-sign-alexnet-data"
 export GCP_PROJECT="secret-cipher-399620"
