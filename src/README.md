@@ -1,0 +1,2 @@
+# Src Directory
+To see our backend functionalities, navigate to the subdirectories within `art_attacks` and view their respective `README.md` files. To see our frontend functionalities, navigate to our `app-building` directory and view it's `README.md`.
