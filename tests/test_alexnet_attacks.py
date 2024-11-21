@@ -10,6 +10,43 @@ IMG_HEIGHT, IMG_WIDTH = 32, 32
 NUM_CLASSES = 43
 
 
+@pytest.fixture
+def mock_generator(monkeypatch):
+    def mock_gen(*args, **kwargs):
+        x_mock = np.random.rand(2, IMG_HEIGHT, IMG_WIDTH, 3)
+        y_mock = np.eye(NUM_CLASSES)[:2] 
+        yield x_mock, y_mock
+
+    monkeypatch.setattr("art_attacks.alexnet_attacks.alexnet_attacks.generator", mock_gen)
+
+@pytest.fixture
+def mock_plot(monkeypatch):
+    def mock_plot_samples(*args, **kwargs):
+        return "mocked_path_to_figure.png"
+    
+    monkeypatch.setattr("art_attacks.alexnet_attacks.alexnet_attacks.plot_samples", mock_plot_samples)
+
+@pytest.fixture
+def mock_model(monkeypatch):
+    model = Sequential([
+        Flatten(input_shape=(IMG_HEIGHT, IMG_WIDTH, 3)),
+        Dense(128, activation='relu'),
+        Dense(NUM_CLASSES, activation='softmax')
+    ])
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+    monkeypatch.setattr("tensorflow.keras.models.load_model", lambda *args, **kwargs: model)
+    return model
+
+@pytest.fixture
+def mock_classifier(monkeypatch):
+    mock_classifier = MagicMock()
+    mock_classifier.predict.return_value = np.eye(NUM_CLASSES)[:2]
+    mock_classifier.generate.return_value = np.random.rand(2, IMG_HEIGHT, IMG_WIDTH, 3)
+    monkeypatch.setattr("art.estimators.classification.KerasClassifier", lambda *args, **kwargs: mock_classifier)
+    return mock_classifier
+
+
 def test_generator(monkeypatch, tmpdir):
     base_path = tmpdir.mkdir("data")
     for class_id in range(NUM_CLASSES):
@@ -65,42 +102,6 @@ def test_parse_args(monkeypatch):
     assert args.fgsm is True
     assert run_args["eps"] == "0.3"
     assert run_args["max_iter"] == "10"
-
-@pytest.fixture
-def mock_generator(monkeypatch):
-    def mock_gen(*args, **kwargs):
-        x_mock = np.random.rand(2, IMG_HEIGHT, IMG_WIDTH, 3)
-        y_mock = np.eye(NUM_CLASSES)[:2] 
-        yield x_mock, y_mock
-
-    monkeypatch.setattr("art_attacks.alexnet_attacks.alexnet_attacks.generator", mock_gen)
-
-@pytest.fixture
-def mock_plot(monkeypatch):
-    def mock_plot_samples(*args, **kwargs):
-        return "mocked_path_to_figure.png"
-    
-    monkeypatch.setattr("art_attacks.alexnet_attacks.alexnet_attacks.plot_samples", mock_plot_samples)
-
-@pytest.fixture
-def mock_model(monkeypatch):
-    model = Sequential([
-        Flatten(input_shape=(IMG_HEIGHT, IMG_WIDTH, 3)),
-        Dense(128, activation='relu'),
-        Dense(NUM_CLASSES, activation='softmax')
-    ])
-    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-
-    monkeypatch.setattr("tensorflow.keras.models.load_model", lambda *args, **kwargs: model)
-    return model
-
-@pytest.fixture
-def mock_classifier(monkeypatch):
-    mock_classifier = MagicMock()
-    mock_classifier.predict.return_value = np.eye(NUM_CLASSES)[:2]
-    mock_classifier.generate.return_value = np.random.rand(2, IMG_HEIGHT, IMG_WIDTH, 3)
-    monkeypatch.setattr("art.estimators.classification.KerasClassifier", lambda *args, **kwargs: mock_classifier)
-    return mock_classifier
 
 def test_run(mock_model, mock_generator, mock_plot, mock_classifier, monkeypatch):
 

@@ -165,6 +165,6 @@ def run(args, run_args):
     print(json.dumps(results))
 
     return results
-
-args, run_args = parse_args()
-run(args, run_args)
+if __name__ == "__main__":
+    args, run_args = parse_args()
+    run(args, run_args)

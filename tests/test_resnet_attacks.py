@@ -43,6 +43,34 @@ def mock_read_csv(monkeypatch):
     monkeypatch.setattr('pandas.read_csv', mock_csv)
 
 
+@pytest.fixture
+def mock_plot(monkeypatch):
+    def mock_plot_samples(*args, **kwargs):
+        return "mocked_path_to_figure.png"
+    
+    monkeypatch.setattr("art_attacks.resnet_attacks.resnet_attacks.plot_samples", mock_plot_samples)
+
+@pytest.fixture
+def mock_model(monkeypatch):
+    model = Sequential([
+        Flatten(input_shape=(IMG_HEIGHT, IMG_WIDTH, 3)),
+        Dense(128, activation='relu'),
+        Dense(NUM_CLASSES, activation='softmax')
+    ])
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+    monkeypatch.setattr("tensorflow.keras.models.load_model", lambda *args, **kwargs: model)
+    return model
+
+@pytest.fixture
+def mock_classifier(monkeypatch):
+    mock_classifier = MagicMock()
+    mock_classifier.predict.return_value = np.eye(NUM_CLASSES)[:2]
+    mock_classifier.generate.return_value = np.random.rand(2, IMG_HEIGHT, IMG_WIDTH, 3)
+    monkeypatch.setattr("art.estimators.classification.KerasClassifier", lambda *args, **kwargs: mock_classifier)
+    return mock_classifier
+
+
 def test_load_data(mock_read_csv, monkeypatch):
     
     train_gen, val_gen, test_gen = load_data()
@@ -66,12 +94,6 @@ def test_parse_args(monkeypatch):
     assert run_args["eps"] == "0.3"
     assert run_args["max_iter"] == "10"
 
-@pytest.fixture
-def mock_plot(monkeypatch):
-    def mock_plot_samples(*args, **kwargs):
-        return "mocked_path_to_figure.png"
-    
-    monkeypatch.setattr("art_attacks.resnet_attacks.resnet_attacks.plot_samples", mock_plot_samples)
 
 def test_plot_samples(monkeypatch):
 
@@ -89,25 +111,6 @@ def test_plot_samples(monkeypatch):
 
     assert path == "figures/example_1_original_vs_adversarial.png"
 
-@pytest.fixture
-def mock_model(monkeypatch):
-    model = Sequential([
-        Flatten(input_shape=(IMG_HEIGHT, IMG_WIDTH, 3)),
-        Dense(128, activation='relu'),
-        Dense(NUM_CLASSES, activation='softmax')
-    ])
-    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-
-    monkeypatch.setattr("tensorflow.keras.models.load_model", lambda *args, **kwargs: model)
-    return model
-
-@pytest.fixture
-def mock_classifier(monkeypatch):
-    mock_classifier = MagicMock()
-    mock_classifier.predict.return_value = np.eye(NUM_CLASSES)[:2]
-    mock_classifier.generate.return_value = np.random.rand(2, IMG_HEIGHT, IMG_WIDTH, 3)
-    monkeypatch.setattr("art.estimators.classification.KerasClassifier", lambda *args, **kwargs: mock_classifier)
-    return mock_classifier
 
 def test_run(mock_read_csv, mock_model, mock_plot, mock_classifier, monkeypatch):
 

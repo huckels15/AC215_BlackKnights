@@ -202,5 +202,6 @@ def run(args, run_args):
 
     return results
 
-args, run_args = parse_args()
-run(args, run_args)
+if __name__ == "__main__":
+    args, run_args = parse_args()
+    run(args, run_args)
