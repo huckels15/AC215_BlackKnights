@@ -1,265 +1,93 @@
-## Black Knights Milestone 3
-
-
-#### Project Milestone 3 Organization
+## Milestone 4 Template
 
 ```
-.
-├── LICENSE
-├── README.md
-├── deliverables
-│   ├── application_mock_up.pdf
-│   ├── presentation
-│   │   └── Milestone 3 Presentation.pptx
-│   └── running_containers_envs
-│       ├── art_container_env.PNG
-│       ├── data_download_resnet_container_env.PNG
-│       ├── data_download_yolo_container_env.PNG
-│       ├── data_versioning_resnet_container_env.PNG
-│       ├── data_versioning_yolo_container_env.PNG
-│       ├── resnet_container_env.PNG
-│       └── yolo_container_env.PNG
+The files are empty placeholders only. You may adjust this template as appropriate for your project.
+Never commit large data files,trained models, personal API Keys/secrets to GitHub
+```
+
+#### Project Milestone 4 Organization
+
+```
+├── Readme.md
+├── data # DO NOT UPLOAD DATA TO GITHUB, only .gitkeep to keep the directory or a really small sample
+├── notebooks
+│   └── eda.ipynb
+├── references
+├── reports
+│   ├── CheesyAppMidterm.pdf
+│   └── Statement of Work_Sample.pdf  #This is Milestone1 proposal
 └── src
-    ├── art
-    │   ├── Dockerfile
-    │   ├── attacks
-    │   ├── data
-    │   ├── docker-shell.sh
-    │   ├── models
-    │   └── requirements.txt
-    ├── data_download_resnet
-    │   ├── Dockerfile
-    │   ├── data_download_resnet.py
-    │   ├── docker-shell.sh
-    │   ├── requirements.txt
-    │   └── secrets
-    ├── data_download_yolo
-    │   ├── Dockerfile
-    │   ├── data_download_yolo.py
-    │   ├── docker-shell.sh
-    │   ├── requirements.txt
-    │   └── secrets
-    ├── data_versioning_resnet
+    ├── api-service
+    ├── datapipeline
     │   ├── Dockerfile
     │   ├── Pipfile
     │   ├── Pipfile.lock
-    │   ├── docker-entrypoint.sh
+    │   ├── dataloader.py
     │   ├── docker-shell.sh
-    │   ├── resnet_dataset
-    │   └── resnet_dataset.dvc
-    ├── data_versioning_yolo
-    │   ├── Dockerfile
-    │   ├── Pipfile
-    │   ├── Pipfile.lock
-    │   ├── docker-entrypoint.sh
-    │   ├── docker-shell.sh
-    │   ├── yolo_dataset
-    │   └── yolo_dataset.dvc
+    │   ├── preprocess_cv.py
+    │   └── preprocess_rag.py
     ├── docker-compose.yml
-    ├── resnet
+    ├── frontend
+    ├── models
     │   ├── Dockerfile
-    │   ├── data
     │   ├── docker-shell.sh
-    │   ├── models
-    │   ├── python_files
-    │   └── requirements.txt
-    ├── resnet_cloud
-    │   ├── Dockerfile
-    │   ├── Pipfile
-    │   ├── cli.py
-    │   ├── cli.sh
-    │   ├── docker-entrypoint.sh
-    │   ├── docker-shell.sh
-    │   ├── package
-    │   ├── package-resnet.sh
-    │   ├── python_files.tar.gz
-    │   └── requirements.txt
-    ├── workflow
-    │   ├── Dockerfile
-    │   ├── Pipfile
-    │   ├── Pipfile.lock
-    │   ├── cli.py
-    │   ├── docker-entrypoint.sh
-    │   ├── docker-shell.sh
-    │   ├── model.py
-    │   ├── model_deploy.yaml
-    │   ├── model_training.yaml
-    │   └── pipeline.yaml
-    ├── yolo
-    │   ├── Dockerfile
-    │   ├── data
-    │   ├── docker-shell.sh
-    │   ├── python_files
-    │   └── requirements.txt
-    └── yolo_cloud
-        ├── Dockerfile
-        ├── Pipfile
-        ├── cli.py
-        ├── cli.sh
-        ├── docker-entrypoint.sh
-        ├── docker-shell.sh
-        ├── package
-        ├── package-yolo.sh
-        ├── python_files.tar.gz
-        └── requirements.txt
+    │   ├── infer_model.py
+    │   ├── model_rag.py
+    │   └── train_model.py
+    └── workflow
 ```
 
-# AC215 - Milestone3 - Advesarial Testing of Image Classification Models
-
-**Team Members**:
-Jacob Huckelberry, Eli Dabkowsi, Ed Tang
-
-**Group Name**:
-Black Knights Group
-
-**Project**:
-In this project, we aim to develop a framework to investigate the effects of adversarial attacks on image classification models. The app will feature two image classification networks trained to make medical diagnoses and recognize street signs--both critical functionalities with large consequences in instances of failure. The user will then be able to use the Adversarial Robustness Toolbox to perform preset attacks against these models to demonstrate their efficacy. Additionally, there will be an option to create mitigations against attacks and evaluate the resulting effects.
-
-### Milestone3 ###
-
-In this milestone, we have the created a pipeline for model training in Vertex AI and have implemented initial attacks on ResNet. 
-
-**Data**
-
-We have gathered two datasets:
-
-The first dataset is from Kaggle (1) and is a dataset of over 500 images of 4 classes of traffic signs. The task associated with this dataset is object recognition, and the preliminary model that we will finetune is Yolo. Along with the image data, there is also bounding box features that are necessary to finetune Yolov5.
-
-The second dataset is from Hugging Face (2), and it is a collection of 10015 images of skin that are associated with seven different diagnoses. There are also metadata including the sex and age of the patient. The classification task is identifying the type of disease given the picture, and a resnet model will be trained on this dataset likely without the features. 
-
-We have stored both datasets into Google Cloud Buckets.
-
-**Data Pipeline Containers**
-
-The Data Pipeline Containers for both the Resnet and Yolo models are identical:
-
-1. One container downloads the data for the associated model from the cloud bucket locally. 
-
-	**Input:** Source GCS location, data bucket location, local filesystem save location (provided via Docker).
-
-	**Output:** Dataset stored in the local filesystem save location
-
-2. Another container tracks the versioning of datasets with DVC (see data_versioning.md)
-
-3. The model containers train on the datasets after loading and preprocessing steps
-
-## Data Pipeline Overview
+# AC215 - Milestone3 - Cheesy App
 
 
-1. **`src/data_download_resnet/data_download_resnet.py`**
-   This script downloads from the bucket containing the ResNet dataset locally.
+**Team Members**
+Pavlos Parmigianopapas, Pavlos Ricottapapas and Pavlos Gouda-papas
 
-2. **`src/data_download_resnet/Dockerfile`**
-   The Dockerfile follows standard convention with modifications to work with Google Cloud Storage, including the necessary packages and credentials.
+**Group Name**
+The Grate Cheese Group
 
-3. **`src/data_download_resnet/requirements.txt`**
-   The packages we used include google-cloud-storage for GCS interaction, pandas for data managment, and dvc/dvc-gs for version control.
+**Project**
+In this project, we aim to develop an AI-powered cheese application. The app will feature visual recognition technology to identify various types of cheese and include a chatbot for answering all kinds of cheese-related questions. Users can simply take a photo of the cheese, and the app will identify it, providing detailed information. Additionally, the chatbot will allow users to ask cheese-related questions. It will be powered by a RAG model and fine-tuned models, making it a specialist in cheese expertise.
 
-4. **`src/data_versioning_resnet/Dockerfile`**
-   Dockerfile that allows the container and associated files to create dvc files that track dataset versions through GCS remote storage.
 
-5. **`src/data_versioning_resnet/docker-entrypoint.sh`**
-   Run by the Dockerfile and accesses the GCS bucket data to mount it for model access.
+----
 
-6. The Yolo data pipeline files match those of resnet with different GCS buckets, dataset, and model architecture.
+### Milestone4 ###
 
-7. **`src/data_versioning_resnet/docker-shell.sh`**
-   Builds and runs container -- universal function among all containers
+In this milestone, we have the components for frontend, API service, also components from previous milestones for data management, including versioning, as well as the computer vision and language models.
 
-## Models Overview
+After completions of building a robust ML Pipeline in our previous milestone we have built a backend api service and frontend app. This will be our user-facing application that ties together the various components built in previous milestones.
 
-1. **`src/resnet/python_files/train_resnet.py`**
-   This script handles data preprocessing and training for the resnet. The dataset is read, split into features (images) and response (diagnosis), split into training and validation splits, and then preprocessed by categorically encoding the diagnoses response variable. 
+**Application Design**
 
-   The images are resized to (224x224). Then the data is then inputted into an ImageDataGenerator which increases the dataset size with transformations, the resulting training and validation sets are then ready for model training and evaulation.
+Before we start implementing the app we built a detailed design document outlining the application’s architecture. We built a Solution Architecture and Technical Architecture to ensure all our components work together.
 
-   The script then compiles the resnet with the adam optimizer and categorical crossentropy loss with accuracy as the validation metric used for early stopping. Finally, the model is trained on the dataset and saved at the end of training to a `models` directory.
+Here is our Solution Architecture:
 
-2. **`src/resnet/Dockerfile`**
-   Follows standard conventions with modifications made to support model training.
+<img src="images/solution-arch.png"  width="800">
 
-3. **`src/resnet/requirements.txt`**
-   We used the following packages for resnet model training and data preprocessing:
-   - numpy
-   - scipy
-   - matplotlib
-   - scikit-learn
-   - pandas
-   - yolov5
-   - torch 
-   - torchvision 
-   - torchaudio
-   - huggingface_hub==0.24.7
-   - requests
-   - ultralytics
-   - ipython
+Here is our Technical Architecture:
 
-4. **`src/resnet/model.py`**
-   Defines the resnet model architecture with tensorflow to be called in `train_resnet.py`.
+<img src="images/technical-arch.png"  width="800">
 
-5. **`src/yolo/requirements.txt`**
-   We used the following packages for yolo model training and data preprocessing:
-   - numpy
-   - scipy
-   - matplotlib
-   - scikit-learn
-   - pandas
-   - yolov5
-   - torch 
-   - torchvision 
-   - torchaudio
-   - huggingface_hub==0.24.7
-   - requests
-   - ultralytics
-   - ipython
 
-6. **`/src/yolo/Dockerfile`**
-   Follows standard conventions with modifications made to support model training, being nearly identical to the resnet Dockerfile, adding libgli1 and libglib packages to be installed.
+**Backend API**
 
-7. Yolo Files: To be Implemented for resnet
-   - **`src/yolo/test_yolo.py`** and **`src/yolo/validate_yolo.py`** 
-      - Generates predictions and metrics on validation and test sets.
-   - **`src/yolo/train_yolo.py`**
-      - Loads image files from street sign dataset, splits into training and validation splits, associates images with classification classes and stores data into yaml file.
-      - Trains imported Yolo model on data stored in yaml file.
+We built backend api service using fast API to expose model functionality to the frontend. We also added apis that will help the frontend display some key information about the model and data. 
 
-8. In **`/src/resnet_cloud`** and **`/src/yolo_cloud`** we have moved our model training for these models to the cloud using Vertex AI
+<img src="images/api-list.png"  width="800">
 
-9. In **`/src/workflow`** we have implemented an initial train and deploy pipeline for ResNet.
+**Frontend**
 
-## Data Versioning Strategy:
+A user friendly React app was built to identify various species of mushrooms in the wild using computer vision models from the backend. Using the app a user can take a picture of a mushroom and upload it. The app will send the image to the backend api to get prediction results on weather the mushroom is poisonous or not. 
 
-### Explanation for Choice:
+Here are some screenshots of our app:
 
-The team chose to use data version control (DVC) as our data versioning strategy, because it allows us to pull the data from our buckets and keep track of different versions of the dataset if we were to modify it in some way. Since the goal of our project is not necessarily to retrain the yolo and resnet models, rather to test adversarial attacks, we do not foresee there to be many different dataset versions. However, being able to use the cloud storage and ensure that teammates are pulling and working with the same datasets is crucial for development.
+```Add screenshots here```
 
-### Implementation:
-
-There are two main datasets, traffic signs and cancer, that are used to train yolo and resnet. These are each set up with a `.dvc` file that stores the dataset metadata without the data itself. The data can then be downloaded from the buckets using our data download containers. If we are to make any modifications to the datasets, we will just update the `.dvc` files with the data versioning containers, ensuring that the most recent dataset is being used when it is pulled to be used for training.
-
-Our current versioning containers are able to mount the google cloud storage bucket, and we are then able to make any modifications necessary.
-
-#### Resnet `.dvc`:
-
-```py
-[core]
-    remote = resnet_dataset
-['remote "resnet_dataset"']
-    url = gs://cancer-data-bucket/dvc_store
-```
-
-#### Yolo `.dvc`:
-
-```py
-[core]
-    remote = yolo_dataset
-['remote "yolo_dataset"']
-    url = gs://traffic-sign-dataset/dvc_store
-```
-## Running Dockerfiles
-
-Containers are run universally with `docker-shell.sh` scripts. Docker compose configuation files to be added later.
-
+## Running Dockerfile
+Instructions for running the Dockerfile can be added here.
+To run Dockerfile - `Instructions here`
 
 ## Notebooks/Reports
 
