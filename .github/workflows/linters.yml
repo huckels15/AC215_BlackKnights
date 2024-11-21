@@ -32,9 +32,10 @@ jobs:
           flake8 src --count --select=E9,F63,F7,F82 --show-source --statistics
           flake8 src --count --exit-zero --max-complexity=10 --max-line-length=88 --statistics
 
+
       # Run Hadolint on src directory
-      - name: Run Hadolint
-        run: |
-          wget https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64 -o /usr/local/bin/hadolint
-          chmod +x /usr/local/bin/hadolint
-          hadolint $(find src -type f -name "Dockerfile" | xargs)
+      - name: Run Hadolint on all Dockerfiles
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: ${{ github.workspace }}/src/**/Dockerfile
+          fail-on-warnings: false
