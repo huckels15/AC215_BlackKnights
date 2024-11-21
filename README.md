@@ -102,6 +102,45 @@ You can find the weights we use for our ResNet and Yolo models here:
 https://drive.google.com/drive/folders/12xqjhiSnE9g7RWqrwCIj-7xWYUFt366e?usp=drive_link
 
 
+## Testing Documentation:
+
+The testing strategy involves unit tests and integration tests that are used to validate the function of the python scripts that run the attacks for the adversarial robustness toolbox. 
+
+The two files that are being tested are `alexnet_attacks.py` and `resnet_attacks.py`. These two files have the associated pytest files `test_alexnet_attacks.py` and `test_resnet_attacks.py`.
+
+Both the attack files have a similar pipeline of loading a model and data, parsing arguments that select attack parameters, then running the attack.
+
+The unit tests are run on each of these functions, with the integration test evaluating the performance of the entire pipeline.
+
+Currently the tests are automatically run on pushes to development branches through Github actions.
+
+### Testing Tools:
+
+- pytest
+- pytest-cov
+- Github actions
+
+### Manual Test Usage:
+
+To run all tests, in the repo root directory run:
+
+```py
+pytest
+```
+
+Tor run all tests with coverage report:
+
+```py
+pytest --cov
+```
+
+To generate an html coverage report:
+
+```py
+pytest --cov --cov-report=html
+```
+
+
 ## Sources:
 
 1. https://www.kaggle.com/datasets/valentynsichkar/traffic-signs-dataset-in-yolo-format
