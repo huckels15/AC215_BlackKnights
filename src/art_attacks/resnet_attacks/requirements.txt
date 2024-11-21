@@ -29,6 +29,7 @@ lief==0.12.1
 pytest==7.1.2 
 pytest-pep8==1.0.6
 pytest-mock==3.8.2 
+
 requests==2.28.1
 fastapi[all]
 uvicorn
