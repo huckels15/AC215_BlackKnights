@@ -24,7 +24,6 @@ jobs:
       - name: Set PYTHONPATH
         run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV  # Adds current directory to PYTHONPATH
 
-
       # Step 3: Install pytest and pytest-cov for coverage
       - name: Install pytest and pytest-cov
         run: |

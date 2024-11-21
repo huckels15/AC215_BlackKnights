@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import MagicMock
 import numpy as np
 import tensorflow as tf
-from resnet_attacks import *
+from art_attacks.resnet_attacks.resnet_attacks import *
 from art.estimators.classification import KerasClassifier
 from art.attacks.evasion import FastGradientMethod, ProjectedGradientDescent as PGD, DeepFool, SquareAttack as Square
 import json
@@ -71,7 +71,7 @@ def mock_plot(monkeypatch):
     def mock_plot_samples(*args, **kwargs):
         return "mocked_path_to_figure.png"
     
-    monkeypatch.setattr("resnet_attacks.plot_samples", mock_plot_samples)
+    monkeypatch.setattr("art_attacks.resnet_attacks.resnet_attacks.plot_samples", mock_plot_samples)
 
 def test_plot_samples(monkeypatch):
 
@@ -130,7 +130,7 @@ def test_run(mock_read_csv, mock_model, mock_plot, mock_classifier, monkeypatch)
         "max_iter": "50"
     }
 
-    monkeypatch.setattr("resnet_attacks.parse_args", lambda: (mock_args, mock_run_args))
+    monkeypatch.setattr("art_attacks.resnet_attacks.resnet_attacks.parse_args", lambda: (mock_args, mock_run_args))
     results = run(mock_args, mock_run_args)
 
     assert "reg_acc" in results
