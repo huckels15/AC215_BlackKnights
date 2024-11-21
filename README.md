@@ -177,7 +177,7 @@ Before the showcase and final milestone due date, we have a few more features to
 
 ## Model Weights Link
 
-You can find the weights we use for our ResNet and Yolo models here:
+You can find the weights we use for our ResNet and Alexnet models here as well as our Resnet data.:
 
 https://drive.google.com/drive/folders/12xqjhiSnE9g7RWqrwCIj-7xWYUFt366e?usp=drive_link
 
