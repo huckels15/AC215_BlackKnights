@@ -21,7 +21,7 @@ In this README we will review how to interact with the frontend through the VM I
     * Run ```npm install```
     * Run ```npm run dev``` on your own machine and navigate your way to http://localhost:3000 to see the webpage.
     * You can now make changes and edit our implementation if you so wish.
-    * If changes are made, run the following commands in order to update your package.json file while the container is still active
+    * Run the following commands in order to update your package.json file while the container is still active
         * npm install
         * npm run build
         * npm ci
