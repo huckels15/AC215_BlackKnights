@@ -38,7 +38,7 @@ export default function MembersPage() {
                         />
                         <h2 className="text-xl font-bold text-purple-600 mt-4">Elijah Dabkowski</h2>
                         <p className="text-gray-600 mt-2">Role: Developer</p>
-                        <p className="text-gray-500 mt-2">Just a really chill guy</p>
+                        <p className="text-gray-500 mt-2">Description about Eli.</p>
                     </div>
 
                     {/* Ed */}
