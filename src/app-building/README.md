@@ -11,7 +11,7 @@ In this README we will review how to interact with the frontend through the VM I
 
 ## Interacting w/ the Adversarial Playground App (Setup Instructions)
 * If you would like to run our solution:
-    * Navigate to http://34.41.1.111:3000
+    * Navigate to http://34.16.0.151:3000
     * Play around on our virtual playground app!
 * If you would like to create your own app or modify our functionality:
     * Begin by cloning this repository
@@ -22,15 +22,15 @@ In this README we will review how to interact with the frontend through the VM I
     * Run ```npm run dev``` on your own machine and navigate your way to http://localhost:3000 to see the webpage.
     * You can now make changes and edit our implementation if you so wish.
     * Run the following commands in order to update your package.json file while the container is still active
-        * npm install
-        * npm run build
-        * npm ci
+        * ```npm install```
+        * ```npm run build```
+        * ```npm ci```
     * Exit the container and adjust the docker-shell.sh script to contain a new image name while changing Dockerfile.dev to Dockerfile
     * Running this should automatically boot up the frontend of the app, allowing you type http://localhost:3000 into your browser to view the frontend.
     * If you would like, you can proceed with pushing this image to dockerhub and then creating a VM instance on GCP to pull the image and run the frontend on a virtual machine.
 
 ## Usage Guidelines
-After finding your way to http://34.41.1.111:3000, you will find yourself on the apps landing page.
+After finding your way to http://34.16.0.151:3000, you will find yourself on the apps landing page.
 
 <img src="images/playground-01.png"  width="700">
 
@@ -70,12 +70,17 @@ Finally, play around on our adversarial playground where you will be able to sel
 │   │   └── assets
 │   ├── src
 │   │   ├── app
-│   │   ├── components
-│   │   ├── public
-│   │   └── services
+│   │   └── components
 │   └── tailwind.config.js
 └── images
-    └── black_knight_2.png
+    ├── advplayground.png
+    ├── black_knight_2.png
+    ├── playground-01.png
+    ├── playground-02.png
+    ├── playground-03.png
+    ├── playground-04.png
+    ├── playground-05.png
+    └── playground-06.png
 ```
 
 ### General Code Overview
@@ -95,13 +100,9 @@ Finally, play around on our adversarial playground where you will be able to sel
 │   ├── not-found.jsx
 │   ├── page.jsx
 │   └── playground
-├── components
-│   ├── layout
-│   └── playground
-└── services
-    ├── Common.js
-    ├── DataService.js
-    └── SampleData.js
+└── components
+    ├── layout
+    └── playground
 ```
 
 ### React Source Code Overview
