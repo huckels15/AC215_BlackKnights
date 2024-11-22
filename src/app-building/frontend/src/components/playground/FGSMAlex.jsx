@@ -1,5 +1,8 @@
 export const getFGSMAlex = async (model, attack) => {
     const url = "http://34.138.29.34:8000/alexnet-attack/";
+    const imageUrl =
+    "http://34.138.29.34:8000/get-file/?file_path=figures/example_1_original_vs_adversarial.png";
+
     const payload = {
       model: model,
       attack: attack,
@@ -20,7 +23,21 @@ export const getFGSMAlex = async (model, attack) => {
       }
   
       const jsonResponse = await response.json();
-      return jsonResponse;
+
+      const imageResponse = await fetch(imageUrl);
+      if (!imageResponse.ok) {
+        throw new Error(`Failed to download image. Status: ${imageResponse.status}`);
+      }
+
+      const imageBlob = await imageResponse.blob();
+
+
+      const imageObjectURL = URL.createObjectURL(imageBlob);
+
+      return {
+        json: jsonResponse,
+        image: imageObjectURL,
+      };
     } catch (error) {
       console.error("Error fetching data:", error);
       return { error: "Failed to fetch response." };
