@@ -2,7 +2,7 @@
 
 set -e
 
-BUILD="True" 
+BUILD="False" 
 
 export IMAGE_NAME="gtsrb_train"
 export BASE_DIR=$(pwd)

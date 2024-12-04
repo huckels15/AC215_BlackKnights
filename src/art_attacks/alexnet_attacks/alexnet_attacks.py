@@ -174,7 +174,7 @@ def run(args, run_args):
     '''
     Function to run adversarial examaple attacks on alexnet model.
     '''
-    train_path = "data/Train"
+    train_path = "data/adversarial_testing"
 
     batch_size = 64
     train_generator = generator(train_path, batch_size)
