@@ -6,7 +6,7 @@ BUILD="True"
 
 export IMAGE_NAME="alexnet_attacks_vertex_ai"
 export BASE_DIR=$(pwd)
-export GCS_BUCKET_NAME="traffic-sign-alexnet-data"
+export GCS_BUCKET_NAME="alexnet-data-multi"
 export GCP_PROJECT="secret-cipher-399620"
 export GCP_ZONE="us-east1"
 

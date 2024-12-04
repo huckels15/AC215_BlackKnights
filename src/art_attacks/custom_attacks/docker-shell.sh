@@ -6,7 +6,7 @@ BUILD="True"
 
 export IMAGE_NAME="custom-attacks-vertex-ai"
 export BASE_DIR=$(pwd)
-export GCS_BUCKET_NAME="custom-attacks"
+export GCS_BUCKET_NAME="custom-attacks-multi"
 export GCP_PROJECT="secret-cipher-399620"
 export GCP_ZONE="us-east1"
 
