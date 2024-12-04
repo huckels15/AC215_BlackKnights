@@ -208,7 +208,7 @@ def run(args, run_args):
     results = {
         "reg_acc": (accuracy) * 100,
         "adv_acc": (accuracy_adv) * 100,
-        "path": path
+        "figure": path
     }
 
     print(json.dumps(results))

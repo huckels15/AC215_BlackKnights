@@ -20,6 +20,11 @@ app.add_middleware(
 
 class AttackRequest(BaseModel):
     model: str
+    model_path: str
+    data_path: str
+    width: int
+    height: int
+    channels: int
     attack: str
     epsilon: Optional[float] = None
     eps_step: Optional[float] = None
@@ -52,7 +57,14 @@ def predict(payload: dict):
     if not os.path.exists(script_name):
         raise HTTPException(status_code=404, detail="Model script not found")
     
-    command = ["python3", script_name]
+    command = [
+        "python3", 
+        script_name,
+        "--model_path", request.model_path,
+        '--data_path', request.data_path, 
+        '--width', str(request.width), 
+        '--height', str(request.height), 
+        '--channels', str(request.channels)]
 
     if request.attack == "fgsm":
         command.append("--fgsm")
@@ -89,7 +101,7 @@ def predict(payload: dict):
 
     with open(image_path, "rb") as image_file:
         image_base64 = base64.b64encode(image_file.read()).decode("utf-8")
-
+    
     response_content = {
         "predictions": [
             {

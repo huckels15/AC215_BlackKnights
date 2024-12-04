@@ -14,42 +14,31 @@ import json
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-def load_data():
+def load_data(sample_size=100):
     '''
-    Function to load the data to test Resnet and generate adversarial examples.
+    Function to load a small subset of the data and return only the test data generator.
     '''
-    train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
-        rotation_range=15,
-        width_shift_range=0.1,
-        height_shift_range=0.1,
-        horizontal_flip=True,
-        validation_split=0.2
-    )
-
     test_datagen = tf.keras.preprocessing.image.ImageDataGenerator()
 
     data = pd.read_csv("data/dvc_store_csvs_hmnist_28_28_RGB.csv")
     y = data['label']
-    X = data.drop(columns= ['label'])
+    X = data.drop(columns=['label'])
 
     X = X.values.reshape(-1, 28, 28, 3)
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size= 0.1)
-    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2)
+    if sample_size > 0:
+        sampled_indices = np.random.choice(len(X), sample_size, replace=False)
+        X = X[sampled_indices]
+        y = y.iloc[sampled_indices]
 
-    y_train = to_categorical(y_train, num_classes=7)
-    y_val = to_categorical(y_val, num_classes=7)
-    y_test = to_categorical(y_test, num_classes=7)
+    y = to_categorical(y, num_classes=7)
 
     with tf.compat.v1.Session() as sess:
-        X_train_resize = sess.run(tf.image.resize(X_train, (224, 224)))
-        X_val_resize = sess.run(tf.image.resize(X_val, (224, 224)))
-        X_test_resize = sess.run(tf.image.resize(X_test, (224, 224)))
+        X_resized = sess.run(tf.image.resize(X, (224, 224)))
+
+    test_gen = test_datagen.flow(X_resized, y, batch_size=sample_size)
     
-    train_gen = train_datagen.flow(X_train_resize, y_train, batch_size=64)
-    val_gen = test_datagen.flow(X_val_resize, y_val, batch_size=64)
-    test_gen = test_datagen.flow(X_test_resize, y_test, batch_size=64)
-    return train_gen, val_gen, test_gen
+    return test_gen
 
 
 def plot_samples(num_samples, x_test, x_test_adv, y_test, predictions_adv):
@@ -139,7 +128,7 @@ def run(args, run_args):
     '''
     Function to run adversarial examaple attacks on resnet model.
     '''
-    _, _, test_gen = load_data()
+    test_gen = load_data()
     custom_objects = {"Adam": Adam}
 
     model = tf.keras.models.load_model("models/trainedResnet_20241016_2143.h5", custom_objects=custom_objects, compile=False)

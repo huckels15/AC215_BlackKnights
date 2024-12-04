@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM nvidia/cuda:11.3.1-cudnn8-runtime-ubuntu20.04
 
 ENV PYENV_SHELL=/bin/bash
 ENV DEBIAN_FRONTEND=noninteractive
@@ -21,12 +21,12 @@ RUN set -ex; \
 
 WORKDIR /app
 
-COPY requirements.txt /app/
+COPY requirements_test.txt /app/
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements_test.txt
 
 COPY . /app
 
 EXPOSE 8000
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
