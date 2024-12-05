@@ -57,14 +57,14 @@ if __name__ == "__main__":
     min_pixel_value, max_pixel_value = 0.0, 255.0
     classifier = KerasClassifier(model=model, clip_values=(min_pixel_value, max_pixel_value), use_logits=False)
 
-    attack = PGD(estimator=classifier, eps=0.2, eps_step=0.01, max_iter=40,targeted=False)
+    attack = PGD(estimator=classifier, eps=0.2, eps_step=0.01, max_iter=20, targeted=False)
 
     X_test_adv = attack.generate(x=X_test)
     predictions_adv = classifier.predict(X_test_adv)
     accuracy_adv = np.sum(np.argmax(predictions_adv, axis=1) == np.argmax(y_test, axis=1)) / len(y_test)
     print(f"Accuracy on perturbed test examples pre adv training: {accuracy_adv * 100:.2f}%")
 
-    x_train_adv = attack.generate(X_train)
+    x_train_adv = attack.generate(X_train[:2000])
 
     es = EarlyStopping(
         monitor="loss",
@@ -79,7 +79,7 @@ if __name__ == "__main__":
 
     model.fit(
         x_train_adv,
-        y_train,
+        y_train[:2000],
         batch_size=32,
         epochs=20,
         callbacks=[es]
