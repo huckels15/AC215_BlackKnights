@@ -46,9 +46,9 @@ RUN mkdir -p /mnt/gcs_data && chown app:app /mnt/gcs_data
 
 WORKDIR /app
 
-COPY requirements_test.txt /app/
+COPY requirements.txt /app/
 
-RUN pip install --no-cache-dir -r requirements_test.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /app
 

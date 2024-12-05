@@ -1,6 +1,5 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
 from google.cloud import storage
 import os
 import shutil
@@ -11,7 +10,7 @@ import zipfile
 
 # Google Cloud Storage configuration
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'secrets/secrets.json'
-GCS_BUCKET_NAME = "custom-attacks"
+GCS_BUCKET_NAME = "custom-attacks-multi"
 
 # FastAPI app setup
 app = FastAPI()

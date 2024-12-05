@@ -11,7 +11,7 @@ import zipfile
 
 # Google Cloud Storage configuration
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'secrets/secrets.json'
-GCS_BUCKET_NAME = "custom-attacks"
+GCS_BUCKET_NAME = "custom-attacks-multi"
 
 # FastAPI app setup
 app = FastAPI()
