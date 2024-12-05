@@ -2,8 +2,7 @@ import tensorflow as tf
 import pandas as pd
 import numpy as np
 from art.estimators.classification import KerasClassifier
-from art.attacks.evasion import FastGradientMethod, ProjectedGradientDescent as PGD, DeepFool, SquareAttack as Square
-from tensorflow.keras.optimizers import Adam
+from art.attacks.evasion import FastGradientMethod, ProjectedGradientDescent as PGD
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.model_selection import train_test_split
@@ -48,8 +47,7 @@ if __name__ == "__main__":
     
     model_name = 'trainedResnet_20241016_2112'
 
-    custom_objects = {"Adam": Adam}
-    model = tf.keras.models.load_model(f"../models/{model_name}.h5", custom_objects=custom_objects, compile=False)
+    model = tf.keras.models.load_model(f"../models/{model_name}.h5")
     optimizer = tf.compat.v1.train.AdamOptimizer(learning_rate=0.001)
     model.compile(optimizer=optimizer, loss='categorical_crossentropy', metrics=['accuracy'])
 
@@ -59,7 +57,7 @@ if __name__ == "__main__":
     min_pixel_value, max_pixel_value = 0.0, 255.0
     classifier = KerasClassifier(model=model, clip_values=(min_pixel_value, max_pixel_value), use_logits=False)
 
-    attack = FastGradientMethod(estimator=classifier, eps=0.2)
+    attack = PGD(estimator=classifier, eps=0.2, eps_step=0.01, max_iter=40,targeted=False)
 
     X_test_adv = attack.generate(x=X_test)
     predictions_adv = classifier.predict(X_test_adv)
