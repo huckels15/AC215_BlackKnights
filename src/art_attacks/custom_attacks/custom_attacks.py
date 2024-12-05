@@ -8,9 +8,45 @@ import argparse
 import os
 import cv2
 import json
+from google.cloud import storage
+import shutil
 
 tf.compat.v1.disable_eager_execution()
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
+def cleanup_temp_dirs(*dirs):
+    for dir_path in dirs:
+        if os.path.exists(dir_path):
+            shutil.rmtree(dir_path)
+
+def download_from_gcs(gcs_path, local_path):
+    client = storage.Client()
+
+    if not gcs_path.startswith("gs://"):
+        raise ValueError(f"Invalid GCS path: {gcs_path}. Must start with 'gs://'")
+    path_parts = gcs_path[5:].split("/", 1)
+    bucket_name = path_parts[0]
+    gcs_prefix = path_parts[1] if len(path_parts) > 1 else ""
+
+    bucket = client.bucket(bucket_name)
+
+    blobs = list(bucket.list_blobs(prefix=gcs_prefix))
+    if not blobs:
+        raise FileNotFoundError(f"No objects found at GCS path: {gcs_path}")
+
+    os.makedirs(local_path, exist_ok=True)
+
+    if len(blobs) == 1 and blobs[0].name.rstrip("/") == gcs_prefix:
+        blob = blobs[0]
+        local_file_path = os.path.join(local_path, os.path.basename(gcs_prefix))
+        blob.download_to_filename(local_file_path)
+    else:
+        for blob in blobs:
+            relative_path = os.path.relpath(blob.name, gcs_prefix)
+            local_file_path = os.path.join(local_path, relative_path)
+            os.makedirs(os.path.dirname(local_file_path), exist_ok=True)
+            blob.download_to_filename(local_file_path)
+
 
 def preprocess_data(data_path, batch_size, img_height, img_width, channels):
     data = []
@@ -33,9 +69,9 @@ def preprocess_data(data_path, batch_size, img_height, img_width, channels):
     images, labels = [], []
     for img_path, class_id in data:
         if channels == 1:
-            img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)  # Grayscale
+            img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
         elif channels == 3:
-            img = cv2.imread(img_path, cv2.IMREAD_COLOR)  # RGB
+            img = cv2.imread(img_path, cv2.IMREAD_COLOR)
 
         img = cv2.resize(img, (img_height, img_width))
         if channels == 1:
@@ -155,7 +191,14 @@ def run(uploaded_model_path, uploaded_data_path, attack_params, img_height, img_
 
     batch_size = 64
     data_generator = preprocess_data(uploaded_data_path, batch_size, img_height, img_width, channels)
-    x_test, y_test = next(data_generator)
+    x_test = []
+    y_test = []
+    for x_batch, y_batch in data_generator:
+        x_test.append(x_batch)
+        y_test.append(y_batch)
+    
+    x_test = np.concatenate(x_test, axis=0)
+    y_test = np.concatenate(y_test, axis=0)
 
     classifier = KerasClassifier(model=model, clip_values=(0.0, 1.0), use_logits=False)
 
@@ -190,11 +233,21 @@ def run(uploaded_model_path, uploaded_data_path, attack_params, img_height, img_
 
 if __name__ == "__main__":
     args = parse_args()
-    
+
+    tmp_model = "/tmp/model"
     uploaded_model_path = args['model_path']
-    uploaded_data_path = args['data_path']
-    img_height = args['width']
-    img_width = args['height']
+    download_from_gcs(args['model_path'], tmp_model)
+    uploaded_model_path = os.path.join(tmp_model, os.listdir(tmp_model)[0])
+
+    tmp_data = "/tmp/data"
+    download_from_gcs(args['data_path'], tmp_data)
+    uploaded_data_path = tmp_data
+
+    img_height = args['height']
+    img_width = args['width']
     channels = args['channels']
 
-    run(uploaded_model_path, uploaded_data_path, args, img_height, img_width,channels)
+    try:
+        run(uploaded_model_path, uploaded_data_path, args, img_height, img_width, channels)
+    finally:
+        cleanup_temp_dirs("/tmp/model", "/tmp/data")

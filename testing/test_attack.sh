@@ -47,22 +47,22 @@
 # }'
 
 ## CUSTOM EXAMPLE:
-# curl -X POST http://127.0.0.1:8000/predict \
-# -H "Content-Type: application/json" \
-# -d '{
-#   "instances": [
-#     {
-#       "model": "custom",
-#       "model_path": "data/example.h5",
-#       "data_path": "data/data",
-#       "width": 28,
-#       "height": 28,
-#       "channels": 1,
-#       "attack": "fgsm",
-#       "epsilon": 0.2
-#     }
-#   ]
-# }'
+curl -X POST http://127.0.0.1:8000/predict \
+-H "Content-Type: application/json" \
+-d '{
+  "instances": [
+    {
+      "model": "custom",
+      "model_path": "gs://custom-attacks-multi/test/example.h5",
+      "data_path": "gs://custom-attacks-multi/test/data",
+      "width": 28,
+      "height": 28,
+      "channels": 1,
+      "attack": "fgsm",
+      "epsilon": 0.2
+    }
+  ]
+}'
 
 ## REGULAR EXAMPLE
 # curl \
