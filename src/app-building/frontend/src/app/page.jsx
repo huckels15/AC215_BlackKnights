@@ -9,7 +9,7 @@ export default function Home() {
             <section className="hero-section">
                 <div className="hero-content">
                     <h1 className="hero-title">
-                        Get Ready to Play on the Adversarial Playground
+                        Get Ready to Play on the Adversarial Playground - RAHHHHH
                     </h1>
                     <img
                         src="/assets/advplayground.png"

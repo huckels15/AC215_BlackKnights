@@ -1,173 +1,208 @@
-'use client'
+'use client';
 
-import { useState } from 'react';
-import { getFGSMRes } from '@/components/playground/FGSMRes';
-import { getPGDRes } from '@/components/playground/PGDRes';
-import { getDEEPFOOLRes } from '@/components/playground/DEEPFOOLRes';
-import { getSQUARERes } from '@/components/playground/SQUARERes';
-import { getFGSMAlex } from '@/components/playground/FGSMAlex';
-import { getPGDAlex } from '@/components/playground/PGDAlex';
-import { getDEEPFOOLAlex } from '@/components/playground/DEEPFOOLAlex';
-import { getSQUAREAlex } from '@/components/playground/SQUAREAlex';
+import React, { useState } from "react";
+import { getFGSMres } from '@/components/playground/FGSMres';
+import { getPGDres } from '@/components/playground/PGDres';
+import { getDEEPFOOLres } from '@/components/playground/DEEPFOOLres';
+import { getSQUAREres } from '@/components/playground/SQUAREres';
+import { getFGSMalex } from '@/components/playground/FGSMalex';
+import { getPGDalex } from '@/components/playground/PGDalex';
+import { getDEEPFOOLalex } from '@/components/playground/DEEPFOOLalex';
+import { getSQUAREalex } from '@/components/playground/SQUAREalex';
+import { getFGSMresrob } from '@/components/playground/FGSMresrob';
+import { getPGDresrob } from '@/components/playground/PGDresrob';
+import { getDEEPFOOLresrob } from '@/components/playground/DEEPFOOLresrob';
+import { getSQUAREresrob } from '@/components/playground/SQUAREresrob';
+import { getFGSMalexrob } from '@/components/playground/FGSMalexrob';
+import { getPGDalexrob } from '@/components/playground/PGDalexrob';
+import { getDEEPFOOLalexrob } from '@/components/playground/DEEPFOOLalexrob';
+import { getSQUAREalexrob } from '@/components/playground/SQUAREalexrob';
 
 export default function PlaygroundPage() {
     const [selectedModel, setSelectedModel] = useState('');
     const [selectedAttack, setSelectedAttack] = useState('');
-    const [output, setOutput] = useState('');
-    const [plotOutput, setPlot] = useState('');
+    const [additionalValues, setAdditionalValues] = useState({});
+    const [regAcc, setRegAcc] = useState(null);
+    const [advAcc, setAdvAcc] = useState(null);
+    const [plotOutput, setPlotOutput] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleModelChange = (event) => {
         setSelectedModel(event.target.value);
+        setSelectedAttack(''); // Reset attack selection
+        setAdditionalValues({}); // Reset additional values
     };
 
     const handleAttackChange = (event) => {
         setSelectedAttack(event.target.value);
+        setAdditionalValues({}); // Reset additional values
+    };
+
+    const handleAdditionalValueChange = (key, value) => {
+        setAdditionalValues((prev) => ({ ...prev, [key]: value }));
     };
 
     const handleRun = async () => {
         if (selectedModel && selectedAttack) {
-            if (selectedModel === "resnet" && selectedAttack === "fgsm") {
-                setLoading(true);
-                try {
-                    const result = await getFGSMRes(selectedModel, selectedAttack);
+            setLoading(true);
+            setError(null);
+            try {
+                let result;
 
-                    if (result.error) {
-                        setOutput('Failed to fetch response.');
-                        console.error(result.error);
-                    } else {
-                        setOutput(result.json);
-                        setPlot(result.image);
-                    }
-                } catch (error) {
-                    setOutput("Failed to fetch response.");
-                } finally {
-                    setLoading(false);
-                }
-            } else if (selectedModel === "resnet" && selectedAttack === "pgd") {
-                setLoading(true);
-                try {
-                    const result = await getPGDRes(selectedModel, selectedAttack);
+                // Call the appropriate function based on the selected attack
+                if (selectedModel === "resnet" && selectedAttack === "fgsm") {
+                    result = await getFGSMres(selectedModel, selectedAttack, additionalValues);
+                } else if (selectedModel === "resnet" && selectedAttack === "pgd") {
+                    result = await getPGDres(selectedModel, selectedAttack, additionalValues);
+                } else if (selectedModel === "resnet" && selectedAttack === "deepfool") {
+                    result = await getDEEPFOOLres(selectedModel, selectedAttack, additionalValues);
+                } else if (selectedModel === "resnet" && selectedAttack === "square") {
+                    result = await getSQUAREres(selectedModel, selectedAttack, additionalValues);
+                } else if (selectedModel === "alexnet" && selectedAttack === "fgsm") {
+                    result = await getFGSMalex(selectedModel, selectedAttack, additionalValues);
+                } else if (selectedModel === "alexnet" && selectedAttack === "pgd") {
+                    result = await getPGDalex(selectedModel, selectedAttack, additionalValues);
+                } else if (selectedModel === "alexnet" && selectedAttack === "deepfool") {
+                    result = await getDEEPFOOLalex(selectedModel, selectedAttack, additionalValues);
+                } else if (selectedModel === "alexnet" && selectedAttack === "square") {
+                    result = await getSQUAREalex(selectedModel, selectedAttack, additionalValues);
+                } else if (selectedModel === "resnetrob" && selectedAttack === "fgsm") {
+                    result = await getFGSMresrob("robust_resnet", selectedAttack, additionalValues);
+                } else if (selectedModel === "resnetrob" && selectedAttack === "pgd") {
+                    result = await getPGDresrob("robust_resnet", selectedAttack, additionalValues);
+                } else if (selectedModel === "resnetrob" && selectedAttack === "deepfool") {
+                    result = await getDEEPFOOLresrob("robust_resnet", selectedAttack, additionalValues);
+                } else if (selectedModel === "resnetrob" && selectedAttack === "square") {
+                    result = await getSQUAREresrob("robust_resnet", selectedAttack, additionalValues);
+                } else if (selectedModel === "alexnetrob" && selectedAttack === "fgsm") {
+                    result = await getFGSMalexrob("robust_alexnet", selectedAttack, additionalValues);
+                } else if (selectedModel === "alexnetrob" && selectedAttack === "pgd") {
+                    result = await getPGDalexrob("robust_alexnet", selectedAttack, additionalValues);
+                } else if (selectedModel === "alexnetrob" && selectedAttack === "deepfool") {
+                    result = await getDEEPFOOLalexrob("robust_alexnet", selectedAttack, additionalValues);
+                } else if (selectedModel === "alexnetrob" && selectedAttack === "square") {
+                    result = await getSQUAREalexrob("robust_alexnet", selectedAttack, additionalValues);
+                } 
 
-                    if (result.error) {
-                        setOutput('Failed to fetch response.');
-                        console.error(result.error);
-                    } else {
-                        setOutput(result.json);
-                        setPlot(result.image);
-                    }
-                } catch (error) {
-                    setOutput("Failed to fetch response.");
-                } finally {
-                    setLoading(false);
+                if (result.error) {
+                    setError("Failed to fetch response.");
+                } else {
+                    setRegAcc(result.regAcc);
+                    setAdvAcc(result.advAcc);
+                    setPlotOutput(result.decodedImage);
                 }
-            } else if (selectedModel === "resnet" && selectedAttack === "deepfool") {
-                setLoading(true);
-                try {
-                    const result = await getDEEPFOOLRes(selectedModel, selectedAttack);
-
-                    if (result.error) {
-                        setOutput('Failed to fetch response.');
-                        console.error(result.error);
-                    } else {
-                        setOutput(result.json);
-                        setPlot(result.image);
-                    }
-                } catch (error) {
-                    setOutput("Failed to fetch response.");
-                } finally {
-                    setLoading(false);
-                }
-            } else if (selectedModel === "resnet" && selectedAttack === "square") {
-                setLoading(true);
-                try {
-                    const result = await getSQUARERes(selectedModel, selectedAttack);
-
-                    if (result.error) {
-                        setOutput('Failed to fetch response.');
-                        console.error(result.error);
-                    } else {
-                        setOutput(result.json);
-                        setPlot(result.image);
-                    }
-                } catch (error) {
-                    setOutput("Failed to fetch response.");
-                } finally {
-                    setLoading(false);
-                }
-            } else if (selectedModel === "alexnet" && selectedAttack === "fgsm") {
-                setLoading(true);
-                try {
-                    const result = await getFGSMAlex(selectedModel, selectedAttack);
-
-                    if (result.error) {
-                        setOutput('Failed to fetch response.');
-                        console.error(result.error);
-                    } else {
-                        setOutput(result.json);
-                        setPlot(result.image);
-                    }
-                } catch (error) {
-                    setOutput("Failed to fetch response.");
-                } finally {
-                    setLoading(false);
-                }
-            } else if (selectedModel === "alexnet" && selectedAttack === "pgd") {
-                setLoading(true);
-                try {
-                    const result = await getPGDAlex(selectedModel, selectedAttack);
-
-                    if (result.error) {
-                        setOutput('Failed to fetch response.');
-                        console.error(result.error);
-                    } else {
-                        setOutput(result.json);
-                        setPlot(result.image);
-                    }
-                } catch (error) {
-                    setOutput("Failed to fetch response.");
-                } finally {
-                    setLoading(false);
-                }
-            } else if (selectedModel === "alexnet" && selectedAttack === "deepfool") {
-                setLoading(true);
-                try {
-                    const result = await getDEEPFOOLAlex(selectedModel, selectedAttack);
-
-                    if (result.error) {
-                        setOutput('Failed to fetch response.');
-                        console.error(result.error);
-                    } else {
-                        setOutput(result.json);
-                        setPlot(result.image);
-                    }
-                } catch (error) {
-                    setOutput("Failed to fetch response.");
-                } finally {
-                    setLoading(false);
-                }
-            } else if (selectedModel === "alexnet" && selectedAttack === "square") {
-                try {
-                    const result = await getSQUAREAlex(selectedModel, selectedAttack);
-
-                    if (result.error) {
-                        setOutput('Failed to fetch response.');
-                        console.error(result.error);
-                    } else {
-                        setOutput(result.json);
-                        setPlot(result.image);
-                    }
-                } catch (error) {
-                    setOutput("Failed to fetch response.");
-                } finally {
-                    setLoading(false);
-                }
-            } else {
-                setOutput("Selected model or attack does not match any valid combinations.");
+            } catch (err) {
+                setError("An error occurred while fetching the response.");
+                console.error(err.message);
+            } finally {
+                setLoading(false);
             }
         } else {
-            setOutput("Please select both a model and an attack.");
+            setError("Please select both a model and an attack.");
         }
+    };
+
+    const renderAdditionalInputs = () => {
+        if (!selectedModel || !selectedAttack) return null;
+
+        return (
+            <div className="mt-8">
+                <h2 className="text-xl font-bold text-gray-700">Additional Settings</h2>
+                <div className="mt-4 space-y-4">
+                {selectedAttack === "fgsm" && (
+                        <>
+                            <div>
+                                <label className="block text-gray-600 font-semibold">Epsilon (Perturbation Strength):</label>
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    min="0"
+                                    value={additionalValues.epsilon || ''}
+                                    onChange={(e) => handleAdditionalValueChange('epsilon', e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                />
+                            </div>
+                        </>
+                    )}
+                    {selectedAttack === "pgd" && (
+                        <>
+                            <div>
+                                <label className="block text-gray-600 font-semibold">Epsilon (Perturbation Strength):</label>
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    min="0"
+                                    value={additionalValues.epsilon || ''}
+                                    onChange={(e) => handleAdditionalValueChange('epsilon', e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-600 font-semibold">Max Iterations:</label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    value={additionalValues.maxIterations || ''}
+                                    onChange={(e) => handleAdditionalValueChange('maxIterations', e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-600 font-semibold">Step Size:</label>
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    min="0"
+                                    value={additionalValues.stepSize || ''}
+                                    onChange={(e) => handleAdditionalValueChange('stepSize', e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                />
+                            </div>
+                        </>
+                    )}
+                    {selectedAttack === "deepfool" && (
+                        <>
+                            <div>
+                                <label className="block text-gray-600 font-semibold">Max Iterations:</label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    value={additionalValues.maxIterations || ''}
+                                    onChange={(e) => handleAdditionalValueChange('maxIterations', e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                />
+                            </div>
+                        </>
+                    )}
+                    {selectedAttack === "square" && (
+                        <>
+                            <div>
+                                <label className="block text-gray-600 font-semibold">Epsilon (Perturbation Strength):</label>
+                                <input
+                                    type="number"
+                                    step="0.01"
+                                    min="0"
+                                    value={additionalValues.epsilon || ''}
+                                    onChange={(e) => handleAdditionalValueChange('epsilon', e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-600 font-semibold">Max Iterations:</label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    value={additionalValues.maxIterations || ''}
+                                    onChange={(e) => handleAdditionalValueChange('maxIterations', e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                />
+                            </div>
+                        </>
+                    )}
+                </div>
+            </div>
+        );
     };
 
     return (
@@ -192,6 +227,8 @@ export default function PlaygroundPage() {
                                     </option>
                                     <option value="resnet">ResNet</option>
                                     <option value="alexnet">AlexNet</option>
+                                    <option value="resnetrob">ResNet - Robust</option>
+                                    <option value="alexnetrob">AlexNet - Robust</option>
                                 </select>
                             </div>
                         </div>
@@ -217,11 +254,13 @@ export default function PlaygroundPage() {
                                 </select>
                             </div>
                         </div>
+
+                        {/* Additional Inputs */}
+                        {renderAdditionalInputs()}
                     </div>
 
                     {/* Display Backend Output */}
                     <div className="flex flex-col items-center justify-center">
-                        {/* Instance to handle backend output */}
                         <button
                             onClick={handleRun}
                             className="mb-8 px-6 py-2 bg-green-600 text-white font-bold rounded-lg shadow-lg hover:bg-green-700 transition-colors"
@@ -229,38 +268,33 @@ export default function PlaygroundPage() {
                             Let's Play!
                         </button>
 
-                        {/* Load Output */}
                         <div className="text-center">
-                            <h2 className="text-xl font-bold text-gray-700">Output</h2>
-                            <div className="mt-4">
-                                {loading ? (
-                                    <p className="text-gray-600">Loading...</p>
-                                ) : (
-                                    <>
-                                      {output.reg_acc && output.adv_acc ? (
+                            {loading ? (
+                                <p className="text-gray-600">Loading...</p>
+                            ) : error ? (
+                                <p className="text-red-600">{error}</p>
+                            ) : (
+                                <>
+                                    {regAcc !== null && advAcc !== null && (
                                         <div className="bg-gray-100 p-4 rounded-lg shadow-inner text-left">
-                                          <p className="text-gray-700">
-                                            <span className="font-bold">Accuracy Before Attack:</span> {output.reg_acc}
-                                          </p>
-                                          <p className="text-gray-700">
-                                            <span className="font-bold">Accuracy After Attack:</span> {output.adv_acc}
-                                          </p>
+                                            <p className="text-gray-700">
+                                                <span className="font-bold">Accuracy Before Attack:</span> {regAcc}
+                                            </p>
+                                            <p className="text-gray-700">
+                                                <span className="font-bold">Accuracy After Attack:</span> {advAcc}
+                                            </p>
                                         </div>
-                                      ) : (
-                                        <p className="text-red-600">{output}</p>
-                                      )}
-                  
-                                      {/* Show Before and After Image */}
-                                      {plotOutput && (
+                                    )}
+
+                                    {plotOutput && (
                                         <img
-                                          src={plotOutput}
-                                          alt="Resulting Adversarial Example"
-                                          className="mt-4 max-w-full rounded-lg shadow-md"
+                                            src={plotOutput}
+                                            alt="Adversarial Output"
+                                            className="mt-4 max-w-full rounded-lg shadow-md"
                                         />
-                                      )}
-                                    </>
-                                  )}
-                            </div>
+                                    )}
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -268,3 +302,4 @@ export default function PlaygroundPage() {
         </div>
     );
 }
+
