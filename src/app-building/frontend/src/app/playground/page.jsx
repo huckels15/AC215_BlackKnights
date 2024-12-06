@@ -117,25 +117,77 @@ export default function PlaygroundPage() {
 
     const renderAdditionalInputs = () => {
         if (!selectedModel || !selectedAttack) return null;
-
+    
         return (
             <div className="mt-8">
                 <h2 className="text-xl font-bold text-gray-700">Additional Settings</h2>
                 <div className="mt-4 space-y-4">
-                {selectedAttack === "fgsm" && (
+                    {selectedModel === "custom" && (
                         <>
                             <div>
-                                <label className="block text-gray-600 font-semibold">Epsilon (Perturbation Strength):</label>
+                                <label className="block text-gray-600 font-semibold">Model Name (No Extension):</label>
+                                <input
+                                    type="text"
+                                    value={additionalValues.modelName || ''}
+                                    onChange={(e) => handleAdditionalValueChange('modelName', e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-600 font-semibold">Dataset Name (No Extension):</label>
+                                <input
+                                    type="text"
+                                    value={additionalValues.datasetName || ''}
+                                    onChange={(e) => handleAdditionalValueChange('datasetName', e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-600 font-semibold">Width:</label>
                                 <input
                                     type="number"
-                                    step="0.01"
-                                    min="0"
-                                    value={additionalValues.epsilon || ''}
-                                    onChange={(e) => handleAdditionalValueChange('epsilon', e.target.value)}
+                                    min="1"
+                                    value={additionalValues.width || ''}
+                                    onChange={(e) => handleAdditionalValueChange('width', e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-600 font-semibold">Height:</label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    value={additionalValues.height || ''}
+                                    onChange={(e) => handleAdditionalValueChange('height', e.target.value)}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-600 font-semibold">Channels:</label>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    value={additionalValues.channels || ''}
+                                    onChange={(e) => handleAdditionalValueChange('channels', e.target.value)}
                                     className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
                                 />
                             </div>
                         </>
+                    )}
+    
+                    {/* Attack-specific inputs */}
+                    {selectedAttack === "fgsm" && (
+                        <div>
+                            <label className="block text-gray-600 font-semibold">Epsilon (Perturbation Strength):</label>
+                            <input
+                                type="number"
+                                step="0.01"
+                                min="0"
+                                value={additionalValues.epsilon || ''}
+                                onChange={(e) => handleAdditionalValueChange('epsilon', e.target.value)}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                            />
+                        </div>
                     )}
                     {selectedAttack === "pgd" && (
                         <>
@@ -174,18 +226,16 @@ export default function PlaygroundPage() {
                         </>
                     )}
                     {selectedAttack === "deepfool" && (
-                        <>
-                            <div>
-                                <label className="block text-gray-600 font-semibold">Max Iterations:</label>
-                                <input
-                                    type="number"
-                                    min="1"
-                                    value={additionalValues.maxIterations || ''}
-                                    onChange={(e) => handleAdditionalValueChange('maxIterations', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
-                                />
-                            </div>
-                        </>
+                        <div>
+                            <label className="block text-gray-600 font-semibold">Max Iterations:</label>
+                            <input
+                                type="number"
+                                min="1"
+                                value={additionalValues.maxIterations || ''}
+                                onChange={(e) => handleAdditionalValueChange('maxIterations', e.target.value)}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                            />
+                        </div>
                     )}
                     {selectedAttack === "square" && (
                         <>
@@ -216,6 +266,8 @@ export default function PlaygroundPage() {
             </div>
         );
     };
+    
+    
 
     return (
         <div className="min-h-screen pt-20 pb-12 px-4">

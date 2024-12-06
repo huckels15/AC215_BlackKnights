@@ -9,11 +9,11 @@ export const getFGSMcustom = async (model, attack, additionalValues) => {
       instances: [
         {
           model: model,
-          model_path: "gs://custom-attacks-multi/run/test_example.h5",
-          data_path: "gs://custom-attacks-multi/run/data",
-          width: 28,
-          height: 28,
-          channels: 1,
+          model_path: "gs://custom-attacks-multi/run/" + additionalValues.modelName + ".h5",
+          data_path: "gs://custom-attacks-multi/run/" + additionalValues.datasetName,
+          width: additionalValues.width,
+          height: additionalValues.height,
+          channels: additionalValues.channels,
           attack: attack,
           epsilon: additionalValues.epsilon || 0.2,
         },
