@@ -18,6 +18,9 @@ import { getPGDalexrob } from '@/components/playground/PGDalexrob';
 import { getDEEPFOOLalexrob } from '@/components/playground/DEEPFOOLalexrob';
 import { getSQUAREalexrob } from '@/components/playground/SQUAREalexrob';
 import { getFGSMcustom} from '@/components/playground/FGSMcustom';
+import { getPGDcustom} from '@/components/playground/PGDcustom';
+import { getDEEPFOOLcustom} from '@/components/playground/DEEPFOOLcustom';
+import { getSQUAREcustom} from '@/components/playground/SQUAREcustom';
 
 export default function PlaygroundPage() {
     const [selectedModel, setSelectedModel] = useState('');
