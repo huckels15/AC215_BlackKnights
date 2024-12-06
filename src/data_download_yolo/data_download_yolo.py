@@ -33,6 +33,6 @@ def download_directory_from_gcs(bucket_name, source_directory, destination_direc
 if __name__ == '__main__':
     bucket_name = 'traffic-sign-dataset' 
     source_directory = 'dvc_store/data/' 
-    destination_directory = './data/' 
+    destination_directory = './yolo_data/' 
 
     download_directory_from_gcs(bucket_name, source_directory, destination_directory)

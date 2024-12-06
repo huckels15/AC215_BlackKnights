@@ -7,6 +7,8 @@ from tensorflow.keras.utils import to_categorical
 from sklearn.model_selection import train_test_split
 import datetime
 import matplotlib.pyplot as plt
+import wandb
+from wandb.integration.keras import WandbCallback
 
 dt = datetime.datetime.today()
 year = dt.year
@@ -61,13 +63,26 @@ def load_data():
     return train_gen, val_gen, test_gen
 
 if __name__ == "__main__":
+
+    model_name = f"trainedResnet_{year}{month:02d}{day:02d}_{hour:02d}{minute:02d}.h5"
     
+    wandb.init(
+        project='blackknights_resnet', 
+        config={
+            'architecture': "ResNet101",
+            'dataset' : "HAM10000",
+            'batch_size': 64,
+            'epochs': 100,
+            "model_name" : model_name
+        }
+    )
+
     resnet = get_resnet()
     train_gen, val_gen, test_gen = load_data()
 
     resnet.compile(
         optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     
-    history = resnet.fit(train_gen, epochs=100, validation_data=val_gen)
-    model_name = f"trainedResnet_{year}{month:02d}{day:02d}_{hour:02d}{minute:02d}.h5"
+    history = resnet.fit(train_gen, epochs=100, validation_data=val_gen, callbacks=[es, WandbCallback()])
     resnet.save("../models/" + model_name)
+    wandb.finish()

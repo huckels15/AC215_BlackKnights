@@ -1,7 +1,6 @@
-## Black Knights Milestone 2
+## Adversarial Playground Milestone 4
 
-
-#### Project Milestone 2 Organization
+#### Project Milestone 4 Organization
 
 ```
 .
@@ -9,233 +8,219 @@
 ├── README.md
 ├── deliverables
 │   ├── application_mock_up.pdf
-│   └── running_containers_envs
-│       ├── art_container_env.PNG
-│       ├── data_download_resnet_container_env.PNG
-│       ├── data_download_yolo_container_env.PNG
-│       ├── data_versioning_resnet_container_env.PNG
-│       ├── data_versioning_yolo_container_env.PNG
-│       ├── resnet_container_env.PNG
-│       └── yolo_container_env.PNG
-└── src
-    ├── art
-    │   ├── Dockerfile
-    |   ├── requirements.txt
-    │   ├── attacks
-    │   └── docker-shell.sh
-    ├── data_download_resnet
-    │   ├── Dockerfile
-    │   ├── data_download_resnet.py
-    │   ├── docker-shell.sh
-    │   └── requirements.txt
-    ├── data_download_yolo
-    │   ├── Dockerfile
-    │   ├── data_download_yolo.py
-    │   ├── docker-shell.sh
-    │   └── requirements.txt
-    ├── data_versioning_resnet
-    │   ├── Dockerfile
-    │   ├── Pipfile
-    │   ├── Pipfile.lock
-    │   ├── docker-entrypoint.sh
-    │   ├── docker-shell.sh
-    │   ├── resnet_dataset
-    │   └── resnet_dataset.dvc
-    ├── data_versioning_yolo
-    │   ├── Dockerfile
-    │   ├── Pipfile
-    │   ├── Pipfile.lock
-    │   ├── docker-entrypoint.sh
-    │   ├── docker-shell.sh
-    │   ├── yolo_dataset
-    │   └── yolo_dataset.dvc
-    ├── docker-compose.yml
-    ├── resnet
-    │   ├── Dockerfile
-    │   ├── data
-    │   ├── docker-shell.sh
-    │   ├── models
-    │   ├── python_files
-    |   |   ├── model.py
-    │   |   └── train_resnet.py
-    │   └── requirements.txt
-    └── yolo
-        ├── Dockerfile
-        ├── data
-        ├── docker-shell.sh
-        ├── python_files
-        │   ├── runs
-        |   ├── test_yolo.py
-        |   ├── train_yolo.py
-        |   ├── validate_yolo.py
-        |   └── yolov5m.pt
-        └── requirements.txt
+│   ├── presentation
+│   │   └── Milestone 3 Presentation.pptx
+│   ├── running_containers_envs
+│   │   ├── art_container_env.PNG
+│   │   ├── data_download_resnet_container_env.PNG
+│   │   ├── data_download_yolo_container_env.PNG
+│   │   ├── data_versioning_resnet_container_env.PNG
+│   │   ├── data_versioning_yolo_container_env.PNG
+│   │   ├── resnet_container_env.PNG
+│   │   └── yolo_container_env.PNG
+│   ├── solution_arch.pdf
+│   └── technical_arch.pdf
+├── pytest.ini
+├── src
+│   ├── GTSRB
+│   │   ├── Dockerfile
+│   │   ├── docker-shell.sh
+│   │   ├── python_files
+│   │   └── requirements.txt
+│   ├── app-building
+│   │   ├── README.md
+│   │   ├── frontend
+│   │   └── images
+│   ├── art_attacks
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── alexnet_attacks
+│   │   └── resnet_attacks
+│   ├── data_download_resnet
+│   │   ├── Dockerfile
+│   │   ├── data_download_resnet.py
+│   │   ├── docker-shell.sh
+│   │   └── requirements.txt
+│   ├── data_download_yolo
+│   │   ├── Dockerfile
+│   │   ├── data_download_yolo.py
+│   │   ├── docker-shell.sh
+│   │   └── requirements.txt
+│   ├── data_versioning_resnet
+│   │   ├── Dockerfile
+│   │   ├── Pipfile
+│   │   ├── Pipfile.lock
+│   │   ├── docker-entrypoint.sh
+│   │   ├── docker-shell.sh
+│   │   └── resnet_dataset.dvc
+│   ├── data_versioning_yolo
+│   │   ├── Dockerfile
+│   │   ├── Pipfile
+│   │   ├── Pipfile.lock
+│   │   ├── docker-entrypoint.sh
+│   │   ├── docker-shell.sh
+│   │   └── yolo_dataset.dvc
+│   ├── docker-compose.yml
+│   ├── requirements.txt
+│   ├── resnet
+│   │   ├── Dockerfile
+│   │   ├── docker-shell.sh
+│   │   ├── python_files
+│   │   └── requirements.txt
+│   ├── resnet_cloud
+│   │   ├── Dockerfile
+│   │   ├── Pipfile
+│   │   ├── cli.py
+│   │   ├── cli.sh
+│   │   ├── docker-entrypoint.sh
+│   │   ├── docker-shell.sh
+│   │   ├── package
+│   │   ├── package-resnet.sh
+│   │   ├── python_files.tar.gz
+│   │   └── requirements.txt
+│   ├── workflow
+│   │   ├── Dockerfile
+│   │   ├── Pipfile
+│   │   ├── Pipfile.lock
+│   │   ├── cli.py
+│   │   ├── docker-entrypoint.sh
+│   │   ├── docker-shell.sh
+│   │   ├── model.py
+│   │   ├── model_deploy.yaml
+│   │   ├── model_training.yaml
+│   │   └── pipeline.yaml
+│   ├── yolo
+│   │   ├── Dockerfile
+│   │   ├── docker-shell.sh
+│   │   ├── python_files
+│   │   └── requirements.txt
+│   └── yolo_cloud
+│       ├── Dockerfile
+│       ├── Pipfile
+│       ├── cli.py
+│       ├── cli.sh
+│       ├── docker-entrypoint.sh
+│       ├── docker-shell.sh
+│       ├── package
+│       ├── package-yolo.sh
+│       ├── python_files.tar.gz
+│       └── requirements.txt
+└── tests
+    ├── test_alexnet_attacks.py
+    └── test_resnet_attacks.py
 ```
 
-# AC215 - Milestone2 - Advesarial Testing of Image Classification Models
-
-**Team Members**:
-Jacob Huckelberry, Eli Dabkowsi, Ed Tang
-
-**Group Name**:
-Black Knights Group
-
-**Project**:
-In this project, we aim to develop a framework to investigate the effects of adversarial attacks on image classification models. The app will feature two image classification networks trained to make medical diagnoses and recognize street signs--both critical functionalities with large consequences in instances of failure. The user will then be able to use the Adversarial Robustness Toolbox to perform preset attacks against these models to demonstrate their efficacy. Additionally, there will be an option to create mitigations against attacks and evaluate the resulting effects.
-
-### Milestone2 ###
-
-In this milestone, we have the components for data management, including versioning, as well as the image classification models and the adversarial robustness toolbox. 
-
-**Data**
-
-We have gathered two datasets:
-
-The first dataset is from Kaggle (1) and is a dataset of over 500 images of 4 classes of traffic signs. The task associated with this dataset is object recognition, and the preliminary model that we will finetune is Yolo. Along with the image data, there is also bounding box features that are necessary to finetune Yolov5.
-
-The second dataset is from Hugging Face (2), and it is a collection of 10015 images of skin that are associated with seven different diagnoses. There are also metadata including the sex and age of the patient. The classification task is identifying the type of disease given the picture, and a resnet model will be trained on this dataset likely without the features. 
-
-We have stored both datasets into Google Cloud Buckets.
-
-**Data Pipeline Containers**
-
-The Data Pipeline Containers for both the Resnet and Yolo models are identical:
-
-1. One container downloads the data for the associated model from the cloud bucket locally. 
-
-	**Input:** Source GCS location, data bucket location, local filesystem save location (provided via Docker).
-
-	**Output:** Dataset stored in the local filesystem save location
-
-2. Another container tracks the versioning of datasets with DVC (see data_versioning.md)
-
-3. The model containers train on the datasets after loading and preprocessing steps
-
-## Data Pipeline Overview
+# AC215 - Milestone4 - Adversarial Playground
 
 
-1. **`src/data_download_resnet/data_download_resnet.py`**
-   This script downloads from the bucket containing the ResNet dataset locally.
+**Team Members**
+Jacob Huckelberry, Elijah Dabkowski, Edward Tang
 
-2. **`src/data_download_resnet/Dockerfile`**
-   The Dockerfile follows standard convention with modifications to work with Google Cloud Storage, including the necessary packages and credentials.
+**Group Name**
+Black Knights
 
-3. **`src/data_download_resnet/requirements.txt`**
-   The packages we used include google-cloud-storage for GCS interaction, pandas for data managment, and dvc/dvc-gs for version control.
+**Project:**
+In this project, we aim to develop a framework to investigate the effects of adversarial attacks on image classification models. The app will feature two image classification networks trained to make medical diagnoses and classify street signs--both critical functionalities with large consequences in instances of failure. The user will then be able to use the Adversarial Robustness Toolbox to perform preset attacks against these models to demonstrate their efficacy. Additionally, there will be an option to create mitigations against attacks and evaluate the resulting effects.
 
-4. **`src/data_versioning_resnet/Dockerfile`**
-   Dockerfile that allows the container and associated files to create dvc files that track dataset versions through GCS remote storage.
+----
 
-5. **`src/data_versioning_resnet/docker-entrypoint.sh`**
-   Run by the Dockerfile and accesses the GCS bucket data to mount it for model access.
+### Milestone4 ###
 
-6. The Yolo data pipeline files match those of resnet with different GCS buckets, dataset, and model architecture.
+In this milestone, we have the components for our Adversarial Playground frontend, model attack API services, and other components from previous milestones including versioning and model training.
 
-7. **`src/data_versioning_resnet/docker-shell.sh`**
-   Builds and runs container -- universal function among all containers
+The primary advances in this milestone are the implementiation of our Adversarial Playground front end using React and the implementation of our model attack api services using FastAPI. The code for our front end can be found in `/src/app-building` and the code for our api services can be found in `/src/art_attacks`. In addition, we have implemented GitHub actions to automatically run our tests found in `/tests` and linting.
 
-## Models Overview
+**Application Design**
+The highest level description of our application can be found in our solution architecture image below. A lower level description of our application can be found in the technical architecture image below.
 
-1. **`src/resnet/python_files/train_resnet.py`**
-   This script handles data preprocessing and training for the resnet. The dataset is read, split into features (images) and response (diagnosis), split into training and validation splits, and then preprocessed by categorically encoding the diagnoses response variable. 
+Here is our Solution Architecture:
 
-   The images are resized to (224x224). Then the data is then inputted into an ImageDataGenerator which increases the dataset size with transformations, the resulting training and validation sets are then ready for model training and evaulation.
+<img src="deliverables/solution_arch.png"  width="800">
 
-   The script then compiles the resnet with the adam optimizer and categorical crossentropy loss with accuracy as the validation metric used for early stopping. Finally, the model is trained on the dataset and saved at the end of training to a `models` directory.
+In this image, we can see that we developed each piece of our app in a local environment, pushing code changes to GitHub and docker images to Dockerhub along the way. For our AI / ML tasks, we have code that allows us to train our computer vision models in Vertex AI which are later used to launch attacks on. Our backend consists of two VMs. One serves attacks on our sign classification model, AlexNet, and the other serves attacks on our cancer classification model, ResNet. The results of these attacks are then displayed on our Adversarial Playground front end. The user is able to interact with the front end by choosing the model they want to attack and the attack they want to launch.
 
-2. **`src/resnet/Dockerfile`**
-   Follows standard conventions with modifications made to support model training.
+Here is our Technical Architecture:
 
-3. **`src/resnet/requirements.txt`**
-   We used the following packages for resnet model training and data preprocessing:
-   - numpy
-   - scipy
-   - matplotlib
-   - scikit-learn
-   - pandas
-   - yolov5
-   - torch 
-   - torchvision 
-   - torchaudio
-   - huggingface_hub==0.24.7
-   - requests
-   - ultralytics
-   - ipython
+<img src="deliverables/technical_arch.png"  width="800">
 
-4. **`src/resnet/model.py`**
-   Defines the resnet model architecture with tensorflow to be called in `train_resnet.py`.
+This image gives a lower-level description of the workflow described above for our solution architecture. We push our code to GitHub and our Docker images to DockerHub. We are able to train models in Vertex AI that are then used in the Docker images we pull on our back end attack api VMs. The model attack api containers serve results to the Adversarial Playground front end container. The user interacts with the front end by selecting the model and attack they want to launch.
 
-5. **`src/yolo/requirements.txt`**
-   We used the following packages for yolo model training and data preprocessing:
-   - numpy
-   - scipy
-   - matplotlib
-   - scikit-learn
-   - pandas
-   - yolov5
-   - torch 
-   - torchvision 
-   - torchaudio
-   - huggingface_hub==0.24.7
-   - requests
-   - ultralytics
-   - ipython
+**Backend API**
 
-6. **`/src/yolo/Dockerfile`**
-   Follows standard conventions with modifications made to support model training, being nearly identical to the resnet Dockerfile, adding libgli1 and libglib packages to be installed.
+We built backend api services using fast API to expose model attack functionality to the frontend for each model, Alexnet and Resnet. These apis take the model and attack, run an attack script, and return the results and a before and after image to the front end.
 
-7. Yolo Files: To be Implemented for resnet
-   - **`src/yolo/test_yolo.py`** and **`src/yolo/validate_yolo.py`** 
-      - Generates predictions and metrics on validation and test sets.
-   - **`src/yolo/train_yolo.py`**
-      - Loads image files from street sign dataset, splits into training and validation splits, associates images with classification classes and stores data into yaml file.
-      - Trains imported Yolo model on data stored in yaml file.
+**Frontend**
 
-## Data Versioning Strategy:
+A user friendly React app was built to allow users to launch adversarial example attacks on our back end computer vision models. Two drop down menus are currently exposed to the user that allow them to pick the model they want to attack and the attack they want to launch.
 
-### Explanation for Choice:
+Here are some screenshots of our app:
 
-The team chose to use data version control (DVC) as our data versioning strategy, because it allows us to pull the data from our buckets and keep track of different versions of the dataset if we were to modify it in some way. Since the goal of our project is not necessarily to retrain the yolo and resnet models, rather to test adversarial attacks, we do not foresee there to be many different dataset versions. However, being able to use the cloud storage and ensure that teammates are pulling and working with the same datasets is crucial for development.
+<img src="deliverables/landing.png"  width="800">
+<img src="deliverables/attacks.png"  width="800">
 
-### Implementation:
-
-There are two main datasets, traffic signs and cancer, that are used to train yolo and resnet. These are each set up with a `.dvc` file that stores the dataset metadata without the data itself. The data can then be downloaded from the buckets using our data download containers. If we are to make any modifications to the datasets, we will just update the `.dvc` files with the data versioning containers, ensuring that the most recent dataset is being used when it is pulled to be used for training.
-
-Our current versioning containers are able to mount the google cloud storage bucket, and we are then able to make any modifications necessary.
-
-#### Resnet `.dvc`:
-
-```py
-[core]
-    remote = resnet_dataset
-['remote "resnet_dataset"']
-    url = gs://cancer-data-bucket/dvc_store
-```
-
-#### Yolo `.dvc`:
-
-```py
-[core]
-    remote = yolo_dataset
-['remote "yolo_dataset"']
-    url = gs://traffic-sign-dataset/dvc_store
-```
-## Running Dockerfiles
-
-Containers are run universally with `docker-shell.sh` scripts. Docker compose configuation files to be added later.
-
+## Running Dockerfile
+Containers are run universally with `docker-shell.sh` scripts. To build, change the `BUILD` variable to `True`.
 
 ## Notebooks/Reports
 
 **`deliverables/`**
-   Contains screenshots for running containers and application mockup.
+   Contains screenshots for running containers, application mockup, milestone 3 presentation, both pdfs and pngs for our solution and technical architectures, and screen shots of our current app.
+
+## TODOs
+
+Before the showcase and final milestone due date, we have a few more features to implement.
+
+- CD and automation: We plan to implement continuous deployment and automation for our app prior to the next deadline. We plan to make use of GitHub actions, ansible playbooks, and Kubernetes.
+- Robust models: We plan to give the user the option to run attacks on adversarially robust models.
+- User models: We plan to allow users to upload their own models and data to run attacks with.
 
 
 ## Model Weights Link
 
-You can find the weights we use for our ResNet and Yolo models here:
+You can find the weights we use for our ResNet and Alexnet models here as well as our Resnet data.:
 
 https://drive.google.com/drive/folders/12xqjhiSnE9g7RWqrwCIj-7xWYUFt366e?usp=drive_link
+
+
+## Testing Documentation:
+
+The testing strategy involves unit tests and integration tests that are used to validate the function of the python scripts that run the attacks for the adversarial robustness toolbox. 
+
+The two files that are being tested are `alexnet_attacks.py` and `resnet_attacks.py`. These two files have the associated pytest files `test_alexnet_attacks.py` and `test_resnet_attacks.py`.
+
+Both the attack files have a similar pipeline of loading a model and data, parsing arguments that select attack parameters, then running the attack.
+
+The unit tests are run on each of these functions, with the integration test evaluating the performance of the entire pipeline.
+
+Currently the tests are automatically run on pushes to development branches through Github actions.
+
+### Testing Tools:
+
+- pytest
+- pytest-cov
+- Hadolint
+- Flint8
+- Github actions
+
+### Manual Test Usage:
+
+To run all tests, in the repo root directory run:
+
+```py
+pytest
+```
+
+Tor run all tests with coverage report:
+
+```py
+pytest --cov
+```
+
+To generate an html coverage report:
+
+```py
+pytest --cov --cov-report=html
+```
 
 
 ## Sources:
