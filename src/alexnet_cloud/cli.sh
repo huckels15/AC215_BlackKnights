@@ -3,18 +3,18 @@
 # https://cloud.google.com/vertex-ai/docs/training/pre-built-containers
 
 export UUID=$(openssl rand -hex 6)
-export DISPLAY_NAME="resnet_training_job_$UUID"
-export MACHINE_TYPE="n1-standard-8"
+export DISPLAY_NAME="alexnet_training_job_$UUID"
+export MACHINE_TYPE="n1-highmem-16"
 export REPLICA_COUNT=1
 export EXECUTOR_IMAGE_URI="us-docker.pkg.dev/vertex-ai/training/tf-gpu.2-14.py310:latest"
-export PYTHON_PACKAGE_URI=$GCS_BUCKET_URI/resnet-trainer.tar.gz
-export PYTHON_MODULE="resnet-trainer.train_resnet"
+export PYTHON_PACKAGE_URI=$GCS_BUCKET_URI/alexnet-trainer.tar.gz
+export PYTHON_MODULE="alexnet-trainer.train_alexnet"
 export ACCELERATOR_TYPE="NVIDIA_TESLA_T4"
 export ACCELERATOR_COUNT=1
-export GCP_REGION="us-central1" # Adjust region based on you approved quotas for GPUs
+export GCP_REGION="us-east1" # Adjust region based on you approved quotas for GPUs
 
 # Change the number of epochs
-export CMDARGS="--wandb_key=$WANDB_KEY,--epochs=100,--batch_size=32"
+export CMDARGS="--wandb_key=$WANDB_KEY,--epochs=1,--batch_size=32"
 
 # Run training with GPU
 gcloud ai custom-jobs create \
