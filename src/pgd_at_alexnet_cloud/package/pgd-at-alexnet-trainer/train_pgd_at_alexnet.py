@@ -32,7 +32,7 @@ def create_dataset(dataset_path, batch_size, shuffle=True):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset_path", type=str, default="gs://alexnet-data-wf/data/Train", help="Path to the dataset (local or GCS)")
+    parser.add_argument("--dataset_path", type=str, default="gs://alexnet-data-multi/data/Train", help="Path to the dataset (local or GCS)")
     parser.add_argument("--pretrained_model", type=str, default="gs://alexnet-models-ac215/alexnet.h5", help="Path to the pretrained AlexNet model in GCS")
     parser.add_argument("--epochs", type=int, default=EPOCHS, help="Number of training epochs")
     parser.add_argument("--batch_size", type=int, default=BATCH_SIZE, help="Batch size")

@@ -130,7 +130,7 @@ deploymentSpec:
         image: python:3.10
     exec-data-download:
       container:
-        image: huckels15/ap-alexnet-data
+        image: huckels15/ap-alexnet-data:latest
     exec-model-training:
       container:
         args:
