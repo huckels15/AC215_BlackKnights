@@ -86,7 +86,13 @@ export default function PlaygroundPage() {
                     result = await getSQUAREalexrob("robust_alexnet", selectedAttack, additionalValues);
                 } else if (selectedModel === "custom" && selectedAttack === "fgsm") {
                     result = await getFGSMcustom(selectedModel, selectedAttack, additionalValues);
-                } 
+                } else if (selectedModel === "custom" && selectedAttack === "pgd") {
+                    result = await getPGDcustom(selectedModel, selectedAttack, additionalValues);
+                } else if (selectedModel === "custom" && selectedAttack === "deepfool") {
+                    result = await getDEEPFOOLcustom(selectedModel, selectedAttack, additionalValues);
+                } else if (selectedModel === "custom" && selectedAttack === "square") {
+                    result = await getSQUAREcustom(selectedModel, selectedAttack, additionalValues);
+                }
 
                 if (result.error) {
                     setError("Failed to fetch response.");

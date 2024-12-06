@@ -1,4 +1,4 @@
-export const getFGSMcustom = async (model, attack, additionalValues) => {
+export const getPGDcustom = async (model, attack, additionalValues) => {
     const frontendUrl = `${window.location.protocol}//${window.location.hostname}`;
     // Replace frontend port (3000) with backend port (3001)
     const backendBaseUrl = `${frontendUrl}:3001`;
@@ -16,6 +16,8 @@ export const getFGSMcustom = async (model, attack, additionalValues) => {
           channels: 1,
           attack: attack,
           epsilon: additionalValues.epsilon || 0.2,
+          eps_step: additionalValues.stepSize || 0.01,
+          max_iter: additionalValues.maxIterations || 1,
         },
       ],
     };
