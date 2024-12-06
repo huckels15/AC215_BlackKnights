@@ -15,7 +15,8 @@ export default function Header() {
         { name: 'GitHub', path: '/github', icon: <GitHub fontSize="small" /> },
         { name: 'Team Members', path: '/members', icon: <People fontSize="small" /> },
         { name: 'Attacks', path: '/attacks', icon: <BugReport fontSize="small" /> },
-        { name: 'Playground', path: '/playground', icon: <DirectionsRun fontSize="small" /> }
+        { name: 'Playground', path: '/playground', icon: <DirectionsRun fontSize="small" /> },
+        { name: 'Upload', path: '/upload', icon: <DirectionsRun fontSize="small" /> }
     ];
 
     // UI View

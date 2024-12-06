@@ -17,6 +17,7 @@ import { getFGSMalexrob } from '@/components/playground/FGSMalexrob';
 import { getPGDalexrob } from '@/components/playground/PGDalexrob';
 import { getDEEPFOOLalexrob } from '@/components/playground/DEEPFOOLalexrob';
 import { getSQUAREalexrob } from '@/components/playground/SQUAREalexrob';
+import { getFGSMcustom} from '@/components/playground/FGSMcustom';
 
 export default function PlaygroundPage() {
     const [selectedModel, setSelectedModel] = useState('');
@@ -83,6 +84,8 @@ export default function PlaygroundPage() {
                     result = await getDEEPFOOLalexrob("robust_alexnet", selectedAttack, additionalValues);
                 } else if (selectedModel === "alexnetrob" && selectedAttack === "square") {
                     result = await getSQUAREalexrob("robust_alexnet", selectedAttack, additionalValues);
+                } else if (selectedModel === "custom" && selectedAttack === "fgsm") {
+                    result = await getFGSMcustom(selectedModel, selectedAttack, additionalValues);
                 } 
 
                 if (result.error) {
@@ -229,6 +232,7 @@ export default function PlaygroundPage() {
                                     <option value="alexnet">AlexNet</option>
                                     <option value="resnetrob">ResNet - Robust</option>
                                     <option value="alexnetrob">AlexNet - Robust</option>
+                                    <option value="custom">Custom Attack</option>
                                 </select>
                             </div>
                         </div>
