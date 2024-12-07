@@ -4,7 +4,7 @@ export const getDEEPFOOLresrob = async (model, attack, additionalValues) => {
     const backendBaseUrl = `${frontendUrl}:3001`;
     const url = `${backendBaseUrl}/api/predict`;
     const payload = {
-      "endpointId": "280476620152635392",
+      "endpointId": "588410244674093056",
       "location": "us-west1",
       instances: [
         {

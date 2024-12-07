@@ -5,7 +5,7 @@ export const getDEEPFOOLalexrob = async (model, attack, additionalValues) => {
     const url = `${backendBaseUrl}/api/predict`;
     console.log(`Backend URL: ${url}`);
       const payload = {
-        "endpointId": "8089102647501520896",
+        "endpointId": "957652637560340480",
         "location": "us-west4",
         instances: [
           {

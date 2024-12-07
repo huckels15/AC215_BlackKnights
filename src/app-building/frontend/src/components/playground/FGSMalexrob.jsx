@@ -4,7 +4,7 @@ export const getFGSMalexrob = async (model, attack, additionalValues) => {
     const backendBaseUrl = `${frontendUrl}:3001`;
     const url = `${backendBaseUrl}/api/predict`;
     const payload = {
-      "endpointId": "8089102647501520896",
+      "endpointId": "957652637560340480",
       "location": "us-west4",
       instances: [
         {

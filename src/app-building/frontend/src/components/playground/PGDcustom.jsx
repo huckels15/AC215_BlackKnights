@@ -4,7 +4,7 @@ export const getPGDcustom = async (model, attack, additionalValues) => {
     const backendBaseUrl = `${frontendUrl}:3001`;
     const url = `${backendBaseUrl}/api/predict`;
     const payload = {
-      "endpointId": "187542598838124544",
+      "endpointId": "7193736244143063040",
       "location": "us-central1",
       instances: [
         {

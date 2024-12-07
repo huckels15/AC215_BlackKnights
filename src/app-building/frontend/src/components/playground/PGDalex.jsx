@@ -4,7 +4,7 @@ export const getPGDalex = async (model, attack, additionalValues) => {
     const backendBaseUrl = `${frontendUrl}:3001`;
     const url = `${backendBaseUrl}/api/predict`;
     const payload = {
-      "endpointId": "2450965349940592640",
+      "endpointId": "520047009705492480",
       "location": "us-east4",
       instances: [
         {

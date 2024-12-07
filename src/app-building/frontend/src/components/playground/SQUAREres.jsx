@@ -4,7 +4,7 @@ export const getSQUAREres = async (model, attack, additionalValues) => {
     const backendBaseUrl = `${frontendUrl}:3001`;
     const url = `${backendBaseUrl}/api/predict`;
     const payload = {
-      "endpointId": "1403350670995619840",
+      "endpointId": "4716311146880040960",
       "location": "us-east1",
       instances: [
         {
