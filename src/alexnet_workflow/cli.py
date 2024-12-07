@@ -21,7 +21,7 @@ GCS_PACKAGE_URI_ADV = os.environ["GCS_PACKAGE_URI_ADV"]
 GCP_REGION = os.environ["GCP_REGION"]
 WANDB_KEY = os.environ["WANDB_KEY"]
 
-DATA_IMAGE = "huckels15/ap-alexnet-data"
+DATA_IMAGE = "huckels15/ap-alexnet-data:latest"
 
 
 def generate_uuid(length: int = 8) -> str:

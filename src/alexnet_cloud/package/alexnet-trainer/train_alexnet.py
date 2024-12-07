@@ -54,7 +54,7 @@ def create_alexnet():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataset_path", type=str, default="gs://alexnet-data-wf/data/Train", help="Path to the dataset (local or GCS)")
+    parser.add_argument("--dataset_path", type=str, default="gs://alexnet-data-multi/data/Train", help="Path to the dataset (local or GCS)")
     parser.add_argument("--epochs", type=int, default=EPOCHS, help="Number of training epochs")
     parser.add_argument("--batch_size", type=int, default=BATCH_SIZE, help="Batch size")
     parser.add_argument("--model_name", type=str, default="alexnet", help="Model name")
