@@ -120,56 +120,56 @@ export default function PlaygroundPage() {
     
         return (
             <div className="mt-8">
-                <h2 className="text-xl font-bold text-gray-700">Additional Settings</h2>
+                <h2 className="text-xl font-bold text-green-400">Additional Settings</h2>
                 <div className="mt-4 space-y-4">
                     {selectedModel === "custom" && (
                         <>
                             <div>
-                                <label className="block text-gray-600 font-semibold">Model Name (No Extension):</label>
+                                <label className="block text-green-600 font-semibold">Model Name (No Extension):</label>
                                 <input
                                     type="text"
                                     value={additionalValues.modelName || ''}
                                     onChange={(e) => handleAdditionalValueChange('modelName', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                    className="w-full px-4 py-2 bg-gray-900 text-green-400 border border-green-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
                                 />
                             </div>
                             <div>
-                                <label className="block text-gray-600 font-semibold">Dataset Name (No Extension):</label>
+                                <label className="block text-green-600 font-semibold">Dataset Name (No Extension):</label>
                                 <input
                                     type="text"
                                     value={additionalValues.datasetName || ''}
                                     onChange={(e) => handleAdditionalValueChange('datasetName', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                    className="w-full px-4 py-2 bg-gray-900 text-green-400 border border-green-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
                                 />
                             </div>
                             <div>
-                                <label className="block text-gray-600 font-semibold">Width:</label>
+                                <label className="block text-green-600 font-semibold">Width:</label>
                                 <input
                                     type="number"
                                     min="1"
                                     value={additionalValues.width || ''}
                                     onChange={(e) => handleAdditionalValueChange('width', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                    className="w-full px-4 py-2 bg-gray-900 text-green-400 border border-green-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
                                 />
                             </div>
                             <div>
-                                <label className="block text-gray-600 font-semibold">Height:</label>
+                                <label className="block text-green-600 font-semibold">Height:</label>
                                 <input
                                     type="number"
                                     min="1"
                                     value={additionalValues.height || ''}
                                     onChange={(e) => handleAdditionalValueChange('height', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                    className="w-full px-4 py-2 bg-gray-900 text-green-400 border border-green-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
                                 />
                             </div>
                             <div>
-                                <label className="block text-gray-600 font-semibold">Channels:</label>
+                                <label className="block text-green-600 font-semibold">Channels:</label>
                                 <input
                                     type="number"
                                     min="1"
                                     value={additionalValues.channels || ''}
                                     onChange={(e) => handleAdditionalValueChange('channels', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                    className="w-full px-4 py-2 bg-gray-900 text-green-400 border border-green-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
                                 />
                             </div>
                         </>
@@ -178,87 +178,87 @@ export default function PlaygroundPage() {
                     {/* Attack-specific inputs */}
                     {selectedAttack === "fgsm" && (
                         <div>
-                            <label className="block text-gray-600 font-semibold">Epsilon (Perturbation Strength):</label>
+                            <label className="block text-green-600 font-semibold">Epsilon (Perturbation Strength):</label>
                             <input
                                 type="number"
                                 step="0.01"
                                 min="0"
                                 value={additionalValues.epsilon || ''}
                                 onChange={(e) => handleAdditionalValueChange('epsilon', e.target.value)}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                className="w-full px-4 py-2 bg-gray-900 text-green-400 border border-green-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
                             />
                         </div>
                     )}
                     {selectedAttack === "pgd" && (
                         <>
                             <div>
-                                <label className="block text-gray-600 font-semibold">Epsilon (Perturbation Strength):</label>
+                                <label className="block text-green-600 font-semibold">Epsilon (Perturbation Strength):</label>
                                 <input
                                     type="number"
                                     step="0.01"
                                     min="0"
                                     value={additionalValues.epsilon || ''}
                                     onChange={(e) => handleAdditionalValueChange('epsilon', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
-                                />
+                                    className="w-full px-4 py-2 bg-gray-900 text-green-400 border border-green-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                                    />
                             </div>
                             <div>
-                                <label className="block text-gray-600 font-semibold">Max Iterations:</label>
+                                <label className="block text-green-600 font-semibold">Max Iterations:</label>
                                 <input
                                     type="number"
                                     min="1"
                                     value={additionalValues.maxIterations || ''}
                                     onChange={(e) => handleAdditionalValueChange('maxIterations', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
-                                />
+                                    className="w-full px-4 py-2 bg-gray-900 text-green-400 border border-green-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                                    />
                             </div>
                             <div>
-                                <label className="block text-gray-600 font-semibold">Step Size:</label>
+                                <label className="block text-green-600 font-semibold">Step Size:</label>
                                 <input
                                     type="number"
                                     step="0.01"
                                     min="0"
                                     value={additionalValues.stepSize || ''}
                                     onChange={(e) => handleAdditionalValueChange('stepSize', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
-                                />
+                                    className="w-full px-4 py-2 bg-gray-900 text-green-400 border border-green-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                                    />
                             </div>
                         </>
                     )}
                     {selectedAttack === "deepfool" && (
                         <div>
-                            <label className="block text-gray-600 font-semibold">Max Iterations:</label>
+                            <label className="block text-green-600 font-semibold">Max Iterations:</label>
                             <input
                                 type="number"
                                 min="1"
                                 value={additionalValues.maxIterations || ''}
                                 onChange={(e) => handleAdditionalValueChange('maxIterations', e.target.value)}
-                                className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                className="w-full px-4 py-2 bg-gray-900 text-green-400 border border-green-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
                             />
                         </div>
                     )}
                     {selectedAttack === "square" && (
                         <>
                             <div>
-                                <label className="block text-gray-600 font-semibold">Epsilon (Perturbation Strength):</label>
+                                <label className="block text-green-600 font-semibold">Epsilon (Perturbation Strength):</label>
                                 <input
                                     type="number"
                                     step="0.01"
                                     min="0"
                                     value={additionalValues.epsilon || ''}
                                     onChange={(e) => handleAdditionalValueChange('epsilon', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
-                                />
+                                    className="w-full px-4 py-2 bg-gray-900 text-green-400 border border-green-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                                    />
                             </div>
                             <div>
-                                <label className="block text-gray-600 font-semibold">Max Iterations:</label>
+                                <label className="block text-green-600 font-semibold">Max Iterations:</label>
                                 <input
                                     type="number"
                                     min="1"
                                     value={additionalValues.maxIterations || ''}
                                     onChange={(e) => handleAdditionalValueChange('maxIterations', e.target.value)}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
-                                />
+                                    className="w-full px-4 py-2 bg-gray-900 text-green-400 border border-green-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                                    />
                             </div>
                         </>
                     )}
@@ -270,21 +270,21 @@ export default function PlaygroundPage() {
     
 
     return (
-        <div className="min-h-screen pt-20 pb-12 px-4">
+        <div className="min-h-screen bg-black text-green-400 pt-20 pb-12 px-4">
             <div className="container mx-auto max-w-6xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* User Selection */}
                     <div>
                         {/* Select Model */}
                         <div className="mb-8">
-                            <h1 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 font-montserrat">
+                            <h1 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-green-500 to-green-600 font-mono">
                                 Select a Model
                             </h1>
                             <div className="mt-4">
                                 <select
                                     value={selectedModel}
                                     onChange={handleModelChange}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                    className="w-full px-4 py-2 bg-gray-900 text-green-400 border border-green-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
                                 >
                                     <option value="" disabled>
                                         Choose a Model
@@ -300,14 +300,14 @@ export default function PlaygroundPage() {
 
                         {/* Select Attack */}
                         <div className="mb-8">
-                            <h1 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 font-montserrat">
+                            <h1 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-green-500 to-green-600 font-mono">
                                 Select an Attack
                             </h1>
                             <div className="mt-4">
                                 <select
                                     value={selectedAttack}
                                     onChange={handleAttackChange}
-                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-600"
+                                    className="w-full px-4 py-2 bg-gray-900 text-green-400 border border-green-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-green-500"
                                 >
                                     <option value="" disabled>
                                         Choose an Attack
@@ -328,24 +328,24 @@ export default function PlaygroundPage() {
                     <div className="flex flex-col items-center justify-center">
                         <button
                             onClick={handleRun}
-                            className="mb-8 px-6 py-2 bg-green-600 text-white font-bold rounded-lg shadow-lg hover:bg-green-700 transition-colors"
+                            className="mb-8 px-6 py-2 bg-green-700 text-black font-bold rounded-lg shadow-lg hover:bg-green-600 transition-transform transform hover:scale-105"
                         >
                             Let's Play!
                         </button>
 
                         <div className="text-center">
                             {loading ? (
-                                <p className="text-gray-600">Loading...</p>
+                                <p className="text-green-400">Loading...</p>
                             ) : error ? (
-                                <p className="text-red-600">{error}</p>
+                                <p className="text-red-500">{error}</p>
                             ) : (
                                 <>
                                     {regAcc !== null && advAcc !== null && (
-                                        <div className="bg-gray-100 p-4 rounded-lg shadow-inner text-left">
-                                            <p className="text-gray-700">
+                                        <div className="bg-gray-900 p-4 rounded-lg shadow-inner text-left">
+                                            <p>
                                                 <span className="font-bold">Accuracy Before Attack:</span> {regAcc}
                                             </p>
-                                            <p className="text-gray-700">
+                                            <p>
                                                 <span className="font-bold">Accuracy After Attack:</span> {advAcc}
                                             </p>
                                         </div>
@@ -367,4 +367,3 @@ export default function PlaygroundPage() {
         </div>
     );
 }
-

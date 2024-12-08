@@ -49,15 +49,15 @@ export default function UploadPage() {
     };
 
     return (
-        <div className="min-h-screen pt-20 pb-12 px-4">
+        <div className="min-h-screen bg-black text-green-400 pt-20 pb-12 px-4">
             <div className="container mx-auto max-w-4xl">
-                <h1 className="text-3xl font-bold text-gray-800 text-center mb-8">Upload Model and Dataset</h1>
+                <h1 className="text-3xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-green-500 to-green-600">Upload Model and Dataset</h1>
                 <div className="space-y-6">
                     {/* Model Upload */}
                     <div>
                         <label
                             htmlFor="model-upload"
-                            className="block text-lg font-medium text-gray-700 mb-2"
+                            className="block text-lg font-medium text-green-400 mb-2"
                         >
                             Upload Model (.h5)
                         </label>
@@ -66,7 +66,7 @@ export default function UploadPage() {
                             id="model-upload"
                             accept=".h5"
                             onChange={handleModelUpload}
-                            className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                            className="w-full bg-grey-900 text-green-400 border border-green-600 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-500"
                         />
                     </div>
 
@@ -74,7 +74,7 @@ export default function UploadPage() {
                     <div>
                         <label
                             htmlFor="dataset-upload"
-                            className="block text-lg font-medium text-gray-700 mb-2"
+                            className="block text-lg font-medium text-green-400 mb-2"
                         >
                             Upload Dataset (.zip)
                         </label>
@@ -83,7 +83,7 @@ export default function UploadPage() {
                             id="dataset-upload"
                             accept=".zip"
                             onChange={handleDatasetUpload}
-                            className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                            className="w-full bg-black text-green-400 border border-green-600 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-500"
                         />
                     </div>
 
@@ -91,7 +91,7 @@ export default function UploadPage() {
                     <div className="text-center">
                         <button
                             onClick={handleUpload}
-                            className="px-6 py-2 bg-green-600 text-white font-bold rounded-lg shadow-lg hover:bg-green-700 transition-colors"
+                            className="px-6 py-2 bg-green-700 text-black font-bold rounded-lg shadow-lg hover:bg-green-600 transition-transform transform hover:scale-105"
                             disabled={loading}
                         >
                             {loading ? 'Uploading...' : 'Upload Files'}
@@ -103,8 +103,8 @@ export default function UploadPage() {
                         <div
                             className={`mt-4 text-center text-lg font-medium ${
                                 uploadStatus.includes('successfully')
-                                    ? 'text-green-600'
-                                    : 'text-red-600'
+                                    ? 'text-green-500'
+                                    : 'text-red-500'
                             }`}
                         >
                             {uploadStatus}
