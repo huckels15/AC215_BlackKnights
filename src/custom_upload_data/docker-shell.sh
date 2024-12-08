@@ -4,7 +4,7 @@ set -e
 
 BUILD="True" 
 
-export IMAGE_NAME="custom-upload-data"
+export IMAGE_NAME="custom-upload-model"
 export BASE_DIR=$(pwd)
 export GCS_BUCKET_NAME="custom-attacks-multi"
 export GCP_PROJECT="secret-cipher-399620"
