@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.3.1-cudnn8-runtime-ubuntu20.04
+FROM python:3.9-slim
 
 ENV PYENV_SHELL=/bin/bash
 ENV DEBIAN_FRONTEND=noninteractive
@@ -54,4 +54,5 @@ COPY . /app
 
 EXPOSE 8000
 
+# ENTRYPOINT ["/bin/bash"]
 ENTRYPOINT ["./docker-entrypoint.sh"]
