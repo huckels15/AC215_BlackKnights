@@ -62,6 +62,16 @@ export default function Home() {
                         </div>
                     </Link>
 
+
+                    <Link href="/upload" className="block">
+                        <div className="feature-card">
+                            <h3 className="feature-card-title">Upload</h3>
+                            <p className="feature-card-description">
+                                Want to upload a custom model and dataset to test? Click below!
+                            </p>
+                        </div>
+                    </Link>
+
                 </div>
             </section>
         </div>
