@@ -54,6 +54,3 @@ export const getFGSMcustom = async (model, attack, additionalValues) => {
     } catch (error) {
       console.error("Error fetching data:", error);
       return { error: "Failed to fetch response or process data." };
-    }
-  };
-  
