@@ -1,8 +1,13 @@
 'use client';
+'use client';
+
+import Header from '@/components/layout/Header';
 
 export default function MembersPage() {
     return (
         <div className="min-h-screen bg-black text-green-400 relative overflow-hidden">
+            {/* Header */}
+            <Header />
 
             {/* Main Content */}
             <div className="relative z-10 flex flex-col items-center justify-center text-center py-20">
@@ -27,7 +32,7 @@ export default function MembersPage() {
                         />
                         <h2 className="text-xl font-bold text-green-400 mt-4">Jacob Huckelberry</h2>
                         <p className="text-green-500 mt-2">Role: Developer</p>
-                        <p className="text-green-600 mt-2 italic">"Description."</p>
+                        <p className="text-green-600 mt-2 italic">Hailing from Discovery Bay, CA, Jacob is in the second year of getting his Masters Degree in Data Science. Following his time at Harvard, he will go on to serve as a Cyber Officer within the United States Army.</p>
                     </div>
 
                     {/* Eli */}
@@ -51,7 +56,7 @@ export default function MembersPage() {
                         />
                         <h2 className="text-xl font-bold text-green-400 mt-4">Ed Tang</h2>
                         <p className="text-green-500 mt-2">Role: Developer</p>
-                        <p className="text-green-600 mt-2 italic">"Innovating for a better tomorrow."</p>
+                        <p className="text-green-600 mt-2 italic">Originally from Palo Alto, CA, ED is a second year Masters student getting a degree in Data Science. He will serve as a Cyber Officer within the United States Army following his time at Harvard.</p>
                     </div>
                 </div>
             </div>

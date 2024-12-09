@@ -36,21 +36,21 @@ export default function GitHubPage() {
                     {/* Section 1 */}
                     <div className="p-6 bg-gray-900 border border-green-500 rounded-lg shadow-md hover:shadow-green-500/50 transition-transform duration-300 transform hover:scale-105">
                         <h2 className="text-2xl font-bold mb-4 text-green-400">
-                            Why Contribute?
+                            Why Use GitHub?
                         </h2>
                         <p className="text-green-500">
-                            Contributing to open-source projects helps us grow, learn, and innovate
-                            together. Join us in shaping the future of technology.
+                            GitHub has enabled our group to keep track of different versions of our project throughout
+                            the span of working on our app. 
                         </p>
                     </div>
 
                     {/* Section 2 */}
                     <div className="p-6 bg-gray-900 border border-green-500 rounded-lg shadow-md hover:shadow-green-500/50 transition-transform duration-300 transform hover:scale-105">
                         <h2 className="text-2xl font-bold mb-4 text-green-400">
-                            Featured Components
+                            Showcase Note
                         </h2>
                         <p className="text-green-500">
-                            Explore cutting-edge features like real-time collaboration, scalable architecture, and a developer-friendly interface.
+                            Unfortunately, our page is private due to course recommendations. Sorry!
                         </p>
                     </div>
                 </div>

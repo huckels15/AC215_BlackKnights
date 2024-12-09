@@ -1,8 +1,8 @@
 export const getFGSMres = async (model, attack, additionalValues) => {
-    const frontendUrl = `${window.location.protocol}//${window.location.hostname}`;
-    // Replace frontend port (3000) with backend port (3001)
-    const backendBaseUrl = `${frontendUrl}:3001`;
-    const url = `${backendBaseUrl}/api/predict`;
+  const frontendUrl = `${window.location.protocol}//${window.location.hostname}`;
+  // Replace frontend port (3000) with backend port (3001)
+  const backendBaseUrl = `${window.location.protocol}//${window.location.hostname}/port3001`;
+  const url = `${backendBaseUrl}/api/predict`;
     const payload = {
       "endpointId": "4716311146880040960",
       "location": "us-east1",
