@@ -11,8 +11,18 @@ const PORT = 3001;
 app.use(cors()); // Allow all origins
 app.use(bodyParser.json());
 
+// Normalize URL to remove duplicate slashes
+app.use((req, res, next) => {
+  req.url = req.url.replace(/\/{2,}/g, '/'); // Replace multiple slashes with one
+  next();
+});
+
 // Replace with your GCP project details
 const PROJECT_ID = "secret-cipher-399620";
+
+app.get("/", async (req, res) => {
+  res.status(200);
+});
 
 // API to fetch the external IP of the VM
 app.get("/api/external-ip", async (req, res) => {

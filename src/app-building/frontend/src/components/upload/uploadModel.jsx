@@ -1,5 +1,5 @@
 export const uploadModel = async (file) => {
-    const url = "http://34.74.113.119:8000/predict/";
+    const url = "http://34.148.135.143:8000/predict/";
     const formData = new FormData();
     formData.append("file", file); // Ensure the key matches the server's expected field
 

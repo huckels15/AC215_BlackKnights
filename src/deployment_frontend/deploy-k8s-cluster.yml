@@ -26,6 +26,8 @@
     register: cluster
 
 
+
+
   - name: "Create a Node Pool"
     google.cloud.gcp_container_node_pool:
       name: default-pool
@@ -44,6 +46,7 @@
           - "https://www.googleapis.com/auth/servicecontrol"
           - "https://www.googleapis.com/auth/service.management.readonly"
           - "https://www.googleapis.com/auth/trace.append"
+          - "https://www.googleapis.com/auth/cloud-platform"
           - "https://www.googleapis.com/auth/cloud-platform"
       autoscaling:
         enabled: "yes"
@@ -126,8 +129,9 @@
                 run: frontend
             spec:
               serviceAccountName: deployment
+              serviceAccountName: deployment
               containers:
-              - image: "docker.io/elijahdabkowski/frontend:1.1"
+              - image: "docker.io/elijahdabkowski/frontend:1.4"
                 imagePullPolicy: IfNotPresent
                 name: frontend
                 ports:
