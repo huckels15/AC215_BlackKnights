@@ -40,7 +40,7 @@ export default function GitHubPage() {
                         </h2>
                         <p className="text-green-500">
                             GitHub has enabled our group to keep track of different versions of our project throughout
-                            the span of working on our app. 
+                            the span of working on our app over the course of the semester.
                         </p>
                     </div>
 

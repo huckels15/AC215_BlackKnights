@@ -131,7 +131,7 @@
               serviceAccountName: deployment
               serviceAccountName: deployment
               containers:
-              - image: "docker.io/elijahdabkowski/frontend:1.5"
+              - image: "docker.io/huckels15/frontend:1.6"
                 imagePullPolicy: IfNotPresent
                 name: frontend
                 ports:

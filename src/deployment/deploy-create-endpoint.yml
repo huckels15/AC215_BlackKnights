@@ -9,7 +9,7 @@
 
     - name: Deploy ResNet model to endpoint
       shell: |
-        gcloud ai endpoints deploy-model 1403350670995619840 \
+        gcloud ai endpoints deploy-model 4716311146880040960 \
           --project='secret-cipher-399620' \
           --model="{{ resnet_model_id.stdout }}" \
           --display-name="resnet-attacks-ansible" \
@@ -26,7 +26,7 @@
 
     - name: Deploy AlexNet model to endpoint
       shell: |
-        gcloud ai endpoints deploy-model 2450965349940592640 \
+        gcloud ai endpoints deploy-model 520047009705492480 \
           --project='secret-cipher-399620' \
           --model="{{ alexnet_model_id.stdout }}" \
           --display-name="alexnet-attacks-ansible" \
@@ -43,7 +43,7 @@
 
     - name: Deploy Custom model to endpoint
       shell: |
-        gcloud ai endpoints deploy-model 187542598838124544 \
+        gcloud ai endpoints deploy-model 7193736244143063040 \
           --project='secret-cipher-399620' \
           --model="{{ custom_model_id.stdout }}" \
           --display-name="custom-attacks-ansible" \
@@ -60,7 +60,7 @@
 
     - name: Deploy Robust ResNet model to endpoint
       shell: |
-        gcloud ai endpoints deploy-model 280476620152635392 \
+        gcloud ai endpoints deploy-model 588410244674093056 \
           --project='secret-cipher-399620' \
           --model="{{ robust_resnet_model_id.stdout }}" \
           --display-name="robust-resnet-attacks-ansible" \
@@ -77,7 +77,7 @@
 
     - name: Deploy Robust AlexNet model to endpoint
       shell: |
-        gcloud ai endpoints deploy-model 8089102647501520896 \
+        gcloud ai endpoints deploy-model 957652637560340480 \
           --project='secret-cipher-399620' \
           --model="{{ robust_alexnet_model_id.stdout }}" \
           --display-name="robust-alexnet-attacks-ansible" \
