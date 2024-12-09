@@ -1,0 +1,34 @@
+---
+- name: "Build docker images and push them to Docker Hub"
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - secrets.yml  # Load variables from the Vault file
+  vars:
+    dockerhub_username: "elijahdabkowski"
+  tasks:
+    - name: "Get timestamp for docker tag"
+      shell: "(date +%Y%m%d%H%M%S)"
+      register: tag
+
+    - name: Print tag
+      debug:
+        var: tag.stdout
+
+    - name: Log in to Docker Hub
+      community.general.docker_login:
+        username: "{{ dockerhub_username }}"
+        password: "{{ dockerhub_password }}"  # Use Vault-protected password
+
+    - name: Build frontend container image
+      community.general.docker_image:
+        build:
+          path: ../app-building
+        name: "{{ dockerhub_username }}/frontend-ansible:{{ tag.stdout }}"
+        source: build
+
+    - name: Push frontend image to Docker Hub
+      community.general.docker_image:
+        name: "{{ dockerhub_username }}/frontend-ansible:{{ tag.stdout }}"
+        push: yes
+        source: local

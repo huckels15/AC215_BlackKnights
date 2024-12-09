@@ -101,3 +101,19 @@
   ]
 }'
 
+# curl \
+# -X POST \
+# # -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+# -H "Content-Type: application/json" \
+# https://us-central1-aiplatform.googleapis.com/ui/projects/secret-cipher-399620/locations/us-central1/endpoints/7193736244143063040:predict \
+# -d '{
+#   "instances": [
+#     {
+#       "model": "resnet",
+#       "attack": "fgsm",
+#       "epsilon": 0.2
+#     }
+#   ]
+# }'
+
+
