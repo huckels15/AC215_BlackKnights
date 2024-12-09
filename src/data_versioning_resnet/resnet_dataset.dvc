@@ -1,6 +1,0 @@
-outs:
-- md5: 114007087837cc84cf9d161443e70573.dir
-  size: 91820383
-  nfiles: 1
-  hash: md5
-  path: resnet_dataset
