@@ -48,7 +48,7 @@ def download_resnet_data(bucket_name, source_directory, destination_directory):
         print(f"Downloaded {blob.name}")
 
 def load_data():
-    data = pd.read_csv("resnet_data/dvc_store_csvs_hmnist_28_28_RGB.csv")
+    data = pd.read_csv("resnet_data/hmnist_28_28_RGB.csv")
     y = data['label']
     X = data.drop(columns= ['label'])
 
@@ -81,14 +81,14 @@ parser.add_argument(
 parser.add_argument(
     "--epochs", 
     dest="epochs", 
-    default=1, 
+    default=100, 
     type=int, 
     help="Number of epochs."
     )
 parser.add_argument(
     "--batch_size", 
     dest="batch_size", 
-    default=16, 
+    default=32, 
     type=int, 
     help="Size of a batch."
     )
@@ -102,7 +102,7 @@ parser.add_argument(
 parser.add_argument(
     "--data_bucket", 
     dest="data_bucket", 
-    default="cancer-data-bucket", 
+    default="resnet-data-wf", 
     type=str, 
     help="Bucket for data."
     )
@@ -115,7 +115,6 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-# Set up early stopping callback
 es = EarlyStopping(
     monitor="val_loss",
     min_delta=0.01,
@@ -127,7 +126,6 @@ es = EarlyStopping(
     start_from_epoch=0,
 )
 
-# Set up data augmentation and validation data generators
 train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
     rotation_range=15,
     width_shift_range=0.1,
@@ -139,9 +137,9 @@ test_datagen = tf.keras.preprocessing.image.ImageDataGenerator()
 
 if __name__ == "__main__":
     dt = datetime.datetime.today()
-    model_name = f"resnet" # potentially change this
+    model_name = f"resnet"
 
-    download_resnet_data(args.data_bucket, 'dvc_store/csvs/', 'resnet_data')
+    download_resnet_data(args.data_bucket, 'data/', 'resnet_data')
     wandb.login(key=args.wandb_key)
     wandb.init(
         project='blackknights_resnet', 
@@ -160,6 +158,15 @@ if __name__ == "__main__":
     resnet.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     history = resnet.fit(train_gen, epochs=args.epochs, validation_data=val_gen, callbacks=[es, WandbCallback()])
     
-    model_path = f"gs://{args.model_bucket}/{model_name}"
-    tf.saved_model.save(resnet, model_path)
+    local_model_path = f"{model_name}.h5"
+    resnet.save(local_model_path)
+
+    gcs_model_path = f"{model_name}.h5"
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(args.model_bucket)
+    blob = bucket.blob(gcs_model_path)
+
+    blob.upload_from_filename(local_model_path)
+
+    print(f"Model successfully uploaded to gs://{args.model_bucket}/{gcs_model_path}")
     wandb.finish()

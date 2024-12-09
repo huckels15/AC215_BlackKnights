@@ -36,15 +36,15 @@
 
 # curl -X POST http://127.0.0.1:8000/predict \
 # -H "Content-Type: application/json" \
-# -d '{
-#   "instances": [
-#     {
-#       "model": "resnet",
-#       "attack": "fgsm",
-#       "epsilon": 0.2
-#     }
-#   ]
-# }'
+-d '{
+  "instances": [
+    {
+      "model": "resnet",
+      "attack": "fgsm",
+      "epsilon": 0.2
+    }
+  ]
+}'
 
 ## CUSTOM EXAMPLE:
 # curl -X POST http://127.0.0.1:8000/predict \
@@ -91,15 +91,15 @@
 # -H "Authorization: Bearer $(gcloud auth print-access-token)" \
 # -H "Content-Type: application/json" \
 # https://us-east1-aiplatform.googleapis.com/ui/projects/secret-cipher-399620/locations/us-east1/endpoints/3829946445218185216:predict \
-# -d '{
-#   "instances": [
-#     {
-#       "model": "resnet",
-#       "attack": "fgsm",
-#       "epsilon": 0.2
-#     }
-#   ]
-# }'
+-d '{
+  "instances": [
+    {
+      "model": "resnet",
+      "attack": "fgsm",
+      "epsilon": 0.2
+    }
+  ]
+}'
 
 # curl \
 # -X POST \
