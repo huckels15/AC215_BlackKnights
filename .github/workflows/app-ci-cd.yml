@@ -60,8 +60,6 @@ jobs:
       #     -v "$HOME/.ssh":/home/app/.ssh \
       #     -v ${{ github.workspace }}/src/art_attacks":/art_attacks \
       #     -v ${{ github.workspace }}/src/app-building":/app-building \
-      #     -v ${{ github.workspace }}/src/art_attacks":/art_attacks \
-      #     -v ${{ github.workspace }}/src/app-building":/app-building \
       #     --volume $GITHUB_WORKSPACE:/workspace \
       #     --mount type=bind,source=$GOOGLE_APPLICATION_CREDENTIALS,target=/secrets/deployment.json \
       #     --env GOOGLE_APPLICATION_CREDENTIALS=/secrets/deployment.json \
