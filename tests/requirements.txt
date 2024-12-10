@@ -1,0 +1,14 @@
+pytest
+numpy
+unittest2
+art
+tensorflow
+google-cloud-storage
+pydantic
+fastapi
+requests
+pandas
+kagglehub
+matplotlib
+scikit-learn
+opencv-python
