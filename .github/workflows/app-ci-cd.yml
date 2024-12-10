@@ -15,6 +15,13 @@ jobs:
       - run: echo "Branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+          registry: https://index.docker.io/v1/
+          ecr: false
       - id: 'auth'
         uses: google-github-actions/auth@v1
         with:
@@ -48,14 +55,6 @@ jobs:
       #     -e GCP_PROJECT=secret-cipher-399620 \
       #     -e GCP_ZONE=us-east1 \
       #     ap-backend-deployment
-      
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
-          registry: docker.io
-          ecr: false
 
       - name: Build Frontend Deployment Container 
         run: |-
