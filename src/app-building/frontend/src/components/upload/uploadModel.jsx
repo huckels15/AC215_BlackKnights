@@ -1,23 +1,33 @@
 export const uploadModel = async (file) => {
-    const url = "http://34.148.135.143:8000/predict/";
-    const formData = new FormData();
-    formData.append("file", file); // Ensure the key matches the server's expected field
-
     try {
-        const response = await fetch(url, {
-            method: "POST",
-            body: formData, // Do not set Content-Type manually
-        });
-
-        if (!response.ok) {
-            const errorText = await response.text(); // Capture error details from the server
-            throw new Error(`Failed to upload model. Status: ${response.status} - ${errorText}`);
-        }
-
-        const jsonResponse = await response.json();
-        return { success: true, json: jsonResponse };
+      // Fetch the external IP of the target VM from the backend
+      const ipResponse = await fetch(
+        `${window.location.protocol}//${window.location.hostname}/port3001/api/vm-external-ip?zone=us-east1-c&instanceName=custom-upload-model`
+      );
+      if (!ipResponse.ok) throw new Error("Failed to fetch VM external IP");
+  
+      const { ip: externalIP } = await ipResponse.json();
+      const url = `http://${externalIP}:8000/predict/`;
+  
+      // Prepare and send the file upload request
+      const formData = new FormData();
+      formData.append("file", file);
+  
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData, // Do not set Content-Type manually
+      });
+  
+      if (!response.ok) {
+        const errorText = await response.text(); // Capture error details from the server
+        throw new Error(`Failed to upload model. Status: ${response.status} - ${errorText}`);
+      }
+  
+      const jsonResponse = await response.json();
+      return { success: true, json: jsonResponse };
     } catch (error) {
-        console.error("Error uploading model:", error);
-        return { success: false, error: error.message };
+      console.error("Error uploading model:", error);
+      return { success: false, error: error.message };
     }
-};
+  };
+  

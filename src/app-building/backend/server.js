@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const { GoogleAuth } = require("google-auth-library");
+const { google } = require("googleapis");
 
 const app = express();
 const PORT = 3001;
@@ -20,22 +21,46 @@ app.use((req, res, next) => {
 // Replace with your GCP project details
 const PROJECT_ID = "secret-cipher-399620";
 
-app.get("/", async (req, res) => {
-  res.status(200);
-});
+// Function to fetch the external IP of a specific VM
+async function getVMExternalIP(projectId, zone, instanceName) {
+  const auth = new google.auth.GoogleAuth({
+    scopes: ["https://www.googleapis.com/auth/cloud-platform"],
+  });
 
-// API to fetch the external IP of the VM
-app.get("/api/external-ip", async (req, res) => {
+  const compute = google.compute({
+    version: "v1",
+    auth,
+  });
+
   try {
-    const ipResponse = await fetch(
-      "http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip",
-      { headers: { "Metadata-Flavor": "Google" } }
-    );
-    const vmIp = await ipResponse.text();
-    res.json({ ip: vmIp });
+    const res = await compute.instances.get({
+      project: projectId,
+      zone,
+      instance: instanceName,
+    });
+
+    const externalIP = res.data.networkInterfaces[0].accessConfigs[0].natIP;
+    return externalIP;
   } catch (error) {
-    console.error("Error fetching VM IP:", error.message);
-    res.status(500).json({ error: "Failed to retrieve VM IP" });
+    console.error("Error fetching VM details:", error);
+    throw error;
+  }
+}
+
+// API route to fetch the external IP of a specific VM
+app.get("/api/vm-external-ip", async (req, res) => {
+  const { zone, instanceName } = req.query;
+
+  if (!zone || !instanceName) {
+    return res.status(400).json({ error: "Missing required query parameters: zone, instanceName" });
+  }
+
+  try {
+    const externalIP = await getVMExternalIP(PROJECT_ID, zone, instanceName);
+    res.json({ ip: externalIP });
+  } catch (error) {
+    console.error("Error fetching external IP:", error.message);
+    res.status(500).json({ error: "Failed to retrieve VM external IP" });
   }
 });
 
