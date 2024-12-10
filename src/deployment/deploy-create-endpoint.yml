@@ -6,6 +6,10 @@
     - name: Read ResNet model ID
       shell: "cat .resnet-attacks-ansible-id"
       register: resnet_model_id
+    
+    - name: Wait before next deployment
+      pause:
+        seconds: 20
 
     - name: Deploy ResNet model to endpoint
       shell: |
@@ -17,8 +21,12 @@
           --accelerator=type=nvidia-tesla-t4,count=1 \
           --service-account="data-service-account@secret-cipher-399620.iam.gserviceaccount.com" \
           --machine-type="n1-highmem-8"
-      async: 999999 
-      poll: 0     
+      async: 999999
+      poll: 0
+
+    - name: Wait before next deployment
+      pause:
+        seconds: 20
 
     - name: Read AlexNet model ID
       shell: "cat .alexnet-attacks-ansible-id"
@@ -37,6 +45,10 @@
       async: 999999
       poll: 0
 
+    - name: Wait before next deployment
+      pause:
+        seconds: 20
+
     - name: Read Custom model ID
       shell: "cat .custom-attacks-ansible-id"
       register: custom_model_id
@@ -53,6 +65,10 @@
           --machine-type="n1-highmem-8"
       async: 999999
       poll: 0
+
+    - name: Wait before next deployment
+      pause:
+        seconds: 20
 
     - name: Read Robust ResNet model ID
       shell: "cat .robust-resnet-attacks-ansible-id"
@@ -71,6 +87,10 @@
       async: 999999
       poll: 0
 
+    - name: Wait before next deployment
+      pause:
+        seconds: 20
+
     - name: Read Robust AlexNet model ID
       shell: "cat .robust-alexnet-attacks-ansible-id"
       register: robust_alexnet_model_id
@@ -85,5 +105,3 @@
           --accelerator=type=nvidia-tesla-t4,count=1 \
           --service-account="data-service-account@secret-cipher-399620.iam.gserviceaccount.com" \
           --machine-type="n1-highmem-8"
-      async: 999999
-      poll: 0
