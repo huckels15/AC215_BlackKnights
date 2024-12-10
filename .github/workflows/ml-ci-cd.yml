@@ -50,5 +50,6 @@ jobs:
             -e GCP_REGION=us-east1 \
             -e GCS_PACKAGE_URI_NORM=gs://resnet-trainer \
             -e GCS_PACKAGE_URI_ADV=gs://pgd-at-resnet-trainer \
+            -e WANDB_KEY=${{ secrets.WANDB_KEY }} \
             ap-app-deployment
       - run: echo "Job's status is ${{ job.status }}."
