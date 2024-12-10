@@ -58,7 +58,7 @@ jobs:
 
       - name: Build Frontend Deployment Container 
         run: |-
-          cd ${{ github.workspace }}/src/deployment/
+          cd ${{ github.workspace }}/src/deployment_frontend/
           docker build -t ap-frontend-deployment -f Dockerfile .
       - name: Run Deploy Frontend
         run: |-
