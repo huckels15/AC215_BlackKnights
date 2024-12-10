@@ -117,7 +117,7 @@
   - name: Importing credentials as a Secret
     shell: |
       #!/bin/bash
-      kubectl create secret generic gcp-service-key --from-file=gcp-service.json=../secrets/gcp-service.json --namespace="{{cluster_name}}-namespace"
+      kubectl create secret generic gcp-service-key --from-file=deployment.json=/secrets/deployment.json --namespace="{{cluster_name}}-namespace"
     register: create_secret_op
     ignore_errors: yes
     when: cluster_state == "present"
@@ -141,9 +141,8 @@
                 run: frontend
             spec:
               serviceAccountName: deployment
-              serviceAccountName: deployment
               containers:
-              - image: "docker.io/ ${{ secrets.DOCKERHUB_USERNAME }}/frontend-anisble:{{ tag.stdout }}"
+              - image: "docker.io/{{ lookup('env', 'DOCKERHUB_USERNAME') }}/frontend-anisble:{{ tag.stdout }}"
                 imagePullPolicy: IfNotPresent
                 name: frontend
                 ports:
