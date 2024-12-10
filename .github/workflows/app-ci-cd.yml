@@ -55,6 +55,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
           registry: docker.io
+          ecr: false
 
       - name: Build Frontend Deployment Container 
         run: |-
