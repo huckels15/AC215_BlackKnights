@@ -19,7 +19,7 @@ docker build -t $IMAGE_NAME --platform=linux/amd64 -f Dockerfile .
 docker run --rm --name $IMAGE_NAME -ti \
 -v /var/run/docker.sock:/var/run/docker.sock \
 -v "$BASE_DIR":/app \
--v "$SECRETS_DIR":/secrets \
+-v "$SECRETS_DIR":/secrets \ 
 -v "$HOME/.ssh":/home/app/.ssh \
 -v "$BASE_DIR/../art_attacks":/art_attacks \
 -v "$BASE_DIR/../app-building":/app-building \
