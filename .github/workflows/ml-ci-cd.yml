@@ -44,8 +44,8 @@ jobs:
             -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
             -e GCP_PROJECT=secret-cipher-399620 \
             -e GCP_ZONE=us-east1 \
-            -e GCS_BUCKET_NAME=resnet-models-ac215 \
-            -e GCS_BUCKET_NAME=pgd-at-resnet-models-ac215 \
+            -e GCS_BUCKET_NAME_NORM=resnet-models-ac215 \
+            -e GCS_BUCKET_NAME_ADV=pgd-at-resnet-models-ac215 \
             -e GCS_SERVICE_ACCOUNT=ml-workflow@secret-cipher-399620.iam.gserviceaccount.com \
             -e GCP_REGION=us-east1 \
             -e GCS_PACKAGE_URI_NORM=gs://resnet-trainer \
