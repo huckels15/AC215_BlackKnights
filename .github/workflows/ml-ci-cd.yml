@@ -29,6 +29,7 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+
       - name: Build Deployment Container 
         run: |-
           cd ${{ github.workspace }}/src/resnet_workflow/
@@ -52,4 +53,29 @@ jobs:
             -e GCS_PACKAGE_URI_ADV=gs://pgd-at-resnet-trainer \
             -e WANDB_KEY=${{ secrets.WANDB_KEY }} \
             ap-app-deployment
+      - run: echo "Job's status is ${{ job.status }}."
+
+      - name: Build Deployment Container 
+        run: |-
+          cd ${{ github.workspace }}/src/alexnet_workflow/
+          docker build -t ap-app-a-deployment -f Dockerfile .
+      - name: Run Alexnet ML Pipeline
+        if: contains(github.event.head_commit.message, '/run-alexnet-pipeline')
+        run: |-
+          docker run --rm --name ap-app-a-deployment \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v ${{ github.workspace }}/src/alexnet_workflow:/alexnet_workflow \
+            --mount type=bind,source=$GOOGLE_APPLICATION_CREDENTIALS,target=/secrets/deployment.json \
+            -e GOOGLE_APPLICATION_CREDENTIALS=/secrets/deployment.json \
+            -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
+            -e GCP_PROJECT=secret-cipher-399620 \
+            -e GCP_ZONE=us-east1 \
+            -e GCS_BUCKET_NAME_NORM=alexnet-models-ac215 \
+            -e GCS_BUCKET_NAME_ADV=pgd-at-alexnet-models-ac215 \
+            -e GCS_SERVICE_ACCOUNT=ml-workflow@secret-cipher-399620.iam.gserviceaccount.com \
+            -e GCP_REGION=us-east1 \
+            -e GCS_PACKAGE_URI_NORM=gs://alexnet-trainer \
+            -e GCS_PACKAGE_URI_ADV=gs://pgd-at-alexnet-trainer \
+            -e WANDB_KEY=${{ secrets.WANDB_KEY }} \
+            ap-app-a-deployment
       - run: echo "Job's status is ${{ job.status }}."

@@ -40,7 +40,6 @@ RUN useradd -ms /bin/bash app -d /home/app -u 1000 -p "$(openssl passwd -1 passw
     chown app:app /app
 
 # Switch to the new user
-USER app
 WORKDIR /app
 
 # Install python packages
