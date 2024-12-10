@@ -3,7 +3,7 @@ name: CI on Merge to Main
 on:
   push:
     branches:
-      - milestone4
+      - main
 
 jobs:
   test:
