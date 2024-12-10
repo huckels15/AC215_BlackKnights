@@ -72,6 +72,8 @@ jobs:
           -e USE_GKE_GCLOUD_AUTH_PLUGIN=True \
           -e GCP_PROJECT=secret-cipher-399620 \
           -e GCP_ZONE=us-east1 \
+          -e DOCKERHUB_USERNAME=${{ vars.DOCKERHUB_USERNAME }} \
+          -e DOCKERHUB_PASSWORD=${{ secrets.DOCKER_ACCESS_TOKEN }} \
           ap-frontend-deployment
 
 
