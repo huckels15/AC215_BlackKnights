@@ -10,4 +10,4 @@ gcloud config set project $GCP_PROJECT
 gcloud auth configure-docker gcr.io -q
 
 #/bin/bash
-pipenv shell
+pipenv run python3 cli.py --pipeline
