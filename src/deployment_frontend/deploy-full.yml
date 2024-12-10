@@ -2,10 +2,6 @@
 - name: "Build docker images and push them to Docker Hub"
   hosts: localhost
   gather_facts: false
-  vars_files:
-    - secrets.yml  # Load variables from the Vault file
-  vars:
-    dockerhub_username: "elijahdabkowski"
   tasks:
     - name: "Get timestamp for docker tag"
       shell: "(date +%Y%m%d%H%M%S)"
@@ -17,44 +13,20 @@
 
     - name: Log in to Docker Hub
       community.general.docker_login:
-        username: "{{ dockerhub_username }}"
-        password: "{{ dockerhub_password }}"  # Use Vault-protected password
+        username:  ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
     - name: Build frontend container image
       community.general.docker_image:
         build:
           path: ../app-building
-        name: "{{ dockerhub_username }}/frontend-ansible:{{ tag.stdout }}"
+        name: " ${{ secrets.DOCKERHUB_USERNAME }}/frontend-ansible:{{ tag.stdout }}"
         source: build
 
     - name: Push frontend image to Docker Hub
       community.general.docker_image:
-        name: "{{ dockerhub_username }}/frontend-ansible:{{ tag.stdout }}"
+        name: " ${{ secrets.DOCKERHUB_USERNAME }}/frontend-ansible:{{ tag.stdout }}"
         push: yes
         source: local
-    - name: Print tag
-      debug:
-        var: tag.stdout
-    - name: Deploy Frontend with Startup Script
-      shell: |
-        # Enable all required Google Cloud APIs
-        gcloud services enable compute.googleapis.com containerregistry.googleapis.com \
-          --project='secret-cipher-399620'
-        
-        # Create the VM with the startup script
-        gcloud compute instances create frontend-m5 \
-          --project='secret-cipher-399620' \
-          --zone='us-east4-a' \
-          --machine-type='e2-medium' \
-          --service-account='frontend-account@secret-cipher-399620.iam.gserviceaccount.com' \
-          --tags=http-server,https-server \
-          --scopes='https://www.googleapis.com/auth/cloud-platform' \
-          --metadata startup-script='#!/bin/bash
-          sudo apt-get update
-          sudo apt-get install -y docker.io
-          sudo systemctl start docker
-          sudo docker pull elijahdabkowski/frontend-ansible:{{ tag.stdout }}
-          sudo docker run --restart=always -d -p 3000:3000 -p 3001:3001 elijahdabkowski/frontend-ansible:{{ tag.stdout }}'
-      async: 999999
-      poll: 0
-
+    - name: "Save docker tag"
+      shell: echo {{ tag.stdout}} > .docker-tag
