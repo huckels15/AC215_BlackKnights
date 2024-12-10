@@ -8,7 +8,7 @@
       shell: |
         gcloud compute instances create-with-container ansible-data \
           --project='secret-cipher-399620' \
-          --zone='us-east4-a' \
+          --zone='us-east1-a' \
           --machine-type='e2-medium' \
           --service-account='data-service-account@secret-cipher-399620.iam.gserviceaccount.com' \
           --tags=http-server,https-server \
@@ -20,7 +20,7 @@
       shell: |
         gcloud compute instances create-with-container ansible-model \
           --project='secret-cipher-399620' \
-          --zone='us-east4-a' \
+          --zone='us-east1-a' \
           --machine-type='e2-medium' \
           --service-account='data-service-account@secret-cipher-399620.iam.gserviceaccount.com' \
           --tags=http-server,https-server \
