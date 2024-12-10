@@ -142,7 +142,7 @@
             spec:
               serviceAccountName: deployment
               containers:
-              - image: "docker.io/ huckels15/frontend-ansible:20241210213715" #image: "docker.io/{{ lookup('env', 'DOCKERHUB_USERNAME') }}/frontend-ansible:{{ tag.stdout }}"
+              - image: "docker.io/huckels15/frontend-ansible:20241210213715" #image: "docker.io/{{ lookup('env', 'DOCKERHUB_USERNAME') }}/frontend-ansible:{{ tag.stdout }}"
                 imagePullPolicy: IfNotPresent
                 name: frontend
                 ports:
