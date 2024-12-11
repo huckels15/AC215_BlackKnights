@@ -27,6 +27,7 @@
           --service-account='data-service-account@secret-cipher-399620.iam.gserviceaccount.com' \
           --tags=http-server,https-server \
           --container-image="{{ lookup('env', 'DOCKERHUB_USERNAME') }}/custom-upload-data-ansible:{{ tag.stdout }}" 
+          --container-privileged
 
     - name: Deploy Upload Model
       shell: |
@@ -36,4 +37,5 @@
           --machine-type='e2-medium' \
           --service-account='data-service-account@secret-cipher-399620.iam.gserviceaccount.com' \
           --tags=http-server,https-server \
-          --container-image="{{ lookup('env', 'DOCKERHUB_USERNAME') }}/custom-upload-model-ansible:{{ tag.stdout }}" 
+          --container-image="{{ lookup('env', 'DOCKERHUB_USERNAME') }}/custom-upload-model-ansible:{{ tag.stdout }}"
+          --container-privileged

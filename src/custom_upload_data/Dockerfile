@@ -52,6 +52,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /app
 
+RUN chmod +x /app/docker-entrypoint.sh
+
 EXPOSE 8000
 
 # ENTRYPOINT ["/bin/bash"]
