@@ -17,11 +17,11 @@ httpx
 python-multipart
 adversarial-robustness-toolbox
 scipy
-tensorflow[and-cuda]
-keras
 tensorflow-addons
 tensorboardX
 requests
 ultralytics
 ipython
 wandb
+tensorflow==2.9.1 
+keras==2.9.0
