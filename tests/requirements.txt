@@ -14,3 +14,4 @@ kagglehub
 matplotlib
 scikit-learn
 opencv-python
+httpx
