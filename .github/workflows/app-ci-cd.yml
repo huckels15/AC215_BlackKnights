@@ -67,7 +67,7 @@ jobs:
           docker build -t ap-frontend-deployment -f Dockerfile .
       - name: Run Deploy Frontend
         run: |-
-          docker run --rm --name ap-frontend-deployment \
+          docker run --rm --name ap-frontend-deployment \ 
           -v /var/run/docker.sock:/var/run/docker.sock \
           -v "$HOME/.ssh":/home/app/.ssh \
           -v ${{ github.workspace }}/src/app-building:/app-building \
