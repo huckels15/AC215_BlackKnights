@@ -39,7 +39,7 @@ jobs:
           docker build -t ap-upload-deployment -f Dockerfile .
       - name: Run Deploy Upload
         run: |-
-          docker run --rm --name ap-upload-deployment -ti \
+          docker run --rm --name ap-upload-deployment \
           -v /var/run/docker.sock:/var/run/docker.sock \
           -v "$HOME/.ssh":/home/app/.ssh \
           -v ${{ github.workspace }}/src/custom_upload_data":/custom_upload_data \
@@ -67,7 +67,7 @@ jobs:
           docker build -t ap-frontend-deployment -f Dockerfile .
       - name: Run Deploy Frontend
         run: |-
-          docker run --rm --name ap-frontend-deployment \ 
+          docker run --rm --name ap-frontend-deployment \
           -v /var/run/docker.sock:/var/run/docker.sock \
           -v "$HOME/.ssh":/home/app/.ssh \
           -v ${{ github.workspace }}/src/app-building:/app-building \
