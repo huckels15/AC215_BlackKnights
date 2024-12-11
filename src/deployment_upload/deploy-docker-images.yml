@@ -42,4 +42,4 @@
       source: local
 
   - name: "Save docker tag"
-    shell: echo {{ tag.stdout}} > .docker-tag
+    shell: echo {{ tag.stdout}} > .docker-tag 
