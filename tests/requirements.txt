@@ -4,7 +4,6 @@ coverage
 numpy
 unittest2
 art
-tensorflow
 google-cloud-storage
 pydantic
 fastapi
@@ -17,3 +16,16 @@ opencv-python
 httpx
 python-multipart
 adversarial-robustness-toolbox
+scipy
+tensorflow[and-cuda]
+keras
+tensorflow-addons
+--extra-index-url https://download.pytorch.org/whl/cu124
+torch 
+torchvision 
+torchaudio
+tensorboardX
+requests
+ultralytics
+ipython
+wandb
