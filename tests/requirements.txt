@@ -16,3 +16,4 @@ scikit-learn
 opencv-python
 httpx
 python-multipart
+adversarial-robustness-toolbox
