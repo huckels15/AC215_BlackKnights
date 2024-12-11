@@ -40,4 +40,4 @@
           --tags=http-server,https-server \
           --container-image="gcr.io/secret-cipher-399620/custom-upload-model-ansible:{{ tag.stdout }}" 
       async: 999999
-      poll: 0
+      poll: 0  
