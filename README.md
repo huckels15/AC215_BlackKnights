@@ -196,15 +196,15 @@ Our application architecture makes use of 9 different containers. These containe
 - NGINX container
     - Our NGINX container implements our webserver that exposes our react front end to the user in their browser.
 
-### Kubernets Deployment
+### Kubernetes Deployment
 
 Our Kubernetes cluster contains the images for our front end and webserver. We chose only to use Kubernetes for these two components because everything else is implemented in Vertex AI endpoints, which have their own scaling methods built in. Below is an image of our deployed cluster.
 
-![](deliverables/images_new_new/cluster.png)
+![](deliverables/images_new/cluster.png)
 
 As we can see in the images below, our cluster has auto-scaling implemented to scale our application when the loads increase or our frontend crashes.
 
-![](deliverables/images_new_new/scaling.png)
+![](deliverables/images_new/scaling.png)
 
 
 ### Ansible Playbooks for Automated Deployment
@@ -213,7 +213,7 @@ In order to automate the provisioning and deployment of our application, we made
 
 ### Machine Learning Workflows
 
-In this project, we made use of four different models, a ResNet, PGD-AT ResNet, AlexNet, and PGD AT AlexNet. In order to train these models, we implemented two seperate ML workflows. Each workflow does the same thing, but for different models. In both workflows, the data is downloaded from kaggle, the data is used to train the models, and then we conduct PGD adversarial training. PGD adversarial training consists of generating adversarial examples using PGD on the training data, then finetuning the model on these adversarial examples. The two different workflows can be found in the `alexnet_workflow` and `resnet_workflow` directories. For our workflow, we did not include a model validation step. This is because we are not attempting to create a SOTA computer vision model. That is, as long as the models are sufficiently trained, we are able to attack them and getting meaningful results. Usage for these workflows will be explained later in this README. Below are some images of our workflows successfully completing in GCP.
+In this project, we made use of four different models, a ResNet, PGD-AT ResNet, AlexNet, and PGD AT AlexNet. In order to train these models, we implemented two seperate ML workflows. Each workflow does the same thing, but for different models. In both workflows, the data is downloaded from kaggle, the data is used to train the models, and then we conduct PGD adversarial training. PGD adversarial training consists of generating adversarial examples using PGD on the training data, then finetuning the model on these adversarial examples. The two different workflows can be found in the `alexnet_workflow` and `resnet_workflow` directories. For our workflow, we did not include a model validation step. This is because we are not attempting to create a SOTA computer vision model. That is, as long as the models are sufficiently trained, we are able to attack them and get meaningful results. Usage for these workflows will be explained later in this README. Below are some images of our workflows successfully completing in GCP.
 
 ![](deliverables/images_new/res_pipe.png)
 ![](deliverables/images_new/alex_pipe.png)
