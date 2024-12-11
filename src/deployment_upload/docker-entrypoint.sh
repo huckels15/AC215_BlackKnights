@@ -9,4 +9,5 @@ gcloud config set project $GCP_PROJECT
 # Configure GCR
 gcloud auth configure-docker gcr.io -q
 
-/bin/bash
+chmod +x ./deploy.sh
+./deploy.sh

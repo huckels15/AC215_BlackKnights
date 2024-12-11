@@ -1,7 +1,7 @@
 export const uploadData = async (file) => {
     try {
       // Fetch the external IP of the target VM from the backend
-      const ipResponse = await fetch(`${window.location.protocol}//${window.location.hostname}/port3001/api/vm-external-ip?zone=us-east1-c&instanceName=custom-upload-data`);
+      const ipResponse = await fetch(`${window.location.protocol}//${window.location.hostname}/port3001/api/vm-external-ip?zone=us-east1-c&instanceName=ansible-data`);
       if (!ipResponse.ok) throw new Error("Failed to fetch VM external IP");
   
       const { ip: externalIP } = await ipResponse.json();
