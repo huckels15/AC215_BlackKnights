@@ -18,7 +18,7 @@
 │   │   ├── data_versioning_yolo_container_env.PNG
 │   │   ├── resnet_container_env.PNG
 │   │   └── yolo_container_env.PNG
-│   ├── solution_arch.pdf
+│   ├── solution_arch.pdf 
 │   └── technical_arch.pdf
 ├── pytest.ini
 ├── src
