@@ -24,7 +24,7 @@
           --project='secret-cipher-399620' \
           --zone='us-east1-c' \
           --machine-type='e2-medium' \
-          --service-account='data-service-account@secret-cipher-399620.iam.gserviceaccount.com' \
+          --service-account=data-upload@secret-cipher-399620.iam.gserviceaccount.com \
           --tags=http-server,https-server \
           --container-image="{{ lookup('env', 'DOCKERHUB_USERNAME') }}/custom-upload-data-ansible:{{ tag.stdout }}" \
           --container-privileged
@@ -35,7 +35,7 @@
           --project='secret-cipher-399620' \
           --zone='us-east1-c' \
           --machine-type='e2-medium' \
-          --service-account='data-service-account@secret-cipher-399620.iam.gserviceaccount.com' \
+          --service-account=data-upload@secret-cipher-399620.iam.gserviceaccount.com \
           --tags=http-server,https-server \
           --container-image="{{ lookup('env', 'DOCKERHUB_USERNAME') }}/custom-upload-model-ansible:{{ tag.stdout }}" \
           --container-privileged
