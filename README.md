@@ -1,6 +1,6 @@
-## Adversarial Playground Milestone 4
+## Adversarial Playground Milestone 5
 
-#### Project Milestone 4 Organization
+#### Project Milestone 5 Organization
 
 ```
 .
@@ -110,8 +110,7 @@
     └── test_resnet_attacks.py
 ```
 
-# AC215 - Milestone4 - Adversarial Playground
-
+# AC215 - Milestone 5 - Adversarial Playground
 
 **Team Members**
 Jacob Huckelberry, Elijah Dabkowski, Edward Tang
@@ -120,15 +119,13 @@ Jacob Huckelberry, Elijah Dabkowski, Edward Tang
 Black Knights
 
 **Project:**
-In this project, we aim to develop a framework to investigate the effects of adversarial attacks on image classification models. The app will feature two image classification networks trained to make medical diagnoses and classify street signs--both critical functionalities with large consequences in instances of failure. The user will then be able to use the Adversarial Robustness Toolbox to perform preset attacks against these models to demonstrate their efficacy. Additionally, there will be an option to create mitigations against attacks and evaluate the resulting effects.
+In this project, we aim to develop a framework to investigate the effects of adversarial attacks on image classification models. The app will feature two image classification networks trained to make medical diagnoses and classify street signs--both critical functionalities with large consequences in instances of failure. The user will then be able to use the Adversarial Robustness Toolbox to perform preset attacks against these models to demonstrate their efficacy. Complementary to these two models, there will be 'robust' versions of these models the user may also test. These models were fine-tuned using PGD adversarial training. In addition to the two base models and their adversarially finetuned versions, the user will be able to upload a model and data to test the adversarial robustness of their own model.
 
 ----
 
-### Milestone4 ###
+### Milestone 5 ###
 
-In this milestone, we have the components for our Adversarial Playground frontend, model attack API services, and other components from previous milestones including versioning and model training.
-
-The primary advances in this milestone are the implementiation of our Adversarial Playground front end using React and the implementation of our model attack api services using FastAPI. The code for our front end can be found in `/src/app-building` and the code for our api services can be found in `/src/art_attacks`. In addition, we have implemented GitHub actions to automatically run our tests found in `/tests` and linting.
+In this milestone, we have added the finishing touches to our project, including the usage of Kubernetes to scale our application, ansible playbooks to automate provisioning and deployment, a CI/CD pipeline that runs tests, and deploys updates to our Kubernetes cluster, and, finally, a complete ML workflow that downloads the datasets of interest, trains the base models, and fine-tunes adversarially robust versions using PGD adversarial training.
 
 **Application Design**
 The highest level description of our application can be found in our solution architecture image below. A lower level description of our application can be found in the technical architecture image below.
