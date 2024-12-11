@@ -11,9 +11,11 @@ WORKDIR /app
 COPY ./backend/package*.json ./backend/
 RUN cd ./backend && npm install
 
+# Copy the entire frontend directory
+COPY ./frontend ./frontend
+
 # Copy frontend dependencies and install
-COPY ./frontend/package*.json ./frontend/
-RUN cd ./frontend && npm install
+RUN cd ./frontend && npm install && npm run build
 
 # Copy the rest of the application code
 COPY . .
@@ -28,4 +30,3 @@ RUN npm install -g concurrently
 CMD ["concurrently", "-n", "frontend,backend", \
      "npm --prefix ./frontend start", \
      "node ./backend/server.js"]
-

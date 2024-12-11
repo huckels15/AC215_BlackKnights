@@ -25,19 +25,19 @@
       state: "{{ cluster_state }}"
     register: cluster
 
-  # - name: Copy docker tag file
-  #   copy:
-  #     src: .docker-tag
-  #     dest: .docker-tag
-  #     mode: 0644
+  - name: Copy docker tag file
+    copy:
+      src: .docker-tag
+      dest: .docker-tag
+      mode: 0644
 
-  # - name: "Get docker tag"
-  #   shell: "cat .docker-tag"
-  #   register: tag
+  - name: "Get docker tag"
+    shell: "cat .docker-tag"
+    register: tag
 
-  # - name: Print tag
-  #   debug:
-  #     var: tag
+  - name: Print tag
+    debug:
+      var: tag
 
 
   - name: "Create a Node Pool"
@@ -142,7 +142,7 @@
             spec:
               serviceAccountName: deployment
               containers:
-              - image: "docker.io/huckels15/frontend-ansible:20241210213715" #image: "docker.io/{{ lookup('env', 'DOCKERHUB_USERNAME') }}/frontend-ansible:{{ tag.stdout }}"
+              - image: "docker.io/{{ lookup('env', 'DOCKERHUB_USERNAME') }}/frontend-ansible:{{ tag.stdout }}"
                 imagePullPolicy: IfNotPresent
                 name: frontend
                 ports:
