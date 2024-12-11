@@ -27,8 +27,6 @@
           --service-account='data-service-account@secret-cipher-399620.iam.gserviceaccount.com' \
           --tags=http-server,https-server \
           --container-image="gcr.io/secret-cipher-399620/custom-upload-data-ansible:{{ tag.stdout }}" 
-      async: 999999
-      poll: 0
 
     - name: Deploy Upload Model
       shell: |
@@ -39,5 +37,3 @@
           --service-account='data-service-account@secret-cipher-399620.iam.gserviceaccount.com' \
           --tags=http-server,https-server \
           --container-image="gcr.io/secret-cipher-399620/custom-upload-model-ansible:{{ tag.stdout }}" 
-      async: 999999
-      poll: 0  
