@@ -182,7 +182,7 @@ In this milestone, we have added the finishing touches to our project, including
 
 A low-level overview of our technical implementation can be seen in our technical architecture below.
 
-![1](deliverables/images/tech_arch.png)
+![1](deliverables/images_new/tech_arch.png)
 
 As you can see in this image, we made use of several different tools to create our application. For development our group memebers made use of local environments, Github for source control, and Dockerhub and GCR for storing our containers for deployment. We make use of our pushed container images to pipeline training for our models in Vertex AI. Our pipeline for both models, AlexNet and ResNet, consist of downloading the data from kaggle, training the base models, and then carrying out adversarial finetuning on our models. Both versions of both models are then save to cloud buckets for use in our service containers.
 
@@ -200,11 +200,11 @@ Our application architecture makes use of 9 different containers. These containe
 
 Our Kubernetes cluster contains the images for our front end and webserver. We chose only to use Kubernetes for these two components because everything else is implemented in Vertex AI endpoints, which have their own scaling methods built in. Below is an image of our deployed cluster.
 
-![](deliverables/images/cluster.png)
+![](deliverables/images_new_new/cluster.png)
 
 As we can see in the images below, our cluster has auto-scaling implemented to scale our application when the loads increase or our frontend crashes.
 
-![](deliverables/images/scaling.png)
+![](deliverables/images_new_new/scaling.png)
 
 
 ### Ansible Playbooks for Automated Deployment
@@ -215,22 +215,22 @@ In order to automate the provisioning and deployment of our application, we made
 
 In this project, we made use of four different models, a ResNet, PGD-AT ResNet, AlexNet, and PGD AT AlexNet. In order to train these models, we implemented two seperate ML workflows. Each workflow does the same thing, but for different models. In both workflows, the data is downloaded from kaggle, the data is used to train the models, and then we conduct PGD adversarial training. PGD adversarial training consists of generating adversarial examples using PGD on the training data, then finetuning the model on these adversarial examples. The two different workflows can be found in the `alexnet_workflow` and `resnet_workflow` directories. For our workflow, we did not include a model validation step. This is because we are not attempting to create a SOTA computer vision model. That is, as long as the models are sufficiently trained, we are able to attack them and getting meaningful resutls. Usage for these workflows will be explained later in this README. Below are some images of our workflows successfully completing in GCP.
 
-![](deliverables/images/res_pipe.png)
-![](deliverables/images/alex_pipe.png)
+![](deliverables/images_new/res_pipe.png)
+![](deliverables/images_new/alex_pipe.png)
 
 ### CI/CD Pipeline Implementation
 
 Complemetary to our ML workflows and ansible playbooks is our CI/CD pipeline. Our CI/CD pipeline consists of four workflows, one to trigger our ML workflow, one to automatically deploy our app components on updates, one to test our python modules, and one to lint our JS. These workflows can be found in `./github/workflows`. In order to trigger our ML workflows, one must enter `run-resnet-pipeline`, `run-alexnet-pipeline`, or both in the commit message. These will run the pipelines described above. In order to trigger a build and deploy for our app, one must include `/deploy-app` in the commit messsage. This will trigger all of the ansible playbooks in the `/deployment`, `/deployment_frontend`, and `/deployment_upload` directories and build and deploy our app. On every push to main, our CI/CD pipeline will test all of the python modules and lint our JS. Examples of each of these workflows completing can be seen in the screenshots below.
 
-![](deliverables/images/deploy_action.png)
+![](deliverables/images_new/deploy_action.png)
 
-![](deliverables/images/test_action.png)
+![](deliverables/images_new/test_action.png)
 
-![](deliverables/images/test_cov.png)
+![](deliverables/images_new/test_cov.png)
 
-![](deliverables/images/lint_action.png)
+![](deliverables/images_new/lint_action.png)
 
-![](deliverables/images/ml_work_action.png)
+![](deliverables/images_new/ml_work_action.png)
 
 ## Prerequisites
 
@@ -312,25 +312,25 @@ You can now follow the next steps to deploy our app to your project. First, clon
 
 With all of the components deployed, you can then navigate to the ip address output by the frontend deployment to get to our app. In you web browser, go to the address http://x.x.x.x.sslip.io. This will bring you to our landing page:
 
-![](deliverables/images/landing.png)
+![](deliverables/images_new/landing.png)
 
 From here, you can navigate to the Github page in the top right to access the link to our github:
 
-![](deliverables/images/git.png)
+![](deliverables/images_new/git.png)
 
 Our team members page, which gives an introduction for each of our team members:
 
-![](deliverables/images/team.png)
+![](deliverables/images_new/team.png)
 
 Our attacks page, which gives a high level overview of the attacks the user can launch on the models and links to their papers:
 
-![](deliverables/images/attacks.png)
+![](deliverables/images_new/attacks.png)
 
 And, the fun parts, the playground page which allows the user to interact with and attack models or the uploads page which allows the user to upload their own model and data to attack:
 
-![](deliverables/images/play.png)
+![](deliverables/images_new/play.png)
 
-![](deliverables/images/upload.png)
+![](deliverables/images_new/upload.png)
 
 ## Example Usage
 
@@ -342,7 +342,7 @@ In this section, we will show two examples of how you can use our app. In the fi
 - select any attack and its respective parameters. For This, we will choose PGD with parameters 0.2 for epsilon, 10 for max iterations, and 0.01 step size.
 - click lets play and await results
 
-![](deliverables/images/resnet_attack.png)
+![](deliverables/images_new/resnet_attack.png)
 
 
 ### Attacking a Custom Model
@@ -359,11 +359,11 @@ In this section, we will show two examples of how you can use our app. In the fi
 - click lets play and await results!
 - For this, we used a toy MNIST CNN example. Due to networking bottlenecks, we only upload a small dataset to test the model with. That is, the data the custom model is tested on and has examples generated with only consists of about 500 images, while mnist is 60000 images in reality. This causes the accuracy before and after the attack to be extremely low in both cases. However, in our local testing with the full dataset, the metrics were similar to that of the resnet attack. More will be discussed about this in the known issues and limitations section.
 
-![](deliverables/images/upload_example.png)
+![](deliverables/images_new/upload_example.png)
 
-![](deliverables/images/upload_example_complete.png)
+![](deliverables/images_new/upload_example_complete.png)
 
-![](deliverables/images/custom_example.png)
+![](deliverables/images_new/custom_example.png)
 
 
 ## Known Issues and Limitations
