@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 from unittest.mock import MagicMock
-from art_attacks.alexnet_attacks.alexnet_attacks import *
+from art_attacks.robust_alexnet_attacks.robust_alexnet_attacks import *
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten
@@ -17,14 +17,14 @@ def mock_generator(monkeypatch):
         y_mock = np.eye(NUM_CLASSES)[:2] 
         yield x_mock, y_mock
 
-    monkeypatch.setattr("art_attacks.alexnet_attacks.alexnet_attacks.generator", mock_gen)
+    monkeypatch.setattr("art_attacks.robust_alexnet_attacks.robust_alexnet_attacks.generator", mock_gen)
 
 @pytest.fixture
 def mock_plot(monkeypatch):
     def mock_plot_samples(*args, **kwargs):
         return "mocked_path_to_figure.png"
     
-    monkeypatch.setattr("art_attacks.alexnet_attacks.alexnet_attacks.plot_samples", mock_plot_samples)
+    monkeypatch.setattr("art_attacks.robust_alexnet_attacks.robust_alexnet_attacks.plot_samples", mock_plot_samples)
 
 @pytest.fixture
 def mock_model(monkeypatch):
@@ -124,7 +124,7 @@ def test_run(mock_model, mock_generator, mock_plot, mock_classifier, monkeypatch
         "max_iter": "50"
     }
 
-    monkeypatch.setattr("art_attacks.alexnet_attacks.alexnet_attacks.parse_args", lambda: (mock_args, mock_run_args))
+    monkeypatch.setattr("art_attacks.robust_alexnet_attacks.robust_alexnet_attacks.parse_args", lambda: (mock_args, mock_run_args))
     results = run(mock_args, mock_run_args)
 
     assert "reg_acc" in results
