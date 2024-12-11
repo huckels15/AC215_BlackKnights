@@ -184,7 +184,7 @@ A low-level overview of our technical implementation can be seen in our technica
 
 ![1](deliverables/images_new/tech_arch.png)
 
-As you can see in this image, we made use of several different tools to create our application. For development our group memebers made use of local environments, Github for source control, and Dockerhub and GCR for storing our containers for deployment. We make use of our pushed container images to pipeline training for our models in Vertex AI. Our pipeline for both models, AlexNet and ResNet, consist of downloading the data from kaggle, training the base models, and then carrying out adversarial finetuning on our models. Both versions of both models are then save to cloud buckets for use in our service containers.
+As you can see in this image, we made use of several different tools to create our application. For development our group memebers made use of local environments, Github for source control, and Dockerhub and GCR for storing our containers for deployment. We make use of our pushed container images to pipeline training for our models in Vertex AI. Our pipeline for both models, AlexNet and ResNet, consist of downloading the data from kaggle, training the base models, and then carrying out adversarial finetuning on our models. Both versions of both models are then saved to cloud buckets for use in our service containers.
 
 Our application architecture makes use of 9 different containers. These containers have the following functionalities:
 - Model service containers
@@ -192,7 +192,7 @@ Our application architecture makes use of 9 different containers. These containe
 - Upload data and Upload model containers
     - These two containers implement the functionality that allows the user to upload their own model in a .h5 format and their data as a zip. These two containers are hosted as VM instances in GCP compute engine.
 - Adversarial Playground app container
-    - This container is implements our user-friendly react front end. It exposes ports 3000 and 3001 to the NGINX webserver.
+    - This container implements our user-friendly react front end. It exposes ports 3000 and 3001 to the NGINX webserver.
 - NGINX container
     - Our NGINX container implements our webserver that exposes our react front end to the user in their browser.
 
@@ -213,7 +213,7 @@ In order to automate the provisioning and deployment of our application, we made
 
 ### Machine Learning Workflows
 
-In this project, we made use of four different models, a ResNet, PGD-AT ResNet, AlexNet, and PGD AT AlexNet. In order to train these models, we implemented two seperate ML workflows. Each workflow does the same thing, but for different models. In both workflows, the data is downloaded from kaggle, the data is used to train the models, and then we conduct PGD adversarial training. PGD adversarial training consists of generating adversarial examples using PGD on the training data, then finetuning the model on these adversarial examples. The two different workflows can be found in the `alexnet_workflow` and `resnet_workflow` directories. For our workflow, we did not include a model validation step. This is because we are not attempting to create a SOTA computer vision model. That is, as long as the models are sufficiently trained, we are able to attack them and getting meaningful resutls. Usage for these workflows will be explained later in this README. Below are some images of our workflows successfully completing in GCP.
+In this project, we made use of four different models, a ResNet, PGD-AT ResNet, AlexNet, and PGD AT AlexNet. In order to train these models, we implemented two seperate ML workflows. Each workflow does the same thing, but for different models. In both workflows, the data is downloaded from kaggle, the data is used to train the models, and then we conduct PGD adversarial training. PGD adversarial training consists of generating adversarial examples using PGD on the training data, then finetuning the model on these adversarial examples. The two different workflows can be found in the `alexnet_workflow` and `resnet_workflow` directories. For our workflow, we did not include a model validation step. This is because we are not attempting to create a SOTA computer vision model. That is, as long as the models are sufficiently trained, we are able to attack them and getting meaningful results. Usage for these workflows will be explained later in this README. Below are some images of our workflows successfully completing in GCP.
 
 ![](deliverables/images_new/res_pipe.png)
 ![](deliverables/images_new/alex_pipe.png)
