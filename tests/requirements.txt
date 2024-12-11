@@ -1,7 +1,7 @@
 pytest
 pytest-cov
 coverage
-numpy
+numpy==1.22.4 
 unittest2
 art
 google-cloud-storage
