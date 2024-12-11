@@ -182,7 +182,7 @@ In this milestone, we have added the finishing touches to our project, including
 
 A low-level overview of our technical implementation can be seen in our technical architecture below.
 
-![](deliverables/images/tech_arch.png)
+![1](deliverables/images/tech_arch.png)
 
 As you can see in this image, we made use of several different tools to create our application. For development our group memebers made use of local environments, Github for source control, and Dockerhub and GCR for storing our containers for deployment. We make use of our pushed container images to pipeline training for our models in Vertex AI. Our pipeline for both models, AlexNet and ResNet, consist of downloading the data from kaggle, training the base models, and then carrying out adversarial finetuning on our models. Both versions of both models are then save to cloud buckets for use in our service containers.
 
