@@ -309,4 +309,4 @@ In this section, we will show two examples of how you can use our app. In the fi
 ## Sources:
 
 1. https://www.kaggle.com/datasets/valentynsichkar/traffic-signs-dataset-in-yolo-format
-2. https://huggingface.co/datasets/marmal88/skin_cancer 
+2. https://huggingface.co/datasets/marmal88/skin_cancer  
