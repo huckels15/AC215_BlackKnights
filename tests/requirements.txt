@@ -21,9 +21,6 @@ tensorflow[and-cuda]
 keras
 tensorflow-addons
 --extra-index-url https://download.pytorch.org/whl/cu124
-torch 
-torchvision 
-torchaudio
 tensorboardX
 requests
 ultralytics
